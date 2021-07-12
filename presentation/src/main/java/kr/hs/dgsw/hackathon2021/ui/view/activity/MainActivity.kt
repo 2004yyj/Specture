@@ -1,4 +1,4 @@
-package kr.hs.dgsw.hackathon2021.ui.activity
+package kr.hs.dgsw.hackathon2021.ui.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
