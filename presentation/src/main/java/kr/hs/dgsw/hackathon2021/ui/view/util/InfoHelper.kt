@@ -18,4 +18,12 @@ object InfoHelper {
             edit.apply()
         }
 
+    var autoLoginChk: Boolean
+        get() = sharedPreferences.getBoolean("autoLoginChk", false)
+        set(value) {
+            val edit = sharedPreferences.edit()
+            edit.putBoolean("autoLoginChk", value)
+            edit.apply()
+        }
+
 }

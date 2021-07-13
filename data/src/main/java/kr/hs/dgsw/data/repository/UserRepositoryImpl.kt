@@ -17,4 +17,8 @@ class UserRepositoryImpl(
     override fun postLogin(loginRequest: LoginRequest): Single<Token> {
         return userDataSource.postLogin(loginRequest)
     }
+
+    override fun postAutoLogin(): Single<Token> {
+        return userDataSource.postAutoLogin()
+    }
 }

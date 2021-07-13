@@ -8,6 +8,7 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.di.module.*
+import kr.hs.dgsw.hackathon2021.ui.view.activity.IntroActivity
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.fragment.LoginFragment
 import kr.hs.dgsw.hackathon2021.ui.view.fragment.RecruitingClassFragment
@@ -29,6 +30,7 @@ interface MyComponent: AndroidInjector<MyDaggerApplication> {
     fun inject(loginFragment: LoginFragment)
     fun inject(signUpInfoFragment: SignUpInfoFragment)
     fun inject(recruitingClassFragment: RecruitingClassFragment)
+    fun inject(introActivity: IntroActivity)
 
     @Component.Factory
     interface Factory {

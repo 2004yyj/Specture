@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -20,6 +17,7 @@ import kr.hs.dgsw.hackathon2021.databinding.FragmentLoginBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.autoLoginChk
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LoginViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LoginViewModel
 import javax.inject.Inject
@@ -40,6 +38,9 @@ class LoginFragment : Fragment() {
         findNavController()
     }
 
+    private val chkAutoLogin: CheckBox by lazy {
+        binding.chkAutoLogin
+    }
     private val btnSubmit: Button by lazy {
         binding.btnSubmitLogin
     }
@@ -94,6 +95,7 @@ class LoginFragment : Fragment() {
         with(viewModel) {
             isSuccess.observe(viewLifecycleOwner, {
                 InfoHelper.token = it
+                autoLoginChk = chkAutoLogin.isChecked
 
                 val intent = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(intent)

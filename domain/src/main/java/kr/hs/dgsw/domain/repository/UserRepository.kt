@@ -9,4 +9,6 @@ interface UserRepository {
     fun postSignUp(signUpRequest: SignUpRequest): Single<Token>
 
     fun postLogin(loginRequest: LoginRequest): Single<Token>
+
+    fun postAutoLogin(): Single<Token>
 }

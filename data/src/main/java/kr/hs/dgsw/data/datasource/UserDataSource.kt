@@ -19,4 +19,8 @@ class UserDataSource @Inject constructor(
     fun postLogin(loginRequest: LoginRequest): Single<Token> {
         return remote.postLogin(loginRequest).map { it.toEntity() }
     }
+
+    fun postAutoLogin(): Single<Token> {
+        return remote.postAutoLogin().map { it.toEntity() }
+    }
 }

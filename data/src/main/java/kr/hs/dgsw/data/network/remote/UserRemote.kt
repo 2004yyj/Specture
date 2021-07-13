@@ -20,4 +20,8 @@ class UserRemote @Inject constructor(
         return service.postLogin(loginRequest).map(getResponse())
     }
 
+    fun postAutoLogin(): Single<TokenData> {
+        return service.postAutoLogin().map(getResponse())
+    }
+
 }

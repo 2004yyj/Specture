@@ -15,4 +15,7 @@ interface UserService {
 
     @POST("/user/login")
     fun postLogin(@Body loginRequest: LoginRequest) : Single<retrofit2.Response<Response<TokenData>>>
+
+    @POST("/user/autoLogin")
+    fun postAutoLogin() : Single<retrofit2.Response<Response<TokenData>>>
 }
