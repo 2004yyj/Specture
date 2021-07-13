@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.dgsw.data.entity.LectureData
+import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
 
 class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapter.ViewHolder>() {
@@ -24,7 +25,7 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
         }
     }
 
-    private val list: ArrayList<LectureData> = ArrayList()
+    private val list: ArrayList<Lecture> = ArrayList()
 
     class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         val tvTitle: TextView = v.findViewById(R.id.tv_title_item_lecture_list)
@@ -50,7 +51,7 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
 
     override fun getItemCount(): Int = list.size
 
-    fun setList(list: ArrayList<LectureData>) {
+    fun setList(list: ArrayList<Lecture>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
