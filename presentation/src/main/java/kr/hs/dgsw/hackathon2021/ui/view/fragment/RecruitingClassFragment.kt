@@ -46,6 +46,7 @@ class RecruitingClassFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+        setVisibility()
         adapter.setOnClickLectureListener {
             navigateToLectureDetail(it)
         }
@@ -59,5 +60,17 @@ class RecruitingClassFragment : Fragment() {
         val bundle = Bundle()
         bundle.putInt("putId", id)
         navController.navigate(R.id.action_homeFragment_to_lectureDetailFragment, bundle)
+    }
+
+    private fun setVisibility() {
+        if(adapter.itemCount <= 0) {
+            binding.imgNoData.visibility = View.VISIBLE
+            binding.tvNoData.visibility = View.VISIBLE
+            binding.rvRecruitingClass.visibility = View.GONE
+        } else {
+            binding.imgNoData.visibility = View.GONE
+            binding.tvNoData.visibility = View.GONE
+            binding.rvRecruitingClass.visibility = View.VISIBLE
+        }
     }
 }

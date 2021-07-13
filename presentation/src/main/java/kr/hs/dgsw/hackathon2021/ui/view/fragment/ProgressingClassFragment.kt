@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.databinding.RecruitingClassFragmentBinding
+import kr.hs.dgsw.hackathon2021.databinding.FragmentProgressingClassBinding
+import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureRecyclerViewAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.ProgressingClassViewModel
 
@@ -19,7 +20,7 @@ class ProgressingClassFragment : Fragment() {
         fun newInstance() = ProgressingClassFragment()
     }
 
-    private lateinit var binding: RecruitingClassFragmentBinding
+    private lateinit var binding: FragmentProgressingClassBinding
 
     private lateinit var viewModel: ProgressingClassViewModel
     private val adapter: LectureRecyclerViewAdapter = LectureRecyclerViewAdapter()
@@ -32,7 +33,8 @@ class ProgressingClassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_progressing_class, container, false)
+        binding = FragmentProgressingClassBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ class ProgressingClassFragment : Fragment() {
 
         initRecyclerView()
         adapter.setOnClickLectureListener {
+            navigateToLectureDetail(it)
         }
     }
 
@@ -53,7 +56,9 @@ class ProgressingClassFragment : Fragment() {
         binding.rvRecruitingClass.adapter = adapter
     }
 
-    private fun navigateToLectureDetail() {
+    private fun navigateToLectureDetail(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt("putId", id)
         navController.navigate(R.id.action_homeFragment_to_lectureDetailFragment)
     }
 }

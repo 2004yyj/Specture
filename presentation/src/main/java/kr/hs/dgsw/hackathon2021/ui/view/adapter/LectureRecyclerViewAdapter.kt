@@ -34,6 +34,7 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.item_lecture_list, parent, false)
         return ViewHolder(inflater)
     }
@@ -42,8 +43,8 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
         val data = list[position]
 
         holder.tvTitle.text = data.title
-        holder.tvUser.text = data.userId // ~~
-        holder.tvProposalEnd.text = "김뫄뫄"
+        holder.tvUser.text = "김뫄뫄" // ~~
+        holder.tvProposalEnd.text = "0000 00 00"
         holder.tvField.text = data.field
     }
 

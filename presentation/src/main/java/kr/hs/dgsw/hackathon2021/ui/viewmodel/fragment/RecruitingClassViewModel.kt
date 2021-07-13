@@ -4,4 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class RecruitingClassViewModel : ViewModel() {
     // TODO: Implement the ViewModel
+    fun get() {
+
+    }
 }
