@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kr.hs.dgsw.data.entity.LectureData
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapter.ViewHolder>() {
+class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
     interface OnLectureListener {
         fun onClick(id: Int)
@@ -30,12 +32,11 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
     class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         val tvTitle: TextView = v.findViewById(R.id.tv_title_item_lecture_list)
         val tvUser: TextView = v.findViewById(R.id.tv_user_item_lecture_list)
-        val tvProposalEnd: TextView = v.findViewById(R.id.tv_proposal_end_item_lecture_list)
+        val tvProposal: TextView = v.findViewById(R.id.tv_proposal_item_lecture_list)
         val tvField: TextView = v.findViewById(R.id.tv_field_item_lecture_list)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.item_lecture_list, parent, false)
         return ViewHolder(inflater)
     }
@@ -43,9 +44,11 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = list[position]
 
+        val sdf = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+
         holder.tvTitle.text = data.title
-        holder.tvUser.text = "김뫄뫄" // ~~
-        holder.tvProposalEnd.text = "0000 00 00"
+        holder.tvUser.text = data.userId
+        holder.tvProposal.text = sdf.format(data.proposal)
         holder.tvField.text = data.field
     }
 
