@@ -35,9 +35,6 @@ android {
 
 dependencies {
 
-    // Gson
-    implementation 'com.google.code.gson:gson:2.8.6'
-
     implementation project(":domain")
 
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))

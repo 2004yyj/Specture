@@ -21,7 +21,7 @@ class ModifyUserInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.modify_user_info_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_modify_user_info, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

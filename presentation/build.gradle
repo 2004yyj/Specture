@@ -43,9 +43,6 @@ dependencies {
     implementation project(":domain")
     implementation project(":data")
 
-    // Gson
-    implementation 'com.google.code.gson:gson:2.8.6'
-
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
 
     // define any required OkHttp artifacts without version

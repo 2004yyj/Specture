@@ -32,7 +32,7 @@ class ProgressingClassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.progressing_class_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_progressing_class, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
