@@ -30,6 +30,8 @@ interface MyComponent: AndroidInjector<MyDaggerApplication> {
     fun inject(recruitingClassFragment: RecruitingClassFragment)
     fun inject(splashActivity: SplashActivity)
     fun inject(lectureDetailFragment: LectureDetailFragment)
+    fun inject(progressingClassFragment: ProgressingClassFragment)
+    fun inject(endedClassFragment: EndedClassFragment)
 
     @Component.Factory
     interface Factory {

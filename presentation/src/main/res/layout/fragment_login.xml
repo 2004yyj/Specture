@@ -84,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="20dp"
+            android:backgroundTint="@color/main"
             android:text="@string/auto_login" />
 
     </LinearLayout>
