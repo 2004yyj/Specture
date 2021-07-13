@@ -9,15 +9,17 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.hackathon2021.R
+import kr.hs.dgsw.hackathon2021.databinding.RecruitingClassFragmentBinding
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureRecyclerViewAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.RecruitingClassViewModel
-import kotlinx.android.synthetic.main.recruiting_class_fragment.*
 
 class RecruitingClassFragment : Fragment() {
 
     companion object {
         fun newInstance() = RecruitingClassFragment()
     }
+
+    private lateinit var binding: RecruitingClassFragmentBinding
 
     private lateinit var viewModel: RecruitingClassViewModel
     private val adapter: LectureRecyclerViewAdapter = LectureRecyclerViewAdapter()
@@ -30,7 +32,8 @@ class RecruitingClassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.recruiting_class_fragment, container, false)
+        binding = RecruitingClassFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -48,7 +51,7 @@ class RecruitingClassFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        rv_recruiting_class.adapter = adapter
+        binding.rvRecruitingClass.adapter = adapter
     }
 
     private fun navigateToLectureDetail() {
