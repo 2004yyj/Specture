@@ -6,4 +6,5 @@
     <string name="password">비밀번호</string>
     <string name="check">확인</string>
     <string name="next">다음</string>
+    <string name="apply">신청</string>
 </resources>
