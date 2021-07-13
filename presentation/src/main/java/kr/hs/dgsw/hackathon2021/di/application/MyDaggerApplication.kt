@@ -4,6 +4,7 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import kr.hs.dgsw.hackathon2021.di.component.DaggerMyComponent
 import kr.hs.dgsw.hackathon2021.di.component.MyComponent
+import kr.hs.dgsw.hackathon2021.ui.view.helper.InfoHelper
 
 class MyDaggerApplication : DaggerApplication() {
 
@@ -16,6 +17,7 @@ class MyDaggerApplication : DaggerApplication() {
 
     override fun onCreate() {
         daggerMyComponent = DaggerMyComponent.factory().create(this)
+        InfoHelper.init(applicationContext)
         super.onCreate()
     }
 

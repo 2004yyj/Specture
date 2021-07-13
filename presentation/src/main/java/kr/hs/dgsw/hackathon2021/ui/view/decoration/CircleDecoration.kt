@@ -1,4 +1,4 @@
-package kr.hs.dgsw.hackathon2021.ui.decoration
+package kr.hs.dgsw.hackathon2021.ui.view.decoration
 
 import android.content.res.Resources
 import android.graphics.Canvas

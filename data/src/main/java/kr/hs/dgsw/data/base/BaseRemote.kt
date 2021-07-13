@@ -1,6 +1,5 @@
 package kr.hs.dgsw.data.base
 
-import com.google.gson.Gson
 import io.reactivex.rxjava3.functions.Function
 import kr.hs.dgsw.data.util.Response
 
