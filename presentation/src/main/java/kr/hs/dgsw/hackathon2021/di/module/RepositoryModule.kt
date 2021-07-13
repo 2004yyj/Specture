@@ -2,8 +2,11 @@ package kr.hs.dgsw.hackathon2021.di.module
 
 import dagger.Module
 import dagger.Provides
+import kr.hs.dgsw.data.datasource.LectureDataSource
 import kr.hs.dgsw.data.datasource.UserDataSource
+import kr.hs.dgsw.data.repository.LectureRepositoryImpl
 import kr.hs.dgsw.data.repository.UserRepositoryImpl
+import kr.hs.dgsw.domain.repository.LectureRepository
 import kr.hs.dgsw.domain.repository.UserRepository
 import javax.inject.Singleton
 
@@ -13,5 +16,11 @@ class RepositoryModule {
     @Singleton
     fun provideUserRepository(userDataSource: UserDataSource): UserRepository {
         return UserRepositoryImpl(userDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLectureRepository(lectureDataSource: LectureDataSource): LectureRepository {
+        return LectureRepositoryImpl(lectureDataSource)
     }
 }

@@ -58,7 +58,7 @@ class ProgressingClassFragment : Fragment() {
 
     private fun navigateToLectureDetail(id: Int) {
         val bundle = Bundle()
-        bundle.putInt("putId", id)
+        bundle.putInt("lectureId", id)
         navController.navigate(R.id.action_homeFragment_to_lectureDetailFragment)
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.hs.dgsw.hackathon2021.R
+import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
 
 class LectureDetailFragment : Fragment() {
@@ -15,13 +16,20 @@ class LectureDetailFragment : Fragment() {
         fun newInstance() = LectureDetailFragment()
     }
 
+    private lateinit var binding: FragmentLectureDetailBinding
+
     private lateinit var viewModel: LectureDetailViewModel
+    private var lectureId: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_lecture_detail, container, false)
+        lectureId = arguments?.getInt("lectureId") as Int
+
+        binding = FragmentLectureDetailBinding.inflate(inflater)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,4 +38,9 @@ class LectureDetailFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
 }

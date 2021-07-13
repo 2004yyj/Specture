@@ -2,7 +2,9 @@ package kr.hs.dgsw.hackathon2021.di.module
 
 import dagger.Module
 import dagger.Provides
+import kr.hs.dgsw.domain.repository.LectureRepository
 import kr.hs.dgsw.domain.repository.UserRepository
+import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
 import kr.hs.dgsw.domain.usecase.user.LoginUseCase
 import kr.hs.dgsw.domain.usecase.user.SignUpUseCase
 import javax.inject.Singleton
@@ -19,5 +21,11 @@ class UseCaseModule {
     @Singleton
     fun provideLogin(userRepository: UserRepository): LoginUseCase {
         return LoginUseCase(userRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLecture(lectureRepository: LectureRepository): GetAllClassUseCase {
+        return GetAllClassUseCase(lectureRepository)
     }
 }
