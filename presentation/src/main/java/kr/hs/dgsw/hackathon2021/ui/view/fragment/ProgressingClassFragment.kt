@@ -10,8 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentProgressingClassBinding
-import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
-import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureRecyclerViewAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.ProgressingClassViewModel
 
 class ProgressingClassFragment : Fragment() {
@@ -23,7 +22,7 @@ class ProgressingClassFragment : Fragment() {
     private lateinit var binding: FragmentProgressingClassBinding
 
     private lateinit var viewModel: ProgressingClassViewModel
-    private val adapter: LectureRecyclerViewAdapter = LectureRecyclerViewAdapter()
+    private val adapter: LectureAdapter = LectureAdapter()
 
     private val navController: NavController by lazy {
         findNavController()

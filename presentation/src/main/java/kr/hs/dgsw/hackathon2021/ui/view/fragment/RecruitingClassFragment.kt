@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureRecyclerViewAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.RecruitingClassViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.RecruitingClassViewModel
 import javax.inject.Inject
@@ -31,7 +30,7 @@ class RecruitingClassFragment : Fragment() {
     private lateinit var binding: FragmentRecruitingClassBinding
 
     private lateinit var viewModel: RecruitingClassViewModel
-    private val adapter: LectureRecyclerViewAdapter = LectureRecyclerViewAdapter()
+    private val adapter: LectureAdapter = LectureAdapter()
 
     private val navController: NavController by lazy {
         findNavController()

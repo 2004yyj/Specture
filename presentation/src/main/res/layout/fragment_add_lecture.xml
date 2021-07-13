@@ -9,10 +9,6 @@
         android:padding="30dp"
         tools:context=".ui.view.fragment.AddLectureFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
     <EditText
         android:id="@+id/et_title_add_lecture"
         style="@style/RegularTextView_black"
