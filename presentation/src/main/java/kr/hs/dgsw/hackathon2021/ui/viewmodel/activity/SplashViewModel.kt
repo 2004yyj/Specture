@@ -15,7 +15,7 @@ class SplashViewModel(
     val isSuccess: LiveData<String> = _isSuccess
 
     private val _isFailure = MutableLiveData<String>()
-    val isFailure: LiveData<String> = _isSuccess
+    val isFailure: LiveData<String> = _isFailure
 
     fun autoLogin() {
         autoLoginUseCase.buildUseCaseObservable()

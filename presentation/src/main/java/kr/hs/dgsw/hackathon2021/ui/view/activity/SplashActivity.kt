@@ -10,7 +10,7 @@ import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.activity.SplashViewModel
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.MainViewModelFactory
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SplashViewModelFactory
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
@@ -23,18 +23,19 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
         (application as MyDaggerApplication).daggerMyComponent.inject(this)
         init()
+    }
+
+    private fun init() {
+        viewModel = ViewModelProvider(this, SplashViewModelFactory(autoLoginUseCase))[SplashViewModel::class.java]
 
         if (InfoHelper.autoLoginChk) {
             viewModel.autoLogin()
         } else {
-            val intent = Intent(this, IntroActivity::class.java)
+            val intent = Intent(this@SplashActivity, IntroActivity::class.java)
             startActivity(intent)
             finish()
         }
-    }
 
-    private fun init() {
-        viewModel = ViewModelProvider(this, MainViewModelFactory(autoLoginUseCase))[SplashViewModel::class.java]
         with(viewModel) {
             isSuccess.observe(this@SplashActivity) {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
@@ -44,6 +45,9 @@ class SplashActivity : AppCompatActivity() {
 
             isFailure.observe(this@SplashActivity) {
                 Toast.makeText(this@SplashActivity, it, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@SplashActivity, IntroActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }
