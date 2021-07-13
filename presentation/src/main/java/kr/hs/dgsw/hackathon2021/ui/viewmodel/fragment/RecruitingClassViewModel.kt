@@ -21,12 +21,11 @@ class RecruitingClassViewModel(
     val isFailure = _isFailure
 
     fun getAllClass() {
-        getAllClassUseCase.buildUseCaseObservable()
+        getAllClassUseCase.buildUseCaseObservable(0)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
                 Log.d("getAllClass()", it.toString())
-
                 classList.postValue(it as ArrayList<Lecture>)
             }, {
                 _isFailure.postValue(it.message)

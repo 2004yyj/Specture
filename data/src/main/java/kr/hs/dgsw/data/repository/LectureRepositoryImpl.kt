@@ -8,8 +8,8 @@ import kr.hs.dgsw.domain.repository.LectureRepository
 class LectureRepositoryImpl(
     private val lectureDataSource: LectureDataSource
 ): LectureRepository {
-    override fun getAllLecture(): Single<Lecture> {
-        return lectureDataSource.getAllClass()
+    override fun getAllLecture(state: Int): Single<List<Lecture>> {
+        return lectureDataSource.getAllClass(state)
     }
 
 }

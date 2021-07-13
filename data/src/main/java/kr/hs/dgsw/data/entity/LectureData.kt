@@ -9,5 +9,6 @@ data class LectureData(
     val startDate: Long,
     val endDate: Long,
     val uploadDate: Long,
-    val proposalEnd: Long
+    val proposal: Long,
+    val state: Int
 )

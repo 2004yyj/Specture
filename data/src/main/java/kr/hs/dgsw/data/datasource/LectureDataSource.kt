@@ -10,6 +10,15 @@ import javax.inject.Inject
 class LectureDataSource @Inject constructor(
     override val remote: LectureRemote
 ): BaseDataSource<LectureRemote>() {
-    fun getAllClass(): Single<Lecture> =
-        remote.getAllClass().map { it.toEntity() }
+    fun getAllClass(state: Int): Single<List<Lecture>> =
+        remote.getAllClass().map { lectureDataList ->
+            val lectureList = ArrayList<Lecture>()
+
+            lectureDataList.forEach {
+                if (it.state == state) {
+                    lectureList.add(it.toEntity())
+                }
+            }
+            lectureList
+        }
 }

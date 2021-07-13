@@ -10,7 +10,7 @@ class LectureRemote @Inject constructor(
     override val service: LectureService
 ): BaseRemote<LectureService>() {
 
-    fun getAllClass(): Single<LectureData> {
+    fun getAllClass(): Single<List<LectureData>> {
         return service.getAllClass().map(getResponse())
     }
 }

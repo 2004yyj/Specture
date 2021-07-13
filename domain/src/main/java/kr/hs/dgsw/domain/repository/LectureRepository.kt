@@ -4,5 +4,5 @@ import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.domain.entity.response.Lecture
 
 interface LectureRepository {
-    fun getAllLecture(): Single<Lecture>
+    fun getAllLecture(state: Int): Single<List<Lecture>>
 }
