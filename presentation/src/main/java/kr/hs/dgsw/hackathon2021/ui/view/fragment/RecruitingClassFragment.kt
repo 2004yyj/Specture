@@ -47,6 +47,7 @@ class RecruitingClassFragment : Fragment() {
 
         initRecyclerView()
         adapter.setOnClickLectureListener {
+            navigateToLectureDetail(it)
         }
     }
 
@@ -54,7 +55,9 @@ class RecruitingClassFragment : Fragment() {
         binding.rvRecruitingClass.adapter = adapter
     }
 
-    private fun navigateToLectureDetail() {
-        navController.navigate(R.id.action_homeFragment_to_lectureDetailFragment)
+    private fun navigateToLectureDetail(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt("putId", id)
+        navController.navigate(R.id.action_homeFragment_to_lectureDetailFragment, bundle)
     }
 }

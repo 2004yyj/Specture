@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kr.hs.dgsw.data.entity.LectureData
 import kr.hs.dgsw.hackathon2021.R
 
 class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapter.ViewHolder>() {
@@ -23,7 +24,7 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
         }
     }
 
-    private val list: ArrayList<String> = ArrayList()
+    private val list: ArrayList<LectureData> = ArrayList()
 
     class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         val tvTitle: TextView = v.findViewById(R.id.tv_title_item_lecture_list)
@@ -38,15 +39,17 @@ class LectureRecyclerViewAdapter : RecyclerView.Adapter<LectureRecyclerViewAdapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvTitle.text
-        holder.tvUser.text
-        holder.tvProposalEnd.text
-        holder.tvField.text
+        val data = list[position]
+
+        holder.tvTitle.text = data.title
+        holder.tvUser.text = data.userId // ~~
+        holder.tvProposalEnd.text = "김뫄뫄"
+        holder.tvField.text = data.field
     }
 
     override fun getItemCount(): Int = list.size
 
-    fun setList(list: ArrayList<String>) {
+    fun setList(list: ArrayList<LectureData>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

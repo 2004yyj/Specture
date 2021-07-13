@@ -11,4 +11,6 @@
     <string name="recruiting_class">모집 중</string>
     <string name="progressing_class">진행 중</string>
     <string name="ended_class">종료 된 강의</string>
+    <string name="content">내용</string>
+    <string name="title">제목</string>
 </resources>
