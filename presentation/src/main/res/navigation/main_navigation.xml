@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.HomeFragment"
-        android:label="홈" >
+        android:label="홈"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_lectureDetailFragment"
             app:destination="@id/lectureDetailFragment" />
@@ -22,7 +23,7 @@
         android:id="@+id/calenderFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.CalenderFragment"
         android:label="강의 일정"
-        tools:layout="@layout/calender_fragment" />
+        tools:layout="@layout/fragment_calender" />
     <fragment
         android:id="@+id/lectureDetailFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.LectureDetailFragment"
