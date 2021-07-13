@@ -3,16 +3,48 @@ package kr.hs.dgsw.hackathon2021.ui.view.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import kr.hs.dgsw.domain.usecase.user.AutoLoginUseCase
 import kr.hs.dgsw.hackathon2021.R
+import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.activity.SplashViewModel
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.MainViewModelFactory
+import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
+    @Inject
+    lateinit var autoLoginUseCase: AutoLoginUseCase
+    private lateinit var viewModel: SplashViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_intro)
+        (application as MyDaggerApplication).daggerMyComponent.inject(this)
+        init()
 
-        val intent = Intent(this, IntroActivity::class.java)
-        // TODO IntroActivity로 이동하도록 수정
-        startActivity(intent)
-        finish()
+        if (InfoHelper.autoLoginChk) {
+            viewModel.autoLogin()
+        } else {
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun init() {
+        viewModel = ViewModelProvider(this, MainViewModelFactory(autoLoginUseCase))[SplashViewModel::class.java]
+        with(viewModel) {
+            isSuccess.observe(this@SplashActivity) {
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            isFailure.observe(this@SplashActivity) {
+                Toast.makeText(this@SplashActivity, it, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
