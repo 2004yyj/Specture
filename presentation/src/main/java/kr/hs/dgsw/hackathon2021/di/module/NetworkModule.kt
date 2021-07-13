@@ -25,6 +25,6 @@ class NetworkModule {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
-            .baseUrl("http://10.0.2.2:3000")
+            .baseUrl("http://10.0.2.2:8000")
             .build()
 }

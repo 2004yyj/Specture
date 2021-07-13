@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
@@ -24,13 +25,14 @@ class RecruitingClassFragment : Fragment() {
     lateinit var getAllClassUseCase: GetAllClassUseCase
 
     companion object {
-        private const val state = -1
+        private const val state = 0
         fun newInstance() = RecruitingClassFragment()
     }
 
     private lateinit var binding: FragmentRecruitingClassBinding
-
     private lateinit var viewModel: ClassViewModel
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private val adapter: LectureAdapter = LectureAdapter()
 
     private val navController: NavController by lazy {
@@ -40,7 +42,7 @@ class RecruitingClassFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRecruitingClassBinding.inflate(inflater)
         return binding.root
     }
@@ -55,6 +57,9 @@ class RecruitingClassFragment : Fragment() {
 
         adapter.setOnClickLectureListener {
             navigateToLectureDetail(it)
+        }
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getAllClass(state)
         }
     }
 
@@ -85,6 +90,7 @@ class RecruitingClassFragment : Fragment() {
         viewModel.classList.observe(viewLifecycleOwner) {
             adapter.setList(it)
             setVisibility()
+            swipeRefreshLayout.isRefreshing = false
         }
 
         viewModel.isFailure.observe(viewLifecycleOwner) {
@@ -92,5 +98,6 @@ class RecruitingClassFragment : Fragment() {
         }
 
         binding.rvRecruitingClass.adapter = adapter
+        swipeRefreshLayout = binding.srlRecruiting
     }
 }

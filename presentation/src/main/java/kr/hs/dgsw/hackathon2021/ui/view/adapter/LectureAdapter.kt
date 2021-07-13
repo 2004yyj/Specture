@@ -47,15 +47,13 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
         val started = output.format(data.startDate)!!
         val ended = output.format(data.endDate)!!
-        val uploaded = output.format(data.uploadDate)!!
-        val proposal = output.format(data.proposal)!!
 
         holder.tvTitle.text = data.title
         holder.tvUser.text = data.userId
         val fieldString = data.field?.toString()
         val slicedString = fieldString?.slice(1 until fieldString.lastIndex)
         holder.tvField.text = slicedString
-        holder.tvProposal.text = "${started}~${ended}"
+        holder.tvProposal.text = "${started} ~ $ended"
 
     }
 
