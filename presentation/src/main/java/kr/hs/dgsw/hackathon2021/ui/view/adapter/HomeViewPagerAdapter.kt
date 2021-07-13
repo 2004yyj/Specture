@@ -8,21 +8,15 @@ import kr.hs.dgsw.hackathon2021.ui.view.fragment.ProgressingClassFragment
 import kr.hs.dgsw.hackathon2021.ui.view.fragment.RecruitingClassFragment
 
 
-class HomeViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
-
-    private val recruitingClassFragment = RecruitingClassFragment.newInstance()
-    private val progressingClassFragment = ProgressingClassFragment.newInstance()
-    private val endedClassFragment = EndedClassFragment.newInstance()
+class HomeViewPagerAdapter(fragment: Fragment, private val list: List<Fragment>): FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int {
-        return 3
+        return list.size
     }
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            0 -> recruitingClassFragment
-            1 -> progressingClassFragment
-            2 -> endedClassFragment
+            position -> list[position]
             else -> throw Exception("위치가 없음")
         }
     }

@@ -34,7 +34,17 @@ android {
 }
 
 dependencies {
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
     implementation project(":domain")
+
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

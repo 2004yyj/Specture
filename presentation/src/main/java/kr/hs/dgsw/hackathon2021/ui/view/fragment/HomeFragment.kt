@@ -14,6 +14,7 @@ import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.HomeFragmentBinding
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.HomeViewPagerAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.HomeViewModel
+import java.text.SimpleDateFormat
 
 class HomeFragment : Fragment() {
 
@@ -32,6 +33,10 @@ class HomeFragment : Fragment() {
         binding.tablayoutHome
     }
 
+    private val recruitingClassFragment = RecruitingClassFragment.newInstance()
+    private val progressingClassFragment = ProgressingClassFragment.newInstance()
+    private val endedClassFragment = EndedClassFragment.newInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +49,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-        viewPager.adapter = HomeViewPagerAdapter(this)
+        viewPager.adapter = HomeViewPagerAdapter(
+            this,
+            listOf(
+                recruitingClassFragment,
+                progressingClassFragment,
+                endedClassFragment
+            )
+        )
 
         TabLayoutMediator(tablayout, viewPager) { tab, position ->
             tab.text = textArray[position]
