@@ -21,4 +21,9 @@ class LectureDataSource @Inject constructor(
             }
             lectureList
         }
+
+    fun getLectureDetail(lectureId: Int): Single<Lecture> {
+        return remote.getLectureDetail(lectureId).map { it.toEntity() }
+    }
+
 }
