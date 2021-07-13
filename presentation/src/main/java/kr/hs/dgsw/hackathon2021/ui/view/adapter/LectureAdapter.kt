@@ -43,13 +43,20 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = list[position]
+        val output = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
 
-        val sdf = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+        val started = output.format(data.startDate)!!
+        val ended = output.format(data.endDate)!!
+        val uploaded = output.format(data.uploadDate)!!
+        val proposal = output.format(data.proposal)!!
 
         holder.tvTitle.text = data.title
         holder.tvUser.text = data.userId
-        holder.tvProposal.text = sdf.format(data.proposal)
-        holder.tvField.text = data.field
+        val fieldString = data.field?.toString()
+        val slicedString = fieldString?.slice(1 until fieldString.lastIndex)
+        holder.tvField.text = slicedString
+        holder.tvProposal.text = "${started}~${ended}"
+
     }
 
     override fun getItemCount(): Int = list.size

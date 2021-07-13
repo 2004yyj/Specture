@@ -8,9 +8,12 @@ import javax.inject.Inject
 
 class GetAllClassUseCase @Inject constructor(
     private val lectureRepository: LectureRepository
-): ParamsUseCase<Int, Single<List<Lecture>>>() {
-    override fun buildUseCaseObservable(params: Int): Single<List<Lecture>> {
-        return lectureRepository.getAllLecture(params)
+): ParamsUseCase<GetAllClassUseCase.Params, Single<List<Lecture>>>() {
+    override fun buildUseCaseObservable(params: Params): Single<List<Lecture>> {
+        return lectureRepository.getAllLecture(params.state)
     }
 
+    data class Params(
+        val state: Int
+    )
 }

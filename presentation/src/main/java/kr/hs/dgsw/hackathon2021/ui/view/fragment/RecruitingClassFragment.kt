@@ -14,8 +14,8 @@ import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureAdapter
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.RecruitingClassViewModelFactory
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.RecruitingClassViewModel
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.ClassViewModelFactory
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.ClassViewModel
 import javax.inject.Inject
 
 class RecruitingClassFragment : Fragment() {
@@ -24,12 +24,13 @@ class RecruitingClassFragment : Fragment() {
     lateinit var getAllClassUseCase: GetAllClassUseCase
 
     companion object {
+        private const val state = -1
         fun newInstance() = RecruitingClassFragment()
     }
 
     private lateinit var binding: FragmentRecruitingClassBinding
 
-    private lateinit var viewModel: RecruitingClassViewModel
+    private lateinit var viewModel: ClassViewModel
     private val adapter: LectureAdapter = LectureAdapter()
 
     private val navController: NavController by lazy {
@@ -47,12 +48,10 @@ class RecruitingClassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
-        viewModel = ViewModelProvider(this, RecruitingClassViewModelFactory(getAllClassUseCase))[RecruitingClassViewModel::class.java]
+        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
 
         init()
-
         setVisibility()
-        setClass()
 
         adapter.setOnClickLectureListener {
             navigateToLectureDetail(it)
@@ -79,10 +78,13 @@ class RecruitingClassFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this, RecruitingClassViewModelFactory(getAllClassUseCase))[RecruitingClassViewModel::class.java]
+        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
+
+        viewModel.getAllClass(state)
 
         viewModel.classList.observe(viewLifecycleOwner) {
             adapter.setList(it)
+            setVisibility()
         }
 
         viewModel.isFailure.observe(viewLifecycleOwner) {
@@ -90,9 +92,5 @@ class RecruitingClassFragment : Fragment() {
         }
 
         binding.rvRecruitingClass.adapter = adapter
-    }
-
-    private fun setClass() {
-        viewModel.getAllClass()
     }
 }

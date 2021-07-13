@@ -5,7 +5,7 @@ data class LectureData(
     val title: String?,
     val content: String?,
     val userId: String?,
-    val field: String?,
+    val field: List<String>?,
     val startDate: Long,
     val endDate: Long,
     val uploadDate: Long,

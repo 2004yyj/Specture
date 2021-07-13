@@ -55,8 +55,6 @@ class CalenderFragment : Fragment() {
         viewModel = ViewModelProvider(this)[CalenderViewModel::class.java]
         rvDate.adapter = lectureAdapter
         rvDate.layoutManager = LinearLayoutManager(context)
-        val lecture = Lecture(1, "asdfsda", "asdfsadf", "adsfasdfaf", "asdfasfaf", 1234124, 1234214, 12341, 124414, 1)
-        lectureAdapter.setList(arrayListOf(lecture, lecture, lecture))
     }
 
 }

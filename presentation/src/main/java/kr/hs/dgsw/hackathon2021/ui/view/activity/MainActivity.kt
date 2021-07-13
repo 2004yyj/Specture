@@ -14,16 +14,18 @@ import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val bnv = findViewById<BottomNavigationView>(R.id.bnv_main)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar_main)
         val fragment = findViewById<FragmentContainerView>(R.id.fragment_main).getFragment<NavHostFragment>()!!
 
         val navController = fragment.findNavController()
-        val appBarConfiguration = AppBarConfiguration(
+        appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,
                 R.id.calenderFragment,
@@ -31,9 +33,6 @@ class MainActivity : AppCompatActivity() {
             )
             ,null
         )
-
         bnv.setupWithNavController(navController)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-
     }
 }

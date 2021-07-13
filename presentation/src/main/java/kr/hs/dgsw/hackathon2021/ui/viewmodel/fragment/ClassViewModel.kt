@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
 
-class RecruitingClassViewModel(
+class ClassViewModel(
     private val getAllClassUseCase: GetAllClassUseCase
 ) : ViewModel() {
 
@@ -20,8 +20,8 @@ class RecruitingClassViewModel(
     private val _isFailure = MutableLiveData<String>()
     val isFailure = _isFailure
 
-    fun getAllClass() {
-        getAllClassUseCase.buildUseCaseObservable(0)
+    fun getAllClass(state: Int) {
+        getAllClassUseCase.buildUseCaseObservable(GetAllClassUseCase.Params(state))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
