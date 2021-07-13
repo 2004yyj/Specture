@@ -14,7 +14,8 @@ fun LectureData.toEntity(): Lecture {
         this.startDate,
         this.endDate,
         this.uploadDate,
-        this.proposalEnd
+        this.proposal,
+        this.state
     )
 }
 
@@ -28,6 +29,7 @@ fun Lecture.toData(): LectureData {
         this.startDate,
         this.endDate,
         this.uploadDate,
-        this.proposalEnd
+        this.proposal,
+        this.state
     )
 }
