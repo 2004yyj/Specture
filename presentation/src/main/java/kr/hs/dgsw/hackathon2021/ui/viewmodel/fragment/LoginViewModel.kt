@@ -15,13 +15,13 @@ class LoginViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     private val _isSuccess = MutableLiveData<String>()
-    val success : LiveData<String> = _isSuccess
+    val isSuccess : LiveData<String> = _isSuccess
 
     private val _isFailure = MutableLiveData<String>()
-    val failure : LiveData<String> = _isFailure
+    val isFailure : LiveData<String> = _isFailure
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val loading : LiveData<Boolean> = _isLoading
+    val isLoading : LiveData<Boolean> = _isLoading
 
     fun login(loginRequest: LoginRequest) {
 

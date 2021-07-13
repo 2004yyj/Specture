@@ -10,6 +10,7 @@ import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.di.module.*
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.fragment.LoginFragment
+import kr.hs.dgsw.hackathon2021.ui.view.fragment.SignUpFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -24,6 +25,7 @@ import javax.inject.Singleton
 interface MyComponent: AndroidInjector<MyDaggerApplication> {
 
     fun inject(loginFragment: LoginFragment)
+    fun inject(signUpFragment: SignUpFragment)
 
     @Component.Factory
     interface Factory {
