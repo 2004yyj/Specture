@@ -2,11 +2,15 @@ package kr.hs.dgsw.hackathon2021
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kr.hs.dgsw.data.network.service.UserService
+import kr.hs.dgsw.domain.entity.request.LoginRequest
 
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -20,5 +24,13 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("kr.hs.dgsw.hackathon2021", appContext.packageName)
+
+        val sv = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://localhost:3000/")
+            .build()
+            .create(UserService::class.java)
+
+        println(sv.postLogin1(LoginRequest("asdf", "asdfa")).execute().body()?.data?.token)
     }
 }

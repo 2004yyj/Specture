@@ -1,6 +1,5 @@
 package kr.hs.dgsw.data.network.remote
 
-import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseRemote
 import kr.hs.dgsw.data.entity.TokenData

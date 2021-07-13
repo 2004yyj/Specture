@@ -24,6 +24,7 @@ class NetworkModule {
         Retrofit.Builder()
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://172.16.3.44:3000")
+            .client(client)
+            .baseUrl("http://10.0.2.2:3000")
             .build()
 }
