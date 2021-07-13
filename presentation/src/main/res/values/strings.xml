@@ -7,4 +7,7 @@
     <string name="check">확인</string>
     <string name="next">다음</string>
     <string name="apply">신청</string>
+    <string name="recruiting_class">모집 중</string>
+    <string name="progressing_class">진행 중</string>
+    <string name="ended_class">종료 된 강의</string>
 </resources>

@@ -8,6 +8,7 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.di.module.*
+import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import javax.inject.Singleton
 
 @Singleton
@@ -21,7 +22,6 @@ import javax.inject.Singleton
     UseCaseModule::class
 ])
 interface MyComponent: AndroidInjector<MyDaggerApplication> {
-
     @Component.Factory
     interface Factory {
         fun create(@BindsInstance application: Application): MyComponent
