@@ -12,4 +12,8 @@ class LectureRepositoryImpl(
         return lectureDataSource.getAllClass(state)
     }
 
+    override fun getLectureDetail(lectureId: Int): Single<Lecture> {
+        return lectureDataSource.getLectureDetail(lectureId)
+    }
+
 }

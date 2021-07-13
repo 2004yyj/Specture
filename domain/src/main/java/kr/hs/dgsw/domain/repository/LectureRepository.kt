@@ -5,4 +5,6 @@ import kr.hs.dgsw.domain.entity.response.Lecture
 
 interface LectureRepository {
     fun getAllLecture(state: Int): Single<List<Lecture>>
+
+    fun getLectureDetail(lectureId: Int): Single<Lecture>
 }

@@ -8,4 +8,7 @@ import retrofit2.http.GET
 interface LectureService {
     @GET("/lecture")
     fun getAllClass(): Single<retrofit2.Response<Response<List<LectureData>>>>
+
+    @GET("/lecture/{lectureId}")
+    fun getLectureDetail(lectureId: Int): Single<retrofit2.Response<Response<LectureData>>>
 }
