@@ -21,7 +21,7 @@ class AddLectureFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.add_lecture_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_add_lecture, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.databinding.RecruitingClassFragmentBinding
+import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureRecyclerViewAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.RecruitingClassViewModel
 
@@ -19,7 +19,7 @@ class RecruitingClassFragment : Fragment() {
         fun newInstance() = RecruitingClassFragment()
     }
 
-    private lateinit var binding: RecruitingClassFragmentBinding
+    private lateinit var binding: FragmentRecruitingClassBinding
 
     private lateinit var viewModel: RecruitingClassViewModel
     private val adapter: LectureRecyclerViewAdapter = LectureRecyclerViewAdapter()
@@ -32,7 +32,7 @@ class RecruitingClassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = RecruitingClassFragmentBinding.inflate(inflater)
+        binding = FragmentRecruitingClassBinding.inflate(inflater)
         return binding.root
     }
 
