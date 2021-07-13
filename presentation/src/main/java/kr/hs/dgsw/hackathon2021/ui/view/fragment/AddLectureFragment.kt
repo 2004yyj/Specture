@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.AddLectureViewModel
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.AddLectureViewModel
 
 class AddLectureFragment : Fragment() {
 
