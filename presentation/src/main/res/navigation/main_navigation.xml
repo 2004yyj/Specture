@@ -8,15 +8,15 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="홈" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.SettingFragment"
-        android:label="setting_fragment"
+        android:label="내 정보"
         tools:layout="@layout/setting_fragment" />
     <fragment
         android:id="@+id/calenderFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.CalenderFragment"
-        android:label="calender_fragment"
+        android:label="강의 일정"
         tools:layout="@layout/calender_fragment" />
 </navigation>

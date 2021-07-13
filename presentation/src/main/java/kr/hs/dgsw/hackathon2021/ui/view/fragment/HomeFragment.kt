@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: HomeFragmentBinding
+
     private val viewPager: ViewPager2 by lazy {
         binding.viewPagerHome
     }
