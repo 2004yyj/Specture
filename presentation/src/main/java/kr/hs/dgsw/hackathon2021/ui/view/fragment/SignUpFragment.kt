@@ -14,36 +14,58 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 
 class SignUpFragment: Fragment() {
 
-    private lateinit var viewModel: SignUpViewModel
     private lateinit var binding: FragmentSignUpBinding
 
     private val navController: NavController by lazy {
         findNavController()
     }
 
-    private val etName: EditText by lazy {
-        binding.etNameSignUp
-    }
-    private val etUsername: EditText by lazy {
-        binding.etUsernameSignUp
-    }
-    private val etPassword: EditText by lazy {
-        binding.etPasswordSignUp
-    }
-    private val etPasswordRe: EditText by lazy {
-        binding.etPasswordReSignUp
-    }
-    private val spnGrade: Spinner by lazy {
-        binding.spinnerGradeSignUp
-    }
-    private val spnKlass: Spinner by lazy {
-        binding.spinnerClassSignUp
-    }
-    private val spnNumber: Spinner by lazy {
-        binding.spinnerNumberSignUp
-    }
-    private val btnNext: Button by lazy {
-        binding.btnNextSignUp
+    private lateinit var etName: EditText
+    private lateinit var etUsername: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var etPasswordRe: EditText
+    private lateinit var spnGrade: Spinner
+    private lateinit var spnKlass: Spinner
+    private lateinit var spnNumber: Spinner
+    private lateinit var btnNext: Button
+
+    private fun init() {
+
+        etName = binding.etNameSignUp
+        etUsername = binding.etUsernameSignUp
+        etPassword = binding.etPasswordSignUp
+        etPasswordRe = binding.etPasswordReSignUp
+        spnGrade = binding.spinnerGradeSignUp
+        spnKlass = binding.spinnerClassSignUp
+        spnNumber = binding.spinnerNumberSignUp
+        btnNext = binding.btnNextSignUp
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.grade,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnGrade.adapter = adapter
+        }
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.klass,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnKlass.adapter = adapter
+        }
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.number,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnNumber.adapter = adapter
+        }
     }
 
     override fun onCreateView(
@@ -98,34 +120,5 @@ class SignUpFragment: Fragment() {
         bundle.putInt("number", number)
 
         navController.navigate(R.id.action_signUpFragment_to_signUpInfoFragment, bundle)
-    }
-
-    private fun init() {
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.grade,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spnGrade.adapter = adapter
-        }
-
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.klass,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spnKlass.adapter = adapter
-        }
-
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.number,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spnNumber.adapter = adapter
-        }
     }
 }

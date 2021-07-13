@@ -13,7 +13,11 @@ class UserRemote @Inject constructor(
 ): BaseRemote<UserService>() {
 
     fun postSignUp(signUpRequest: SignUpRequest): Single<TokenData> {
-        return service.postSignUp(signUpRequest).map(getResponse())
+        with(signUpRequest) {
+            return service.postSignUp(
+                userId, password, name, grade, klass, number, introduce, field, profile
+            ).map(getResponse())
+        }
     }
 
     fun postLogin(loginRequest: LoginRequest): Single<TokenData> {

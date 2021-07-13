@@ -17,8 +17,6 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.usecase.user.SignUpUseCase
-import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpBinding
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
@@ -26,7 +24,9 @@ import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SignUpViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 class SignUpInfoFragment : Fragment() {
@@ -41,81 +41,20 @@ class SignUpInfoFragment : Fragment() {
 
     private lateinit var multipartBody: MultipartBody.Part
 
-    private val btnSubmit: Button by lazy {
-        binding.btnSubmitSignUpInfo
-    }
+    private lateinit var btnSubmit: Button
+    private lateinit var btnImageAdd: CardView
+    private lateinit var tvName: TextView
+    private lateinit var tvSchool: TextView
+    private lateinit var etIntroduce: EditText
+    private lateinit var etField: EditText
 
-    private val btnImageAdd: CardView by lazy {
-        binding.btnImageAddSignUpInfo
-    }
-
-    private val tvName: TextView by lazy {
-        binding.tvNameSignUpInfo
-    }
-
-    private val tvSchool: TextView by lazy {
-        binding.tvSchoolSignUpInfo
-    }
-
-    private val etIntroduce: EditText by lazy {
-        binding.etIntroduceSignUpInfo
-    }
-
-    private val etKind: EditText by lazy {
-        binding.etKindSignUpInfo
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSignUpInfoBinding.inflate(inflater)
-        (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
-        viewModel = ViewModelProvider(this, SignUpViewModelFactory(signUpUseCase))[SignUpViewModel::class.java]
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val arguments = requireArguments()
-
-        val userId = arguments.getString("userId")!!
-        val password = arguments.getString("password")!!
-        val name = arguments.getString("name")!!
-        val grade = arguments.getInt("grade")
-        val klass = arguments.getInt("klass")
-        val number = arguments.getInt("number")
-
-        tvName.text = name
-        tvSchool.text = "${grade}학년 ${klass}반 ${number}번"
-
-        btnImageAdd.setOnClickListener {
-            activityResultLauncher.launch("image/*")
-        }
-
-        btnSubmit.setOnClickListener {
-            val introduce = etIntroduce.text.toString()
-            val kind = etKind.text.toString()
-
-            if (introduce.isNotBlank() && kind.isNotBlank()) {
-                val signUpRequest = if (this::multipartBody.isInitialized) {
-                    SignUpRequest(userId, password, multipartBody, name, grade, klass, number, introduce, kind)
-                } else {
-                    SignUpRequest(userId, password, null, name, grade, klass, number, introduce, kind)
-                }
-                viewModel.signUp(signUpRequest)
-            } else {
-                Toast.makeText(context, "빈 칸이 없는지 확인해 주세요.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+    private fun init() {
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
                 val inputStream = requireActivity().contentResolver.openInputStream(it)
                 val image = BitmapFactory.decodeStream(inputStream)
                 with(requireActivity()) {
-                    multipartBody = it.asMultipart("profileImage", cacheDir, contentResolver)!!
+                    multipartBody = it.asMultipart("profile", cacheDir, contentResolver)!!
                 }
                 binding.ivProfileSignUpInfo.setImageBitmap(image)
             }
@@ -137,6 +76,62 @@ class SignUpInfoFragment : Fragment() {
             isLoading.observe(viewLifecycleOwner, {
 
             })
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSignUpInfoBinding.inflate(inflater)
+        (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
+        viewModel = ViewModelProvider(this, SignUpViewModelFactory(signUpUseCase))[SignUpViewModel::class.java]
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        init()
+
+        val arguments = requireArguments()
+
+        val userId = arguments.getString("userId")!!
+        val password = arguments.getString("password")!!
+        val name = arguments.getString("name")!!
+        val grade = arguments.getInt("grade")
+        val klass = arguments.getInt("klass")
+        val number = arguments.getInt("number")
+
+        tvName.text = name
+        tvSchool.text = "${grade}학년 ${klass}반 ${number}번"
+
+        btnImageAdd.setOnClickListener {
+            activityResultLauncher.launch("image/*")
+        }
+
+        btnSubmit.setOnClickListener {
+            val introduce = etIntroduce.text.toString()
+            val kind = etField.text.toString()
+
+            if (introduce.isNotBlank() && kind.isNotBlank()) {
+                val mediaType = "text/plain".toMediaType()
+                val userIdBody = userId.toRequestBody(mediaType)
+                val passwordBody = password.toRequestBody(mediaType)
+                val nameBody = name.toRequestBody(mediaType)
+                val introduceBody = introduce.toRequestBody(mediaType)
+                val fieldBody = kind.toRequestBody(mediaType)
+
+                val signUpRequest = if (this::multipartBody.isInitialized) {
+                    println(multipartBody.body)
+                    SignUpRequest(userIdBody, passwordBody, multipartBody, nameBody, grade, klass, number, introduceBody, fieldBody)
+                } else {
+                    SignUpRequest(userIdBody, passwordBody, null, nameBody, grade, klass, number, introduceBody, fieldBody)
+                }
+                viewModel.signUp(signUpRequest)
+            } else {
+                Toast.makeText(context, "빈 칸이 없는지 확인해 주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

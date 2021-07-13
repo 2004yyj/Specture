@@ -13,17 +13,16 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hackathon2021">
-        <activity android:name=".ui.view.activity.IntroActivity" />
         <activity android:name=".ui.view.activity.SplashActivity"
             android:theme="@style/SplashTheme">
-        </activity>
-        <activity android:name=".ui.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.view.activity.IntroActivity" />
+        <activity android:name=".ui.view.activity.MainActivity" />
     </application>
 
 </manifest>
