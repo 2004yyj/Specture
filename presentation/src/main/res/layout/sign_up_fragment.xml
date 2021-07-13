@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="40dp"
-    android:gravity="center_horizontal"
+    android:gravity="bottom"
     android:orientation="vertical">
 
 
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
         style="@style/BoldTextView"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +24,8 @@
 
     <EditText
         android:id="@+id/et_name_sign_up"
+        android:drawableStart="@drawable/ic_baseline_user"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +64,7 @@
 
     <EditText
         android:id="@+id/et_password_sign_up"
+        android:drawableStart="@drawable/ic_padlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
