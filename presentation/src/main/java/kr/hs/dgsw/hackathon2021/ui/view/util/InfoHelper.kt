@@ -1,4 +1,4 @@
-package kr.hs.dgsw.hackathon2021.ui.view.helper
+package kr.hs.dgsw.hackathon2021.ui.view.util
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

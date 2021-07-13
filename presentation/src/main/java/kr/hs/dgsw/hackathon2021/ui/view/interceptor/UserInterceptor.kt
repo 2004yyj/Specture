@@ -1,6 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.view.interceptor
 
-import kr.hs.dgsw.hackathon2021.ui.view.helper.InfoHelper.token
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.token
 import okhttp3.Interceptor
 import okhttp3.Response
 

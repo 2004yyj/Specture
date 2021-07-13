@@ -19,7 +19,7 @@ import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLoginBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
-import kr.hs.dgsw.hackathon2021.ui.view.helper.InfoHelper
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LoginViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LoginViewModel
 import javax.inject.Inject
