@@ -16,4 +16,8 @@ class LectureRepositoryImpl(
         return lectureDataSource.getLectureDetail(lectureId)
     }
 
+    override fun getAllLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>> {
+        return lectureDataSource.getLectureByDate(year, month, day)
+    }
+
 }
