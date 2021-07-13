@@ -13,4 +13,5 @@ class GetLectureDetailUseCase @Inject constructor(
     override fun buildUseCaseObservable(params: Int): Single<Lecture> {
         return lectureRepository.getLectureDetail(params)
     }
+
 }
