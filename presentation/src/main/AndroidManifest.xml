@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hackathon2021">
-        <activity android:name="kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity">
+        <activity android:name=".ui.view.activity.AccountActivity"></activity>
+        <activity android:name=".ui.view.activity.SplashActivity" />
+        <activity android:name=".ui.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
