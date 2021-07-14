@@ -7,6 +7,8 @@ import kr.hs.dgsw.data.entity.UserData
 import kr.hs.dgsw.data.network.service.UserService
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
+import okhttp3.RequestBody
+import org.json.JSONArray
 import javax.inject.Inject
 
 class UserRemote @Inject constructor(

@@ -27,6 +27,7 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
 import javax.inject.Inject
 
 class SignUpInfoFragment : Fragment() {
@@ -49,6 +50,13 @@ class SignUpInfoFragment : Fragment() {
     private lateinit var etField: EditText
 
     private fun init() {
+        btnSubmit = binding.btnSubmitSignUpInfo
+        btnImageAdd = binding.btnImageAddSignUpInfo
+        tvName = binding.tvNameSignUpInfo
+        tvSchool = binding.tvSchoolSignUpInfo
+        etIntroduce = binding.etIntroduceSignUpInfo
+        etField = binding.etFieldSignUpInfo
+
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
                 val inputStream = requireActivity().contentResolver.openInputStream(it)
@@ -112,23 +120,25 @@ class SignUpInfoFragment : Fragment() {
 
         btnSubmit.setOnClickListener {
             val introduce = etIntroduce.text.toString()
-            val kind = etField.text.toString()
+            val field = etField.text.toString()
 
-            if (introduce.isNotBlank() && kind.isNotBlank()) {
+            if (introduce.isNotBlank() && field.isNotBlank()) {
                 val mediaType = "text/plain".toMediaType()
                 val userIdBody = userId.toRequestBody(mediaType)
                 val passwordBody = password.toRequestBody(mediaType)
                 val nameBody = name.toRequestBody(mediaType)
                 val introduceBody = introduce.toRequestBody(mediaType)
-                val fieldBody = kind.toRequestBody(mediaType)
+                val fieldList = JSONArray()
+                fieldList.put(field)
+                val fieldBody = fieldList.toString().toRequestBody(mediaType)
 
-                val signUpRequest = if (this::multipartBody.isInitialized) {
+                if (this::multipartBody.isInitialized) {
                     println(multipartBody.body)
-                    SignUpRequest(userIdBody, passwordBody, multipartBody, nameBody, grade, klass, number, introduceBody, fieldBody)
+                    val signUpRequest = SignUpRequest(userIdBody, passwordBody, multipartBody, nameBody, grade, klass, number, fieldBody, introduceBody)
+                    viewModel.signUp(signUpRequest)
                 } else {
-                    SignUpRequest(userIdBody, passwordBody, null, nameBody, grade, klass, number, introduceBody, fieldBody)
+                    Toast.makeText(context, "이미지를 반드시 삽입해 주세요.", Toast.LENGTH_SHORT).show()
                 }
-                viewModel.signUp(signUpRequest)
             } else {
                 Toast.makeText(context, "빈 칸이 없는지 확인해 주세요.", Toast.LENGTH_SHORT).show()
             }

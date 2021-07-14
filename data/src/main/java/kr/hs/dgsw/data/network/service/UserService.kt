@@ -30,6 +30,6 @@ interface UserService {
     @POST("/user/autoLogin")
     fun postAutoLogin() : Single<retrofit2.Response<Response<TokenData>>>
 
-    @GET("/lecture/proposal/cancel")
+    @GET("/user")
     fun getUser() : Single<retrofit2.Response<Response<UserData>>>
 }

@@ -121,6 +121,7 @@
                     android:drawableStart="@drawable/ic_padlock"
                     android:drawablePadding="10dp"
                     android:paddingBottom="15dp"
+                    android:inputType="textPassword"
                     android:hint="@string/password" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -140,6 +141,7 @@
                     android:paddingBottom="15dp"
                     app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                     app:layout_constraintTop_toBottomOf="@+id/et_name_sign_up"
+                    android:inputType="textPassword"
                     android:hint="@string/password_chk" />
 
             </com.google.android.material.textfield.TextInputLayout>
