@@ -7,7 +7,7 @@ import kr.hs.dgsw.domain.repository.LectureRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class LectureProposalUseCase @Inject constructor(
+class PostLectureProposalUseCase @Inject constructor(
     private val lectureRepository: LectureRepository
 ): ParamsUseCase<Int, Single<Any?>>() {
     override fun buildUseCaseObservable(params: Int): Single<Any?> {

@@ -4,10 +4,7 @@ import dagger.Module
 import dagger.Provides
 import kr.hs.dgsw.domain.repository.LectureRepository
 import kr.hs.dgsw.domain.repository.UserRepository
-import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
-import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureByDateUseCase
-import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
-import kr.hs.dgsw.domain.usecase.lecture.LectureProposalUseCase
+import kr.hs.dgsw.domain.usecase.lecture.*
 import kr.hs.dgsw.domain.usecase.user.AutoLoginUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 import kr.hs.dgsw.domain.usecase.user.LoginUseCase
@@ -36,7 +33,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideLecture(lectureRepository: LectureRepository): GetAllClassUseCase {
+    fun provideGetLecture(lectureRepository: LectureRepository): GetAllClassUseCase {
         return GetAllClassUseCase(lectureRepository)
     }
 
@@ -54,13 +51,19 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideLectureProposal(lectureRepository: LectureRepository): LectureProposalUseCase {
-        return LectureProposalUseCase(lectureRepository)
+    fun provideLectureProposal(lectureRepository: LectureRepository): PostLectureProposalUseCase {
+        return PostLectureProposalUseCase(lectureRepository)
     }
 
     @Provides
     @Singleton
     fun provideUser(userRepository: UserRepository): GetUserUseCase {
         return GetUserUseCase(userRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostLecture(lectureRepository: LectureRepository): PostLectureUseCase {
+        return PostLectureUseCase(lectureRepository)
     }
 }

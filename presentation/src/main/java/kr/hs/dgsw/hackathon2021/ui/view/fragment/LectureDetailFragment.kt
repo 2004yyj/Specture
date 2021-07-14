@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
-import kr.hs.dgsw.domain.usecase.lecture.LectureProposalUseCase
-import kr.hs.dgsw.hackathon2021.R
+import kr.hs.dgsw.domain.usecase.lecture.PostLectureProposalUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
@@ -25,7 +24,7 @@ class LectureDetailFragment : Fragment() {
     lateinit var getLectureDetailUseCase: GetLectureDetailUseCase
 
     @Inject
-    lateinit var postLectureDetailUseCase: LectureProposalUseCase
+    lateinit var postPostLectureDetailUseCase: PostLectureProposalUseCase
 
     companion object {
         fun newInstance() = LectureDetailFragment()
@@ -60,7 +59,7 @@ class LectureDetailFragment : Fragment() {
     private fun init() {
         viewModel = ViewModelProvider(
             this,
-            LectureDetailViewModelFactory(getLectureDetailUseCase, postLectureDetailUseCase))[LectureDetailViewModel::class.java]
+            LectureDetailViewModelFactory(getLectureDetailUseCase, postPostLectureDetailUseCase))[LectureDetailViewModel::class.java]
 
         viewModel.lectureDetail.observe(viewLifecycleOwner, {
             setText(it)

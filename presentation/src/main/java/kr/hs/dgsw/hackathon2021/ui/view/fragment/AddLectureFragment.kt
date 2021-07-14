@@ -6,8 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.hs.dgsw.hackathon2021.R
+import android.widget.Button
+import android.widget.DatePicker
+import android.widget.EditText
+import android.widget.ImageButton
+import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
+import kr.hs.dgsw.hackathon2021.databinding.FragmentAddLectureBinding
+import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.AddLectureViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.AddLectureViewModel
+import javax.inject.Inject
 
 class AddLectureFragment : Fragment() {
 
@@ -15,19 +23,32 @@ class AddLectureFragment : Fragment() {
         fun newInstance() = AddLectureFragment()
     }
 
+    @Inject
+    lateinit var postLectureUseCase: PostLectureUseCase
+
     private lateinit var viewModel: AddLectureViewModel
+    private lateinit var binding: FragmentAddLectureBinding
+
+    private lateinit var ibAdd: ImageButton
+    private lateinit var etTitle: EditText
+    private lateinit var proposalDate: DatePicker
+    private lateinit var startDate: DatePicker
+    private lateinit var endDate: DatePicker
+    private lateinit var etContent: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_add_lecture, container, false)
+    ): View {
+        (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
+
+        binding = FragmentAddLectureBinding.inflate(inflater)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddLectureViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, AddLectureViewModelFactory(postLectureUseCase))[AddLectureViewModel::class.java]
     }
 
 }

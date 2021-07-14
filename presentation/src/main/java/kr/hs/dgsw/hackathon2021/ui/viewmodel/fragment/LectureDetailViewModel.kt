@@ -7,12 +7,12 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
-import kr.hs.dgsw.domain.usecase.lecture.LectureProposalUseCase
+import kr.hs.dgsw.domain.usecase.lecture.PostLectureProposalUseCase
 import kr.hs.dgsw.hackathon2021.ui.view.util.SingleLiveEvent
 
 class LectureDetailViewModel(
     private val getLectureDetailUseCase: GetLectureDetailUseCase,
-    private val lectureProposalUseCase: LectureProposalUseCase
+    private val postLectureProposalUseCase: PostLectureProposalUseCase
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
@@ -40,7 +40,7 @@ class LectureDetailViewModel(
     }
 
     fun postLectureProposal() {
-        lectureProposalUseCase.buildUseCaseObservable(lectureId)
+        postLectureProposalUseCase.buildUseCaseObservable(lectureId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({

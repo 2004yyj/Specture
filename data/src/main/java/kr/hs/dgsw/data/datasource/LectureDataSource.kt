@@ -5,6 +5,8 @@ import kr.hs.dgsw.data.base.BaseDataSource
 import kr.hs.dgsw.data.mapper.toEntity
 import kr.hs.dgsw.data.network.remote.LectureRemote
 import kr.hs.dgsw.domain.entity.response.Lecture
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -50,6 +52,18 @@ class LectureDataSource @Inject constructor(
 
     fun postLectureProposal(lectureId: Int): Single<Any?> {
         return remote.postLectureProposal(lectureId)
+    }
+
+    fun postLecture(
+        title: RequestBody,
+        content: RequestBody,
+        attachment: ArrayList<MultipartBody.Part>,
+        field: RequestBody,
+        start_date: Long,
+        end_date: Long,
+        proposal: Long
+    ): Single<Any?> {
+        return remote.postLecture(title, content, attachment, field, start_date, end_date, proposal)
     }
 
 }
