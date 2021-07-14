@@ -9,25 +9,158 @@
         android:padding="40dp"
         tools:context=".ui.view.fragment.LectureDetailFragment">
 
-        <TextView
-            android:id="@+id/tv_title_lecture_detail"
-            style="@style/BoldTextView"
+        <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/tv_user_lecture_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            style="@style/SmallTextView"
-            app:layout_constraintStart_toStartOf="@+id/tv_title_lecture_detail"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_title_lecture_detail"
+                    style="@style/BoldTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_user_lecture_detail"
+                    style="@style/SmallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="id"
+                    app:layout_constraintStart_toStartOf="@+id/tv_title_lecture_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_img_lecture_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_content_lecture_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_proposal_lecture_detail"
+                    tools:listitem="@layout/item_lecture_img" />
+
+                <TextView
+                    android:id="@+id/tv_content_lecture_detail"
+                    style="@style/RegularTextView_black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_img_lecture_detail" />
+
+                <TextView
+                    android:id="@+id/tv_field_lecture_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="분야"
+                    style="@style/RegularTextView_black"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_user_lecture_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_user_lecture_detail" />
+
+                <TextView
+                    android:id="@+id/tv_start_date_lecture_detail"
+                    style="@style/SmallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="0000.00.00"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    app:layout_constraintStart_toEndOf="@+id/textView7"
+                    app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/tv_end_date_lecture_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="0000.00.00"
+                    style="@style/SmallTextView"
+                    app:layout_constraintStart_toEndOf="@+id/textView8"
+                    app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+                <TextView
+                    android:id="@+id/tv_upload_date_lecture_detail"
+                    style="@style/SmallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="0000.00.00"
+                    app:layout_constraintStart_toEndOf="@+id/tv_user_lecture_detail"
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_lecture_detail" />
+
+                <TextView
+                    android:id="@+id/tv_proposal_lecture_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="0000.00.00"
+                    style="@style/SmallTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_field_lecture_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_field_lecture_detail"
+                    app:layout_goneMarginTop="5dp"
+                    app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/RegularTextView_black"
+                    android:text="일시"
+                    android:layout_margin="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="~"
+                    style="@style/SmallTextView"
+                    app:layout_constraintStart_toEndOf="@+id/tv_start_date_lecture_detail"
+                    app:layout_constraintTop_toTopOf="@+id/tv_start_date_lecture_detail" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="마감"
+                    style="@style/RegularTextView_black"
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_participate_lecture_detail"
@@ -64,26 +197,5 @@
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_img_lecture_detail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_content_lecture_detail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_lecture_detail" />
-
-        <TextView
-            android:id="@+id/tv_content_lecture_detail"
-            android:layout_width="0dp"
-            android:layout_height="358dp"
-            android:layout_marginBottom="16dp"
-            android:text="TextView"
-            style="@style/RegularTextView_black"
-            app:layout_constraintBottom_toTopOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

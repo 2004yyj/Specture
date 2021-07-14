@@ -5,6 +5,7 @@ import kr.hs.dgsw.data.datasource.UserDataSource
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.entity.response.Token
+import kr.hs.dgsw.domain.entity.response.User
 import kr.hs.dgsw.domain.repository.UserRepository
 
 class UserRepositoryImpl(
@@ -20,5 +21,9 @@ class UserRepositoryImpl(
 
     override fun postAutoLogin(): Single<Token> {
         return userDataSource.postAutoLogin()
+    }
+
+    override fun getUser(): Single<User> {
+        return userDataSource.getUser()
     }
 }

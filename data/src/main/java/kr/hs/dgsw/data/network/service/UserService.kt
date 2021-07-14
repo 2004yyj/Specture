@@ -2,14 +2,12 @@ package kr.hs.dgsw.data.network.service
 
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.entity.TokenData
+import kr.hs.dgsw.data.entity.UserData
 import kr.hs.dgsw.data.util.Response
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.*
 
 interface UserService {
     @Multipart
@@ -31,4 +29,7 @@ interface UserService {
 
     @POST("/user/autoLogin")
     fun postAutoLogin() : Single<retrofit2.Response<Response<TokenData>>>
+
+    @GET("/lecture/proposal/cancel")
+    fun getUser() : Single<retrofit2.Response<Response<UserData>>>
 }

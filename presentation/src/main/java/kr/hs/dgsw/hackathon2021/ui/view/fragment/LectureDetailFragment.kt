@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class LectureDetailFragment : Fragment() {
@@ -42,6 +45,7 @@ class LectureDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        viewModel.getLectureDetail()
         viewModel.lectureId = arguments?.getInt("lectureId") as Int
     }
 
@@ -49,14 +53,29 @@ class LectureDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this, LectureDetailViewModelFactory(getLectureDetailUseCase))[LectureDetailViewModel::class.java]
 
         viewModel.lectureDetail.observe(viewLifecycleOwner, {
-            binding.tvContentLectureDetail.text = it.content
-            binding.tvTitleLectureDetail.text = it.title
-            binding.tvUserLectureDetail.text = "김뫄뫄"
-            binding.tvParticipantsLectureDetail.text = "10명"
+            setText(it)
         })
 
         viewModel.isFailure.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private fun setText(data: Lecture) {
+        val output = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+
+        val started = output.format(data.startDate)!!
+        val ended = output.format(data.endDate)!!
+        val uploaded = output.format(data.uploadDate)!!
+        val proposal = output.format(data.proposal)!!
+
+        binding.tvContentLectureDetail.text = data.content
+        binding.tvTitleLectureDetail.text = data.title
+        binding.tvUserLectureDetail.text = data.userId  //
+        binding.tvParticipantsLectureDetail.text = "10"
+        binding.tvEndDateLectureDetail.text = ended
+        binding.tvStartDateLectureDetail.text = started
+        binding.tvUploadDateLectureDetail.text = uploaded
+        binding.tvProposalLectureDetail.text = proposal
     }
 }
