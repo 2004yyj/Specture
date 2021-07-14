@@ -2,7 +2,6 @@ package kr.hs.dgsw.data.mapper
 
 import kr.hs.dgsw.data.entity.LectureData
 import kr.hs.dgsw.domain.entity.response.Lecture
-import kr.hs.dgsw.domain.entity.response.Token
 
 fun LectureData.toEntity(): Lecture {
     return Lecture(
@@ -15,7 +14,8 @@ fun LectureData.toEntity(): Lecture {
         this.endDate,
         this.uploadDate,
         this.proposal,
-        this.state
+        this.state,
+        this.attachmentUrl
     )
 }
 
@@ -30,6 +30,7 @@ fun Lecture.toData(): LectureData {
         this.endDate,
         this.uploadDate,
         this.proposal,
-        this.state
+        this.state,
+        this.attachmentUrl
     )
 }

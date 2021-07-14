@@ -13,6 +13,8 @@ import kr.hs.dgsw.domain.usecase.lecture.LectureProposalUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
 import java.text.SimpleDateFormat
@@ -34,6 +36,8 @@ class LectureDetailFragment : Fragment() {
     private lateinit var binding: FragmentLectureDetailBinding
 
     private lateinit var viewModel: LectureDetailViewModel
+
+    private val adapter = LectureImageAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,8 +66,11 @@ class LectureDetailFragment : Fragment() {
             this,
             LectureDetailViewModelFactory(getLectureDetailUseCase, postLectureDetailUseCase))[LectureDetailViewModel::class.java]
 
+        binding.rvImgLectureDetail.adapter = adapter
+
         viewModel.lectureDetail.observe(viewLifecycleOwner, {
             setText(it)
+            adapter(it.attachmentUrl)
         })
 
         viewModel.isFailure.observe(viewLifecycleOwner, {
@@ -92,4 +99,5 @@ class LectureDetailFragment : Fragment() {
         binding.tvUploadDateLectureDetail.text = uploaded
         binding.tvProposalLectureDetail.text = proposal
     }
+
 }
