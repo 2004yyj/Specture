@@ -21,13 +21,12 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SettingViewModel
 import javax.inject.Inject
 
 class SettingFragment : Fragment() {
+    @Inject
+    lateinit var getUserUseCase: GetUserUseCase
 
     companion object {
         fun newInstance() = SettingFragment()
     }
-
-    @Inject
-    private lateinit var getUserUseCase: GetUserUseCase
 
     private lateinit var binding: FragmentSettingBinding
     private lateinit var viewModel: SettingViewModel
