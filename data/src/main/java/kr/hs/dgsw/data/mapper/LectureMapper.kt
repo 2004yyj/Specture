@@ -8,6 +8,7 @@ fun LectureData.toEntity(): Lecture {
         this.lectureId,
         this.title,
         this.content,
+        this.attachmentUrl,
         this.userId,
         this.field,
         this.startDate,
@@ -15,7 +16,6 @@ fun LectureData.toEntity(): Lecture {
         this.uploadDate,
         this.proposal,
         this.state,
-        this.attachmentUrl
     )
 }
 
@@ -24,6 +24,7 @@ fun Lecture.toData(): LectureData {
         this.lectureId,
         this.title,
         this.content,
+        this.attachmentUrl,
         this.userId,
         this.field,
         this.startDate,
@@ -31,6 +32,5 @@ fun Lecture.toData(): LectureData {
         this.uploadDate,
         this.proposal,
         this.state,
-        this.attachmentUrl
     )
 }
