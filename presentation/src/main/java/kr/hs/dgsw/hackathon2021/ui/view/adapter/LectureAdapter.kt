@@ -5,16 +5,18 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
+class LectureAdapter(private val view: View? = null) : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
     interface OnLectureListener {
         fun onClick(id: Int)
@@ -39,6 +41,7 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
         val tvField: TextView = v.findViewById(R.id.tv_field_item_lecture_list)
         val cardView: CardView = v.findViewById(R.id.cv_lecture_item)
         val tvState: TextView = v.findViewById(R.id.tv_state_item_lecture)
+        val img: ImageView = v.findViewById(R.id.img_lecture_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -82,6 +85,13 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
                 holder.tvState.text = "종료 됨"
             }
         }
+
+        if (view != null) {
+            Glide.with(view)
+                .load(data.attachmentUrl?.get(0))
+                .into(holder.img)
+        }
+
         holder.cardView.setOnClickListener {
             onClickLectureListener.onClick(data.lectureId)
         }
@@ -94,4 +104,5 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
         this.list.addAll(list)
         notifyDataSetChanged()
     }
+
 }

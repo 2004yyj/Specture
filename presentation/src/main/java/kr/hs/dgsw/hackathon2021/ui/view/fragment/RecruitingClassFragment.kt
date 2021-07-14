@@ -33,7 +33,7 @@ class RecruitingClassFragment : Fragment() {
     private lateinit var viewModel: ClassViewModel
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private val adapter: LectureAdapter = LectureAdapter()
+    private lateinit var adapter: LectureAdapter
 
     private val navController: NavController by lazy {
         findNavController()
@@ -51,6 +51,8 @@ class RecruitingClassFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
         viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
+
+        adapter = LectureAdapter(requireView())
 
         init()
         setVisibility()

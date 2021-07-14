@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         if (InfoHelper.autoLoginChk) {
             viewModel.autoLogin()
         } else {
-            val intent = Intent(this@SplashActivity, IntroActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -45,7 +45,7 @@ class SplashActivity : AppCompatActivity() {
 
             isFailure.observe(this@SplashActivity) {
                 Toast.makeText(this@SplashActivity, it, Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@SplashActivity, IntroActivity::class.java)
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
