@@ -47,6 +47,12 @@ class LectureDetailFragment : Fragment() {
         init()
         viewModel.getLectureDetail()
         viewModel.lectureId = arguments?.getInt("lectureId") as Int
+
+        binding.btnParticipateLectureDetail.setOnClickListener {
+            Toast.makeText(context, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+
+
+        }
     }
 
     private fun init() {

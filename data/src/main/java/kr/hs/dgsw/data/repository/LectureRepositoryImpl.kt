@@ -20,4 +20,7 @@ class LectureRepositoryImpl(
         return lectureDataSource.getLectureByDate(year, month, day)
     }
 
+    override fun postLectureProposal(lectureId: Int): Single<Any?> {
+        return lectureDataSource.postLectureProposal(lectureId)
+    }
 }

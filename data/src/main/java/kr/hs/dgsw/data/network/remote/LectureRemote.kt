@@ -17,4 +17,8 @@ class LectureRemote @Inject constructor(
     fun getLectureDetail(lectureId: Int): Single<LectureData> {
         return service.getLectureDetail(lectureId).map(getResponse())
     }
+
+    fun postLectureProposal(lectureId: Int): Single<Any?> {
+        return service.postLectureProposal(lectureId).map(getResponse())
+    }
 }

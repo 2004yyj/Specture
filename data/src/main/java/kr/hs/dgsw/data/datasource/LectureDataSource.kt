@@ -48,4 +48,8 @@ class LectureDataSource @Inject constructor(
         return remote.getLectureDetail(lectureId).map { it.toEntity() }
     }
 
+    fun postLectureProposal(lectureId: Int): Single<Any?> {
+        return remote.postLectureProposal(lectureId)
+    }
+
 }
