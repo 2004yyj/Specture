@@ -31,7 +31,7 @@ class LectureDataSource @Inject constructor(
             val lectureList = ArrayList<Lecture>()
 
             val sdf = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
-            val curDate = sdf.parse(year.toString()+String.format("%02d", month+1)+String.format("%02d", day))!!.time
+            val curDate = sdf.parse(year.toString()+String.format("%02d", month)+String.format("%02d", day))!!.time
 
             lectureDataList.forEach {
                 val strDate = sdf.parse(sdf.format(Date(it.startDate)))!!.time
