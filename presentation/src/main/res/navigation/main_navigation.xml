@@ -18,7 +18,11 @@
         android:id="@+id/settingFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.SettingFragment"
         android:label="내 정보"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_recruitingClassFragment"
+            app:destination="@id/recruitingClassFragment" />
+    </fragment>
     <fragment
         android:id="@+id/calenderFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.CalenderFragment"
@@ -32,5 +36,13 @@
         <action
             android:id="@+id/action_lectureDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recruitingClassFragment"
+        android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.RecruitingClassFragment"
+        android:label="RecruitingClassFragment" >
+        <action
+            android:id="@+id/action_recruitingClassFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
 </navigation>

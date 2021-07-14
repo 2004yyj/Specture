@@ -35,6 +35,10 @@ class ClassViewModel(
             }
     }
 
+    fun getClass(lectureId: Int) {
+
+    }
+
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()

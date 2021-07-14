@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.User
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
@@ -31,6 +32,10 @@ class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
     private lateinit var viewModel: SettingViewModel
 
+    private val navController by lazy {
+        findNavController()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +52,13 @@ class SettingFragment : Fragment() {
         init(view)
         viewModel.getUser()
 
+        binding.card1Setting.setOnClickListener{
+            navigateToRecruitingClass()
+        }
+
+        binding.card2Setting.setOnClickListener {
+            navigateToRecruitingClass()
+        }
     }
 
     private fun init(v: View) {
@@ -71,4 +83,7 @@ class SettingFragment : Fragment() {
             .into(binding.imgUserSetting)
     }
 
+    private fun navigateToRecruitingClass() { //
+        navController.navigate(R.id.action_settingFragment_to_recruitingClassFragment)
+    }
 }
