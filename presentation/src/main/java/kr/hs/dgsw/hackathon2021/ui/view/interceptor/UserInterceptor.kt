@@ -8,7 +8,6 @@ import okhttp3.Response
 class UserInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder().addHeader("Authorization", token?:"").build()
-        Log.d("UserInterceptor", "intercept: $token")
         return chain.proceed(request)
     }
 }
