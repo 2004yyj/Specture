@@ -5,6 +5,7 @@ import dagger.Provides
 import kr.hs.dgsw.domain.repository.LectureRepository
 import kr.hs.dgsw.domain.repository.UserRepository
 import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
+import kr.hs.dgsw.domain.usecase.lecture.GetClassByDateUseCase
 import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
 import kr.hs.dgsw.domain.usecase.user.AutoLoginUseCase
 import kr.hs.dgsw.domain.usecase.user.LoginUseCase
@@ -41,5 +42,11 @@ class UseCaseModule {
     @Singleton
     fun provideLectureDetail(lectureRepository: LectureRepository): GetLectureDetailUseCase {
         return GetLectureDetailUseCase(lectureRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideClassByDate(lectureRepository: LectureRepository): GetClassByDateUseCase {
+        return GetClassByDateUseCase(lectureRepository)
     }
 }
