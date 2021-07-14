@@ -7,4 +7,6 @@ interface LectureRepository {
     fun getAllLecture(state: Int): Single<List<Lecture>>
 
     fun getLectureDetail(lectureId: Int): Single<Lecture>
+
+    fun getAllLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>>
 }

@@ -1,9 +1,12 @@
 package kr.hs.dgsw.hackathon2021.ui.view.adapter
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
@@ -34,6 +37,8 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
         val tvUser: TextView = v.findViewById(R.id.tv_user_item_lecture_list)
         val tvProposal: TextView = v.findViewById(R.id.tv_proposal_item_lecture_list)
         val tvField: TextView = v.findViewById(R.id.tv_field_item_lecture_list)
+        val cardView: CardView = v.findViewById(R.id.cv_lecture_item)
+        val tvState: TextView = v.findViewById(R.id.tv_state_item_lecture)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,6 +60,31 @@ class LectureAdapter : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
         holder.tvField.text = slicedString
         holder.tvProposal.text = "${started} ~ $ended"
 
+        val currentTime = System.currentTimeMillis()
+
+        when(data.state) {
+            0 -> {
+                holder.tvState.setTextColor(Color.parseColor("#747474"))
+                holder.tvState.text = "모집 중"
+            }
+            1 -> {
+                holder.tvState.text =
+                    if (currentTime < data.startDate) {
+                        holder.tvState.setTextColor(Color.parseColor("#FFB300"))
+                        "진행 예정"
+                    } else {
+                        holder.tvState.setTextColor(Color.parseColor("#43A047"))
+                        "진행 중"
+                    }
+            }
+            2 -> {
+                holder.tvState.setTextColor(Color.parseColor("#F4511E"))
+                holder.tvState.text = "종료 됨"
+            }
+        }
+        holder.cardView.setOnClickListener {
+            onClickLectureListener.onClick(data.lectureId)
+        }
     }
 
     override fun getItemCount(): Int = list.size
