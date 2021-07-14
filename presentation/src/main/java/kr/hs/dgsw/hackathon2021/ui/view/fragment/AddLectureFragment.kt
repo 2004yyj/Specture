@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentAddLectureBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.AddLectureViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.AddLectureViewModel
@@ -37,6 +39,7 @@ class AddLectureFragment : Fragment() {
     private lateinit var viewModel: AddLectureViewModel
     private lateinit var binding: FragmentAddLectureBinding
 
+    private lateinit var lectureImageAdapter: LectureImageAdapter
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var etTitle: EditText
     private lateinit var proposalDate: DatePicker
@@ -46,7 +49,9 @@ class AddLectureFragment : Fragment() {
     private lateinit var etField: EditText
     private lateinit var btnSubmit: Button
 
-    private lateinit var imageList: ArrayList<MultipartBody.Part>
+    private lateinit var imageList: ArrayList<String>
+
+    private lateinit var rvImageList: RecyclerView
 
     private lateinit var multipartBuilder: MultipartBody.Builder
 
@@ -102,6 +107,8 @@ class AddLectureFragment : Fragment() {
     private fun init() {
         viewModel = ViewModelProvider(this, AddLectureViewModelFactory(postLectureUseCase))[AddLectureViewModel::class.java]
 
+        lectureImageAdapter = LectureImageAdapter()
+
         fabAdd = binding.fabAddImage
         etTitle = binding.etTitleAddLecture
         proposalDate = binding.proposalDate
@@ -110,15 +117,20 @@ class AddLectureFragment : Fragment() {
         etContent = binding.etContentAddLecture
         btnSubmit = binding.btnSubmitAddLecture
         etField = binding.etFieldAddLecture
+        rvImageList = binding.rvImageAddLecture
+        rvImageList.adapter = lectureImageAdapter
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
                 val inputStream = requireActivity().contentResolver.openInputStream(it)
                 val image = BitmapFactory.decodeStream(inputStream)
+
+                imageList.add(it.toString())
+
                 with(requireActivity()) {
                     multipartBuilder.addPart(it.asMultipart("profile", cacheDir, contentResolver)!!)
                 }
-
+                lectureImageAdapter.setList(imageList)
             }
         }
     }
