@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         if (InfoHelper.autoLoginChk) {
             viewModel.autoLogin()
         } else {
-            val intent = Intent(this@SplashActivity, IntroActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

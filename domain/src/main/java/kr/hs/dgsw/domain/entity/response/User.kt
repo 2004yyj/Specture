@@ -1,6 +1,6 @@
-package kr.hs.dgsw.data.entity
+package kr.hs.dgsw.domain.entity.response
 
-data class UserData(
+data class User(
     val userId: String,
     val password: String,
     val profile: String,

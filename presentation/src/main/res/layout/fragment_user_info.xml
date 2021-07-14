@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="30dp"
         tools:context=".ui.view.fragment.UserInfoFragment">
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_grade_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="53dp" />
+            style="@style/RegularTextView_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_name_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="51dp" />
+            style="@style/RegularTextView_black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_grade_user_info"
+            app:layout_constraintStart_toEndOf="@+id/tv_grade_user_info" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_introduce_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="16dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="27dp"
-            tools:layout_editor_absoluteY="97dp" />
+            app:layout_constraintStart_toStartOf="@+id/tv_grade_user_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_grade_user_info" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name_user_info"
+            app:layout_constraintStart_toEndOf="@+id/tv_name_user_info" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
