@@ -29,6 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/img_lecture_item"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@color/grey" />

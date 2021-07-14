@@ -19,6 +19,7 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class LectureDetailFragment : Fragment() {
 
@@ -69,7 +70,7 @@ class LectureDetailFragment : Fragment() {
 
         viewModel.lectureDetail.observe(viewLifecycleOwner, {
             setText(it)
-            adapter(it.attachmentUrl)
+            adapter.setList(it.attachmentUrl as ArrayList<String>)
         })
 
         viewModel.isFailure.observe(viewLifecycleOwner, {
