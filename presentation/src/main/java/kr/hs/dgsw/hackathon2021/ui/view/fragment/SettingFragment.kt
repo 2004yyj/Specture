@@ -27,7 +27,7 @@ class SettingFragment : Fragment() {
     }
 
     @Inject
-    private lateinit var getUserUseCase: GetUserUseCase
+    lateinit var getUserUseCase: GetUserUseCase
 
     private lateinit var binding: FragmentSettingBinding
     private lateinit var viewModel: SettingViewModel
