@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
+import kr.hs.dgsw.domain.usecase.lecture.LectureProposalUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
@@ -22,6 +23,9 @@ class LectureDetailFragment : Fragment() {
 
     @Inject
     lateinit var getLectureDetailUseCase: GetLectureDetailUseCase
+
+    @Inject
+    lateinit var postLectureDetailUseCase: LectureProposalUseCase
 
     companion object {
         fun newInstance() = LectureDetailFragment()
@@ -49,9 +53,6 @@ class LectureDetailFragment : Fragment() {
         viewModel.lectureId = arguments?.getInt("lectureId") as Int
 
         binding.btnParticipateLectureDetail.setOnClickListener {
-            Toast.makeText(context, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-
-
         }
     }
 
@@ -64,6 +65,10 @@ class LectureDetailFragment : Fragment() {
 
         viewModel.isFailure.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.singleLiveData.observe(viewLifecycleOwner, {
+            Toast.makeText(context, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show()
         })
     }
 
