@@ -40,9 +40,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    tools:text="아이디"
+                    android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_title_lecture_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail"
+                    tools:text="아이디" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_img_lecture_detail"
@@ -53,7 +54,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_proposal_lecture_detail"
-                    tools:listitem="@layout/item_lecture_img" />
+                    tools:listitem="@layout/item_lecture_img"
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"/>
 
                 <TextView
                     android:id="@+id/tv_content_lecture_detail"
@@ -104,10 +108,10 @@
                     style="@style/SmallTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    tools:text="0000.00.00"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintStart_toEndOf="@+id/tv_user_lecture_detail"
-                    app:layout_constraintTop_toTopOf="@+id/tv_user_lecture_detail" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_lecture_detail"
+                    tools:text="0000.00.00" />
 
                 <TextView
                     android:id="@+id/tv_proposal_lecture_detail"
@@ -122,9 +126,9 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_field_lecture_detail"
                     app:layout_constraintTop_toBottomOf="@+id/tv_field_lecture_detail"
                     app:layout_goneMarginTop="5dp"
@@ -132,13 +136,14 @@
 
                 <TextView
                     android:id="@+id/textView7"
+                    style="@style/RegularTextView_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/RegularTextView_black"
-                    tools:text="일시"
                     android:layout_margin="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                    app:layout_constraintTop_toTopOf="@+id/imageView4"
+                    tools:text="일시" />
 
                 <TextView
                     android:id="@+id/textView8"
