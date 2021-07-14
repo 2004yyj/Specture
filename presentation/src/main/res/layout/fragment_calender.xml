@@ -9,11 +9,16 @@
         android:orientation="vertical"
         tools:context=".ui.view.fragment.CalenderFragment">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <CalendarView
             android:id="@+id/cv_date_calendar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             app:layout_constraintBottom_toTopOf="@id/rv_date_calender"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +28,7 @@
             android:id="@+id/rv_date_calender"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             tools:listitem="@layout/item_lecture_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
