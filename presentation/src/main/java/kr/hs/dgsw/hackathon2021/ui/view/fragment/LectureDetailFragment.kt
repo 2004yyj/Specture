@@ -53,11 +53,14 @@ class LectureDetailFragment : Fragment() {
         viewModel.lectureId = arguments?.getInt("lectureId") as Int
 
         binding.btnParticipateLectureDetail.setOnClickListener {
+            viewModel.postLectureProposal()
         }
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this, LectureDetailViewModelFactory(getLectureDetailUseCase))[LectureDetailViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            LectureDetailViewModelFactory(getLectureDetailUseCase, postLectureDetailUseCase))[LectureDetailViewModel::class.java]
 
         viewModel.lectureDetail.observe(viewLifecycleOwner, {
             setText(it)
