@@ -29,7 +29,7 @@
                     style="@style/BoldTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    tools:text="TextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="id"
+                    tools:text="아이디"
                     app:layout_constraintStart_toStartOf="@+id/tv_title_lecture_detail"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail" />
 
@@ -72,7 +72,7 @@
                     android:id="@+id/tv_field_lecture_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="분야"
+                    tools:text="분야"
                     style="@style/RegularTextView_black"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_user_lecture_detail"
@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="0000.00.00"
+                    tools:text="0000.00.00"
                     app:layout_constraintStart_toEndOf="@+id/tv_user_lecture_detail"
                     app:layout_constraintTop_toTopOf="@+id/tv_user_lecture_detail" />
 
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/RegularTextView_black"
-                    android:text="일시"
+                    tools:text="일시"
                     android:layout_margin="5dp"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
                     app:layout_constraintTop_toTopOf="@+id/imageView4" />
@@ -145,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="~"
+                    tools:text="~"
                     style="@style/SmallTextView"
                     app:layout_constraintStart_toEndOf="@+id/tv_start_date_lecture_detail"
                     app:layout_constraintTop_toTopOf="@+id/tv_start_date_lecture_detail" />
