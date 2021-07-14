@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
@@ -119,12 +120,10 @@ class AddLectureFragment : Fragment() {
         etField = binding.etFieldAddLecture
         rvImageList = binding.rvImageAddLecture
         rvImageList.adapter = lectureImageAdapter
+        rvImageList.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
-                val inputStream = requireActivity().contentResolver.openInputStream(it)
-                val image = BitmapFactory.decodeStream(inputStream)
-
                 imageList.add(it.toString())
 
                 with(requireActivity()) {

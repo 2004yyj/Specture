@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_lectureDetailFragment"
             app:destination="@id/lectureDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addLectureFragment"
+            app:destination="@id/addLectureFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -40,9 +43,15 @@
     <fragment
         android:id="@+id/recruitingClassFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.RecruitingClassFragment"
-        android:label="RecruitingClassFragment" >
+        android:label="RecruitingClassFragment"
+        tools:layout="@layout/fragment_recruiting_class">
         <action
             android:id="@+id/action_recruitingClassFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addLectureFragment"
+        android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.AddLectureFragment"
+        android:label="AddLectureFragment"
+        tools:layout="@layout/fragment_add_lecture"  />
 </navigation>

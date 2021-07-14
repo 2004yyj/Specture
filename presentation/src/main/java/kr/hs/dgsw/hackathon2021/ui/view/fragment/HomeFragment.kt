@@ -11,8 +11,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentHomeBinding
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.HomeViewPagerAdapter
@@ -40,11 +42,14 @@ class HomeFragment : Fragment() {
     private val progressingClassFragment = ProgressingClassFragment.newInstance()
     private val endedClassFragment = EndedClassFragment.newInstance()
 
+    private lateinit var fab: FloatingActionButton
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
+
         return binding.root
     }
 
@@ -62,9 +67,17 @@ class HomeFragment : Fragment() {
             )
         )
 
+        fab.setOnClickListener {
+            navigateHomeToAddLecture()
+        }
+
         TabLayoutMediator(tablayout, viewPager) { tab, position ->
             tab.text = textArray[position]
         }.attach()
+    }
+
+    private fun navigateHomeToAddLecture() {
+        navController.navigate(R.id.action_homeFragment_to_addLectureFragment)
     }
 
     private fun init() {
@@ -73,6 +86,7 @@ class HomeFragment : Fragment() {
         viewPager = binding.viewPagerHome
         tablayout = binding.tablayoutHome
         toolbar = binding.toolbarHome
+        fab = binding.fabAddHome
 
         val appBarConfiguration = (requireActivity() as MainActivity).appBarConfiguration
         toolbar.setupWithNavController(navController, appBarConfiguration)
