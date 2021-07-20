@@ -4,101 +4,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="kr.hs.dgsw.hackathon2021.ui.view.fragment.SignUpInfoFragment">
 
+    <data>
+        <import type="kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel"/>
+        <variable
+            name="vm"
+            type="SignUpViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="80dp"
-        android:paddingHorizontal="40dp"
+        android:paddingVertical="40dp"
         android:gravity="bottom"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logo_login"
             android:layout_width="0dp"
-            android:layout_height="130dp"
-            android:layout_marginBottom="30dp"
-            app:layout_constraintBottom_toTopOf="@id/linearLayout1"
+            android:layout_height="125dp"
+            android:layout_marginHorizontal="40dp"
             android:src="@drawable/ic_white_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
+            android:layout_marginHorizontal="40dp"
             app:layout_constraintBottom_toTopOf="@id/btn_submit_sign_up_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo_login">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btn_image_add_signUpInfo"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="100dp"
-                    android:background="?selectableItemBackground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_gravity="center_horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_image_add_signUpInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="100dp"
+                        android:background="?selectableItemBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/iv_profile_signUpInfo"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:background="@color/grey" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_name_sign_up_info"
+                    style="@style/RegularTextView_black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="asdfasdf"
+                    android:textSize="25sp"/>
+
+                <TextView
+                    android:id="@+id/tv_school_sign_up_info"
+                    style="@style/RegularTextView_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="0학년 0반 0번"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Design.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_introduce_sign_up_info"
+                        style="@style/RegularTextView_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_introduce"
+                        android:drawablePadding="10dp"
+                        android:hint="@string/introduce"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_next_sign_up" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="10dp">
 
                     <ImageView
-                        android:id="@+id/iv_profile_signUpInfo"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:background="@color/grey" />
+                        android:src="@drawable/ic_field"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                </androidx.cardview.widget.CardView>
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:id="@+id/fb_field_sign_up_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:flexWrap="wrap"
+                        app:alignItems="stretch"
+                        app:alignContent="space_around"
+                        app:showDivider="beginning|middle|end">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <EditText
+                            android:id="@+id/et_field_sign_up_info"
+                            style="@style/RegularTextView_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="5dp"
+                            app:layout_flexGrow="1"
+                            android:hint="@string/field"
+                            android:background="@android:color/transparent"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"/>
 
-            <TextView
-                android:id="@+id/tv_name_sign_up_info"
-                style="@style/RegularTextView_black"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="asdfasdf"
-                android:textSize="30sp"/>
+                    </com.google.android.flexbox.FlexboxLayout>
 
-            <TextView
-                android:id="@+id/tv_school_sign_up_info"
-                style="@style/RegularTextView_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="0학년 0반 0번"/>
+                </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_introduce_sign_up_info"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/introduce"/>
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_field_sign_up_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="나의 분야"/>
-
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit_sign_up_info"
             style="@style/RegularTextView_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity=""
+            android:layout_marginHorizontal="40dp"
             android:background="@drawable/round_button_main"
             android:text="@string/check"
             app:layout_constraintTop_toBottomOf="@id/linearLayout1"
