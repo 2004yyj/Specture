@@ -9,9 +9,9 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 
-interface UserService {
+interface AccountService {
     @Multipart
-    @POST("/user/signUp")
+    @POST("/account/signUp")
     fun postSignUp(
         @Part("userId") userId: RequestBody,
         @Part("password") password: RequestBody,
@@ -24,12 +24,12 @@ interface UserService {
         @Part profile: MultipartBody.Part?
     ) : Single<retrofit2.Response<Response<TokenData>>>
 
-    @POST("/user/login")
+    @POST("/account/login")
     fun postLogin(@Body loginRequest: LoginRequest) : Single<retrofit2.Response<Response<TokenData>>>
 
-    @POST("/user/autoLogin")
+    @POST("/account/autoLogin")
     fun postAutoLogin() : Single<retrofit2.Response<Response<TokenData>>>
 
-    @GET("/user")
+    @GET("/account")
     fun getUser() : Single<retrofit2.Response<Response<UserData>>>
 }

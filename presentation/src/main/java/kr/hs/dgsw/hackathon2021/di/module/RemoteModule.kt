@@ -3,9 +3,9 @@ package kr.hs.dgsw.hackathon2021.di.module
 import dagger.Module
 import dagger.Provides
 import kr.hs.dgsw.data.network.remote.LectureRemote
-import kr.hs.dgsw.data.network.remote.UserRemote
+import kr.hs.dgsw.data.network.remote.AccountRemote
 import kr.hs.dgsw.data.network.service.LectureService
-import kr.hs.dgsw.data.network.service.UserService
+import kr.hs.dgsw.data.network.service.AccountService
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -13,8 +13,8 @@ import javax.inject.Singleton
 class RemoteModule {
     @Provides
     @Singleton
-    fun provideUserRemote(retrofit: Retrofit): UserRemote {
-        return UserRemote(retrofit.create(UserService::class.java))
+    fun provideUserRemote(retrofit: Retrofit): AccountRemote {
+        return AccountRemote(retrofit.create(AccountService::class.java))
     }
 
     @Provides

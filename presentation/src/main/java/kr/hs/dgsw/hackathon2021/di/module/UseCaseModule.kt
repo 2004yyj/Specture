@@ -3,7 +3,7 @@ package kr.hs.dgsw.hackathon2021.di.module
 import dagger.Module
 import dagger.Provides
 import kr.hs.dgsw.domain.repository.LectureRepository
-import kr.hs.dgsw.domain.repository.UserRepository
+import kr.hs.dgsw.domain.repository.AccountRepository
 import kr.hs.dgsw.domain.usecase.lecture.*
 import kr.hs.dgsw.domain.usecase.user.AutoLoginUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
@@ -15,20 +15,20 @@ import javax.inject.Singleton
 class UseCaseModule {
     @Provides
     @Singleton
-    fun provideSignUp(userRepository: UserRepository): SignUpUseCase {
-        return SignUpUseCase(userRepository)
+    fun provideSignUp(accountRepository: AccountRepository): SignUpUseCase {
+        return SignUpUseCase(accountRepository)
     }
 
     @Provides
     @Singleton
-    fun provideLogin(userRepository: UserRepository): LoginUseCase {
-        return LoginUseCase(userRepository)
+    fun provideLogin(accountRepository: AccountRepository): LoginUseCase {
+        return LoginUseCase(accountRepository)
     }
 
     @Provides
     @Singleton
-    fun provideAutoLogin(userRepository: UserRepository): AutoLoginUseCase {
-        return AutoLoginUseCase(userRepository)
+    fun provideAutoLogin(accountRepository: AccountRepository): AutoLoginUseCase {
+        return AutoLoginUseCase(accountRepository)
     }
 
     @Provides
@@ -57,8 +57,8 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideUser(userRepository: UserRepository): GetUserUseCase {
-        return GetUserUseCase(userRepository)
+    fun provideUser(accountRepository: AccountRepository): GetUserUseCase {
+        return GetUserUseCase(accountRepository)
     }
 
     @Provides

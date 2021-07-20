@@ -3,16 +3,16 @@ package kr.hs.dgsw.data.datasource
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseDataSource
 import kr.hs.dgsw.data.mapper.toEntity
-import kr.hs.dgsw.data.network.remote.UserRemote
+import kr.hs.dgsw.data.network.remote.AccountRemote
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.entity.response.Token
 import kr.hs.dgsw.domain.entity.response.User
 import javax.inject.Inject
 
-class UserDataSource @Inject constructor(
-    override val remote: UserRemote
-): BaseDataSource<UserRemote>() {
+class AccountDataSource @Inject constructor(
+    override val remote: AccountRemote
+): BaseDataSource<AccountRemote>() {
     fun postSignUp(signUpRequest: SignUpRequest): Single<Token> {
         return remote.postSignUp(signUpRequest).map { it.toEntity() }
     }
