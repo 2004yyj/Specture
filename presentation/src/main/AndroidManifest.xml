@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.view.activity.IntroActivity" />
+        <activity android:name=".ui.view.activity.IntroActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.view.activity.MainActivity" />
     </application>
 
