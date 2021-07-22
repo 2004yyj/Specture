@@ -6,7 +6,7 @@ import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.entity.response.Token
 import kr.hs.dgsw.domain.entity.response.User
 
-interface AccountRepository {
+interface AuthRepository {
     fun postSignUp(signUpRequest: SignUpRequest): Single<Token>
 
     fun postLogin(loginRequest: LoginRequest): Single<Token>

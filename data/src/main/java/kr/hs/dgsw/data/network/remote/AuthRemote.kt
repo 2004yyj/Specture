@@ -4,14 +4,14 @@ import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseRemote
 import kr.hs.dgsw.data.entity.TokenData
 import kr.hs.dgsw.data.entity.UserData
-import kr.hs.dgsw.data.network.service.AccountService
+import kr.hs.dgsw.data.network.service.AuthService
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import javax.inject.Inject
 
-class AccountRemote @Inject constructor(
-    override val service: AccountService
-): BaseRemote<AccountService>() {
+class AuthRemote @Inject constructor(
+    override val service: AuthService
+): BaseRemote<AuthService>() {
 
     fun postSignUp(signUpRequest: SignUpRequest): Single<TokenData> {
         with(signUpRequest) {

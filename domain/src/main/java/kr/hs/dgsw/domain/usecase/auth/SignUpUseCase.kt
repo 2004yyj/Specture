@@ -1,17 +1,17 @@
-package kr.hs.dgsw.domain.usecase.account
+package kr.hs.dgsw.domain.usecase.auth
 
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.domain.base.ParamsUseCase
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.entity.response.Token
-import kr.hs.dgsw.domain.repository.AccountRepository
+import kr.hs.dgsw.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class SignUpUseCase @Inject constructor(
-    private val accountRepository: AccountRepository
+    private val authRepository: AuthRepository
 ): ParamsUseCase<SignUpUseCase.Params, Single<Token>>() {
     override fun buildUseCaseObservable(params: Params): Single<Token> {
-        return accountRepository.postSignUp(params.signUpRequest)
+        return authRepository.postSignUp(params.signUpRequest)
     }
 
     data class Params(

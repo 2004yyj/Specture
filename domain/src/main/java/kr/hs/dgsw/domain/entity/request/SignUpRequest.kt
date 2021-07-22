@@ -11,6 +11,6 @@ data class SignUpRequest(
     val grade: Int,
     val klass: Int,
     val number: Int,
-    val field: RequestBody,
+    val field: ArrayList<RequestBody>,
     val introduce: RequestBody,
 )

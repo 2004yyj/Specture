@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.domain.entity.request.LoginRequest
-import kr.hs.dgsw.domain.usecase.account.LoginUseCase
+import kr.hs.dgsw.domain.usecase.auth.LoginUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLoginBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication

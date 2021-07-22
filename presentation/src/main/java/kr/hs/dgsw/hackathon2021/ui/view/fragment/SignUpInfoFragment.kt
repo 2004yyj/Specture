@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
-import kr.hs.dgsw.domain.usecase.account.SignUpUseCase
+import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
@@ -31,8 +31,8 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SignUpViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONArray
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -146,9 +146,11 @@ class SignUpInfoFragment : Fragment() {
                 val passwordBody = password.toRequestBody(mediaType)
                 val nameBody = name.toRequestBody(mediaType)
                 val introduceBody = introduce.toRequestBody(mediaType)
-                val fieldList = JSONArray()
-                fieldList.put(field)
-                val fieldBody = fieldList.toString().toRequestBody(mediaType)
+
+                val fieldBody = ArrayList<RequestBody>()
+                field.forEach {
+                    fieldBody.add(it.toRequestBody(mediaType))
+                }
 
                 val signUpRequest =
                     if (this::multipartBody.isInitialized) {
@@ -179,10 +181,12 @@ class SignUpInfoFragment : Fragment() {
         chip.setOnCloseIconClickListener { fbField.removeView(chip as View) }
     }
 
-    fun FlexboxLayout.getAllText(): List<String> {
-        return (0 until childCount - 1).mapNotNull {
-            (getChildAt(it) as Chip).text.toString()
+    fun FlexboxLayout.getAllText(): ArrayList<String> {
+        val arrayList = ArrayList<String>()
+        (0 until childCount - 1).mapNotNull {
+            arrayList.add((getChildAt(it) as Chip).text.toString())
         }
+        return arrayList
     }
 
 }

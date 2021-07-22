@@ -3,19 +3,19 @@ package kr.hs.dgsw.hackathon2021.di.module
 import dagger.Module
 import dagger.Provides
 import kr.hs.dgsw.data.datasource.LectureDataSource
-import kr.hs.dgsw.data.datasource.AccountDataSource
+import kr.hs.dgsw.data.datasource.AuthDataSource
 import kr.hs.dgsw.data.repository.LectureRepositoryImpl
-import kr.hs.dgsw.data.repository.AccountRepositoryImpl
+import kr.hs.dgsw.data.repository.AuthRepositoryImpl
 import kr.hs.dgsw.domain.repository.LectureRepository
-import kr.hs.dgsw.domain.repository.AccountRepository
+import kr.hs.dgsw.domain.repository.AuthRepository
 import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
     @Provides
     @Singleton
-    fun provideAccountRepository(accountDataSource: AccountDataSource): AccountRepository {
-        return AccountRepositoryImpl(accountDataSource)
+    fun provideAuthRepository(authDataSource: AuthDataSource): AuthRepository {
+        return AuthRepositoryImpl(authDataSource)
     }
 
     @Provides

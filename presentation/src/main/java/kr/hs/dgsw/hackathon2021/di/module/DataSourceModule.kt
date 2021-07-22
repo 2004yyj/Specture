@@ -3,17 +3,17 @@ package kr.hs.dgsw.hackathon2021.di.module
 import dagger.Module
 import dagger.Provides
 import kr.hs.dgsw.data.datasource.LectureDataSource
-import kr.hs.dgsw.data.datasource.AccountDataSource
+import kr.hs.dgsw.data.datasource.AuthDataSource
 import kr.hs.dgsw.data.network.remote.LectureRemote
-import kr.hs.dgsw.data.network.remote.AccountRemote
+import kr.hs.dgsw.data.network.remote.AuthRemote
 import javax.inject.Singleton
 
 @Module
 class DataSourceModule {
     @Provides
     @Singleton
-    fun provideAccountDataSource(accountRemote: AccountRemote): AccountDataSource {
-        return AccountDataSource(accountRemote)
+    fun provideAuthDataSource(authRemote: AuthRemote): AuthDataSource {
+        return AuthDataSource(authRemote)
     }
 
     @Provides
