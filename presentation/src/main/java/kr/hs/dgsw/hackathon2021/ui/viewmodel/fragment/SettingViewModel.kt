@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.entity.response.User
-import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.account.GetUserUseCase
 
 class SettingViewModel(
     private val getUserUseCase: GetUserUseCase

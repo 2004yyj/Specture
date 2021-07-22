@@ -5,10 +5,10 @@ import dagger.Provides
 import kr.hs.dgsw.domain.repository.LectureRepository
 import kr.hs.dgsw.domain.repository.AccountRepository
 import kr.hs.dgsw.domain.usecase.lecture.*
-import kr.hs.dgsw.domain.usecase.user.AutoLoginUseCase
-import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
-import kr.hs.dgsw.domain.usecase.user.LoginUseCase
-import kr.hs.dgsw.domain.usecase.user.SignUpUseCase
+import kr.hs.dgsw.domain.usecase.account.AutoLoginUseCase
+import kr.hs.dgsw.domain.usecase.account.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.account.LoginUseCase
+import kr.hs.dgsw.domain.usecase.account.SignUpUseCase
 import javax.inject.Singleton
 
 @Module

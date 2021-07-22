@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
-import kr.hs.dgsw.domain.usecase.user.SignUpUseCase
+import kr.hs.dgsw.domain.usecase.account.SignUpUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication

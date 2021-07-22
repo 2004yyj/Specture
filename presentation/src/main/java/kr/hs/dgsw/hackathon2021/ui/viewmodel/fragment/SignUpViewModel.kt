@@ -7,8 +7,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
-import kr.hs.dgsw.domain.entity.response.Token
-import kr.hs.dgsw.domain.usecase.user.SignUpUseCase
+import kr.hs.dgsw.domain.usecase.account.SignUpUseCase
 
 class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : ViewModel() {
 

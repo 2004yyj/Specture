@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.request.LoginRequest
-import kr.hs.dgsw.domain.usecase.user.LoginUseCase
+import kr.hs.dgsw.domain.usecase.account.LoginUseCase
 
 class LoginViewModel(
     private val loginUseCase: LoginUseCase

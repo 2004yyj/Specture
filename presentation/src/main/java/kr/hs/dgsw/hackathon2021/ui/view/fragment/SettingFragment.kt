@@ -10,14 +10,11 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.User
-import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.account.GetUserUseCase
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSettingBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SettingViewModelFactory
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SettingViewModel
 import javax.inject.Inject
 

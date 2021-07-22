@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class DataSourceModule {
     @Provides
     @Singleton
-    fun provideUserDataSource(accountRemote: AccountRemote): AccountDataSource {
+    fun provideAccountDataSource(accountRemote: AccountRemote): AccountDataSource {
         return AccountDataSource(accountRemote)
     }
 

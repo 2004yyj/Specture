@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class RemoteModule {
     @Provides
     @Singleton
-    fun provideUserRemote(retrofit: Retrofit): AccountRemote {
+    fun provideAccountRemote(retrofit: Retrofit): AccountRemote {
         return AccountRemote(retrofit.create(AccountService::class.java))
     }
 

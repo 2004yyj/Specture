@@ -2,9 +2,8 @@ package kr.hs.dgsw.hackathon2021.ui.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.account.GetUserUseCase
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SettingViewModel
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 
 class SettingViewModelFactory(
     private val getUserUseCase: GetUserUseCase

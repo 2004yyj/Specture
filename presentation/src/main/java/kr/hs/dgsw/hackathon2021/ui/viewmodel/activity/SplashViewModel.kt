@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kr.hs.dgsw.domain.usecase.user.AutoLoginUseCase
+import kr.hs.dgsw.domain.usecase.account.AutoLoginUseCase
 
 class SplashViewModel(
     private val autoLoginUseCase: AutoLoginUseCase
