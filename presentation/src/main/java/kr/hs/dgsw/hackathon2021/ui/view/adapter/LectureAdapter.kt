@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class LectureAdapter(private val view: View? = null) : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
+class LectureAdapter() : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
     interface OnLectureListener {
         fun onClick(id: Int)
@@ -86,9 +86,9 @@ class LectureAdapter(private val view: View? = null) : RecyclerView.Adapter<Lect
             }
         }
 
-        if (view != null) {
-            Glide.with(view)
-                .load(data.attachmentUrl?.get(0))
+        if (data.attachmentUrl.isNotEmpty()) {
+            Glide.with(holder.img.context)
+                .load(data.attachmentUrl[0])
                 .into(holder.img)
         }
 

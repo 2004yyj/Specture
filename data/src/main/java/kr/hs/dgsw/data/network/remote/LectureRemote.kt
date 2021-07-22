@@ -4,7 +4,6 @@ import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseRemote
 import kr.hs.dgsw.data.entity.LectureData
 import kr.hs.dgsw.data.network.service.LectureService
-import kr.hs.dgsw.data.util.Response
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -13,8 +12,12 @@ class LectureRemote @Inject constructor(
     override val service: LectureService
 ): BaseRemote<LectureService>() {
 
-    fun getAllClass(): Single<List<LectureData>> {
-        return service.getAllClass().map(getResponse())
+    fun getAllClass(state: Int): Single<List<LectureData>> {
+        return service.getAllClass(state).map(getResponse())
+    }
+
+    fun getLectureByDate(year: Int, month: Int, day: Int): Single<List<LectureData>> {
+        return service.getLectureByDate(year, month, day).map(getResponse())
     }
 
     fun getLectureDetail(lectureId: Int): Single<LectureData> {

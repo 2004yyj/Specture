@@ -52,7 +52,7 @@ class RecruitingClassFragment : Fragment() {
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
         viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
 
-        adapter = LectureAdapter(requireView())
+        adapter = LectureAdapter()
 
         init()
         setVisibility()

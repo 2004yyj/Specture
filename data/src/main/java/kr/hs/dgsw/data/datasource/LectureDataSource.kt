@@ -16,20 +16,17 @@ class LectureDataSource @Inject constructor(
     override val remote: LectureRemote
 ): BaseDataSource<LectureRemote>() {
     fun getAllClass(state: Int): Single<List<Lecture>> =
-        remote.getAllClass().map { lectureDataList ->
+        remote.getAllClass(state).map { lectureDataList ->
             val lectureList = ArrayList<Lecture>()
-
             lectureDataList.forEach {
-                if (it.state == state) {
-                    lectureList.add(it.toEntity())
-                }
+                lectureList.add(it.toEntity())
             }
             lectureList
         }
 
 
     fun getLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>> =
-        remote.getAllClass().map { lectureDataList ->
+        remote.getLectureByDate(year, month, day).map { lectureDataList ->
             val lectureList = ArrayList<Lecture>()
 
             val sdf = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
