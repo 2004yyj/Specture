@@ -1,6 +1,7 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.TypedValue
@@ -26,7 +27,9 @@ import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
+import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
+import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SignUpViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 import okhttp3.MediaType.Companion.toMediaType
@@ -127,7 +130,12 @@ class SignUpInfoFragment : Fragment() {
         etField.doAfterTextChanged { s ->
             val trimmed = s.toString().trim { it <= ' ' }
             if (trimmed.length > 1 && trimmed.endsWith(",")) {
-                fbField.addChip(trimmed.substring(0, trimmed.length - 1))
+                fbField.addChip(
+                    resources,
+                    isClickable = true,
+                    isCloseIconVisible = false,
+                    trimmed.substring(0, trimmed.length - 1)
+                )
                 s?.clear()
             }
         }
@@ -164,29 +172,4 @@ class SignUpInfoFragment : Fragment() {
             }
         }
     }
-
-    fun Int.dpToPx(): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), resources.displayMetrics).roundToInt()
-
-    fun FlexboxLayout.addChip(text: String) {
-        val inflater = LayoutInflater.from(context)
-        val chip = inflater.inflate(R.layout.layout_chip, null) as Chip
-
-        val layoutParams = ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.WRAP_CONTENT, ViewGroup.MarginLayoutParams.WRAP_CONTENT)
-        layoutParams.marginEnd = 4.dpToPx()
-        chip.text = text
-        chip.isClickable = true
-        chip.isCloseIconVisible = true
-
-        fbField.addView(chip, fbField.childCount - 1, layoutParams)
-        chip.setOnCloseIconClickListener { fbField.removeView(chip as View) }
-    }
-
-    fun FlexboxLayout.getAllText(): ArrayList<String> {
-        val arrayList = ArrayList<String>()
-        (0 until childCount - 1).mapNotNull {
-            arrayList.add((getChildAt(it) as Chip).text.toString())
-        }
-        return arrayList
-    }
-
 }
