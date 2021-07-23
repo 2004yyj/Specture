@@ -2,6 +2,7 @@ package kr.hs.dgsw.hackathon2021.di.module
 
 import dagger.Module
 import dagger.Provides
+import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
 import kr.hs.dgsw.hackathon2021.ui.view.interceptor.UserInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -25,6 +26,6 @@ class NetworkModule {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
-            .baseUrl("http://10.0.2.2:8080")
+            .baseUrl(SERVER_ADDRESS)
             .build()
 }

@@ -3,7 +3,6 @@ package kr.hs.dgsw.data.network.remote
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseRemote
 import kr.hs.dgsw.data.entity.TokenData
-import kr.hs.dgsw.data.entity.UserData
 import kr.hs.dgsw.data.network.service.AuthService
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
@@ -12,7 +11,6 @@ import javax.inject.Inject
 class AuthRemote @Inject constructor(
     override val service: AuthService
 ): BaseRemote<AuthService>() {
-
     fun postSignUp(signUpRequest: SignUpRequest): Single<TokenData> {
         with(signUpRequest) {
             return service.postSignUp(
@@ -28,9 +26,4 @@ class AuthRemote @Inject constructor(
     fun postAutoLogin(): Single<TokenData> {
         return service.postAutoLogin().map(getResponse())
     }
-
-    fun getUser(): Single<UserData> {
-        return service.getUser().map(getResponse())
-    }
-
 }

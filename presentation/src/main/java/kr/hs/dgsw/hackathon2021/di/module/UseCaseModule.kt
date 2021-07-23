@@ -4,9 +4,10 @@ import dagger.Module
 import dagger.Provides
 import kr.hs.dgsw.domain.repository.LectureRepository
 import kr.hs.dgsw.domain.repository.AuthRepository
+import kr.hs.dgsw.domain.repository.UserRepository
 import kr.hs.dgsw.domain.usecase.lecture.*
 import kr.hs.dgsw.domain.usecase.auth.AutoLoginUseCase
-import kr.hs.dgsw.domain.usecase.auth.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 import kr.hs.dgsw.domain.usecase.auth.LoginUseCase
 import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
 import javax.inject.Singleton
@@ -57,8 +58,8 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideUser(authRepository: AuthRepository): GetUserUseCase {
-        return GetUserUseCase(authRepository)
+    fun provideUser(userRepository: UserRepository): GetUserUseCase {
+        return GetUserUseCase(userRepository)
     }
 
     @Provides

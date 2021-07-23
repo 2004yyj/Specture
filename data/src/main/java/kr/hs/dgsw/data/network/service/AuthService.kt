@@ -29,7 +29,4 @@ interface AuthService {
 
     @POST("/auth/autoLogin")
     fun postAutoLogin() : Single<retrofit2.Response<Response<TokenData>>>
-
-    @GET("/account")
-    fun getUser() : Single<retrofit2.Response<Response<UserData>>>
 }

@@ -7,7 +7,6 @@ import kr.hs.dgsw.data.network.remote.AuthRemote
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.entity.response.Token
-import kr.hs.dgsw.domain.entity.response.User
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(
@@ -23,9 +22,5 @@ class AuthDataSource @Inject constructor(
 
     fun postAutoLogin(): Single<Token> {
         return remote.postAutoLogin().map { it.toEntity() }
-    }
-
-    fun getUser(): Single<User> {
-        return remote.getUser().map { it.toEntity() }
     }
 }

@@ -6,8 +6,6 @@ import kr.hs.dgsw.domain.entity.response.User
 fun UserData.toEntity(): User {
     return User(
         this.userId,
-        this.password,
-        this.profile,
         this.name,
         this.grade,
         this.klass,
@@ -21,8 +19,6 @@ fun UserData.toEntity(): User {
 fun User.toData(): UserData {
     return UserData(
         this.userId,
-        this.password,
-        this.profile,
         this.name,
         this.grade,
         this.klass,
