@@ -35,7 +35,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.381"
-                app:srcCompat="@drawable/no_data" />
+                app:srcCompat="@drawable/ic_no_data" />
 
             <TextView
                 android:id="@+id/tv_no_data"

@@ -18,13 +18,16 @@
             app:destination="@id/addLectureFragment" />
     </fragment>
     <fragment
-        android:id="@+id/settingFragment"
-        android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.SettingFragment"
+        android:id="@+id/userInfoFragment"
+        android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.UserInfoFragment"
         android:label="내 정보"
-        tools:layout="@layout/fragment_setting" >
+        tools:layout="@layout/fragment_user_info" >
         <action
-            android:id="@+id/action_settingFragment_to_recruitingClassFragment"
+            android:id="@+id/action_userInfoFragment_to_recruitingClassFragment"
             app:destination="@id/recruitingClassFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/calenderFragment"
@@ -47,11 +50,16 @@
         tools:layout="@layout/fragment_recruiting_class">
         <action
             android:id="@+id/action_recruitingClassFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+            app:destination="@id/userInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLectureFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.AddLectureFragment"
         android:label="AddLectureFragment"
         tools:layout="@layout/fragment_add_lecture"  />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

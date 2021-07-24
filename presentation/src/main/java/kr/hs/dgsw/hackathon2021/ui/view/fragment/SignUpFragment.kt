@@ -10,7 +10,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpBinding
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 
 class SignUpFragment: Fragment() {
 

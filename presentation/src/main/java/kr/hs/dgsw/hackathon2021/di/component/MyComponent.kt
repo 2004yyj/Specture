@@ -35,6 +35,7 @@ interface MyComponent: AndroidInjector<MyDaggerApplication> {
     fun inject(settingFragment: SettingFragment)
     fun inject(calenderFragment: CalenderFragment)
     fun inject(addLectureFragment: AddLectureFragment)
+    fun inject(userInfoFragment: UserInfoFragment)
 
     @Component.Factory
     interface Factory {
