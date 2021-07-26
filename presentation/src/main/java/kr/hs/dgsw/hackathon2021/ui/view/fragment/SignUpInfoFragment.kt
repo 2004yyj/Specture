@@ -133,7 +133,7 @@ class SignUpInfoFragment : Fragment() {
                 fbField.addChip(
                     resources,
                     isClickable = true,
-                    isCloseIconVisible = false,
+                    isCloseIconVisible = true,
                     trimmed.substring(0, trimmed.length - 1)
                 )
                 s?.clear()

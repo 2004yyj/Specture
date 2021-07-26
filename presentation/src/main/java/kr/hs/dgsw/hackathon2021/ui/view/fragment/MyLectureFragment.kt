@@ -9,32 +9,34 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureUseCase
+import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureByUserIdUseCase
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.databinding.FragmentProgressingClassBinding
+import kr.hs.dgsw.hackathon2021.databinding.FragmentMyLectureBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
+import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureAdapter
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.ClassViewModelFactory
-import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.ClassViewModel
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.MyLectureViewModelFactory
+import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.MyLectureViewModel
 import javax.inject.Inject
 
-class ProgressingClassFragment : Fragment() {
+class MyLectureFragment : Fragment() {
 
     @Inject
-    lateinit var getAllLectureUseCase: GetAllLectureUseCase
+    lateinit var getAllLectureByUserIdUseCase: GetAllLectureByUserIdUseCase
 
     companion object {
-        private const val state = 1
-        fun newInstance() = ProgressingClassFragment()
+        fun newInstance() = MyLectureFragment()
     }
 
-    private lateinit var binding: FragmentProgressingClassBinding
-    private lateinit var viewModel: ClassViewModel
+    private lateinit var userId: String
+
+    private lateinit var binding: FragmentMyLectureBinding
+    private lateinit var viewModel: MyLectureViewModel
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
-    private val adapter: LectureAdapter = LectureAdapter()
+    private lateinit var adapter: LectureAdapter
 
     private val navController: NavController by lazy {
         findNavController()
@@ -44,7 +46,7 @@ class ProgressingClassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProgressingClassBinding.inflate(inflater)
+        binding = FragmentMyLectureBinding.inflate(inflater)
         return binding.root
     }
 
@@ -59,7 +61,7 @@ class ProgressingClassFragment : Fragment() {
             navigateToLectureDetail(it)
         }
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getAllClass(state)
+            viewModel.getAllClass(userId)
         }
     }
 
@@ -74,18 +76,22 @@ class ProgressingClassFragment : Fragment() {
         if(adapter.itemCount <= 0) {
             binding.imgNoData.visibility = View.VISIBLE
             binding.tvNoData.visibility = View.VISIBLE
-            binding.rvProgressingClass.visibility = View.GONE
+            binding.rvMyLecture.visibility = View.GONE
         } else {
             binding.imgNoData.visibility = View.GONE
             binding.tvNoData.visibility = View.GONE
-            binding.rvProgressingClass.visibility = View.VISIBLE
+            binding.rvMyLecture.visibility = View.VISIBLE
         }
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllLectureUseCase))[ClassViewModel::class.java]
+        adapter = LectureAdapter()
 
-        viewModel.getAllClass(state)
+        viewModel = ViewModelProvider(this, MyLectureViewModelFactory(getAllLectureByUserIdUseCase))[MyLectureViewModel::class.java]
+
+        userId = requireArguments().getString("userId", "")
+
+        viewModel.getAllClass(userId)
 
         viewModel.classList.observe(viewLifecycleOwner) {
             adapter.setList(it)
@@ -97,7 +103,10 @@ class ProgressingClassFragment : Fragment() {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }
 
-        binding.rvProgressingClass.adapter = adapter
-        swipeRefreshLayout = binding.srlProgressingClass
+        binding.rvMyLecture.adapter = adapter
+        swipeRefreshLayout = binding.srlMyLecture
+
+        val appBarConfiguration = (requireActivity() as MainActivity).appBarConfiguration
+        binding.toolbarMyLecture.setupWithNavController(navController, appBarConfiguration)
     }
 }

@@ -29,6 +29,7 @@ class UserInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentUserInfoBinding
     private lateinit var viewModel: UserInfoViewModel
+    private lateinit var userId: String
 
     private val navController by lazy {
         findNavController()
@@ -51,11 +52,17 @@ class UserInfoFragment : Fragment() {
         viewModel.getUser()
 
         binding.card1Setting.setOnClickListener{
-            navigateToRecruitingClass()
+            if (this::userId.isInitialized) {
+                val bundle = Bundle()
+                bundle.putString("userId", userId)
+                navigateToMyLecture(bundle)
+            }
         }
 
         binding.card2Setting.setOnClickListener {
-            navigateToRecruitingClass()
+            val bundle = Bundle()
+            bundle.putString("userId", userId)
+            navigateToMyLecture(bundle)
         }
     }
 
@@ -75,6 +82,7 @@ class UserInfoFragment : Fragment() {
     }
 
     private fun setView(user: User) {
+        userId = user.userId
         binding.tvGradeSetting.text = "${user.grade}학년 ${user.klass}반 ${user.number}번"
         binding.tvIntroduceSetting.text = user.introduce
         binding.tvNameSetting.text = user.name
@@ -94,7 +102,7 @@ class UserInfoFragment : Fragment() {
             .into(binding.ivProfileSetting)
     }
 
-    private fun navigateToRecruitingClass() {
-        navController.navigate(R.id.action_userInfoFragment_to_recruitingClassFragment)
+    private fun navigateToMyLecture(bundle: Bundle) {
+        navController.navigate(R.id.action_userInfoFragment_to_myLectureFragment, bundle)
     }
 }

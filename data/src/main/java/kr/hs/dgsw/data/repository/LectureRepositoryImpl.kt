@@ -11,7 +11,7 @@ class LectureRepositoryImpl(
     private val lectureDataSource: LectureDataSource
 ): LectureRepository {
     override fun getAllLecture(state: Int): Single<List<Lecture>> {
-        return lectureDataSource.getAllClass(state)
+        return lectureDataSource.getAllLecture(state)
     }
 
     override fun getLectureDetail(lectureId: Int): Single<Lecture> {
@@ -19,7 +19,11 @@ class LectureRepositoryImpl(
     }
 
     override fun getAllLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>> {
-        return lectureDataSource.getLectureByDate(year, month, day)
+        return lectureDataSource.getAllLectureByDate(year, month, day)
+    }
+
+    override fun getAllLectureByUserId(userId: String): Single<List<Lecture>> {
+        return lectureDataSource.getAllLectureByUserId(userId)
     }
 
     override fun postLectureProposal(lectureId: Int): Single<Any?> {

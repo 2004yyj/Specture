@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/srl_ended"
+        android:id="@+id/srl_ended_class"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,7 +14,7 @@
             tools:context=".ui.view.fragment.RecruitingClassFragment">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_recruiting_class"
+                android:id="@+id/rv_ended_class"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

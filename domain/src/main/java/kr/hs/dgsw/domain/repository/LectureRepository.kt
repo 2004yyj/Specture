@@ -12,6 +12,8 @@ interface LectureRepository {
 
     fun getAllLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>>
 
+    fun getAllLectureByUserId(userId: String): Single<List<Lecture>>
+
     fun postLectureProposal(lectureId: Int): Single<Any?>
 
     fun postLecture(

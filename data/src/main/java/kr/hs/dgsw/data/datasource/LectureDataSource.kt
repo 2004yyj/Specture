@@ -15,8 +15,8 @@ import kotlin.collections.ArrayList
 class LectureDataSource @Inject constructor(
     override val remote: LectureRemote
 ): BaseDataSource<LectureRemote>() {
-    fun getAllClass(state: Int): Single<List<Lecture>> =
-        remote.getAllClass(state).map { lectureDataList ->
+    fun getAllLecture(state: Int): Single<List<Lecture>> =
+        remote.getAllLecture(state).map { lectureDataList ->
             val lectureList = ArrayList<Lecture>()
             lectureDataList.forEach {
                 lectureList.add(it.toEntity())
@@ -25,8 +25,8 @@ class LectureDataSource @Inject constructor(
         }
 
 
-    fun getLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>> =
-        remote.getLectureByDate(year, month, day).map { lectureDataList ->
+    fun getAllLectureByDate(year: Int, month: Int, day: Int): Single<List<Lecture>> =
+        remote.getAllLectureByDate(year, month, day).map { lectureDataList ->
             val lectureList = ArrayList<Lecture>()
 
             val sdf = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
@@ -41,6 +41,13 @@ class LectureDataSource @Inject constructor(
                 }
             }
             lectureList
+        }
+
+    fun getAllLectureByUserId(userId: String): Single<List<Lecture>> =
+        remote.getAllLectureByUserId(userId).map {  lectureDataList ->
+            lectureDataList.map {
+                it.toEntity()
+            }
         }
 
     fun getLectureDetail(lectureId: Int): Single<Lecture> {

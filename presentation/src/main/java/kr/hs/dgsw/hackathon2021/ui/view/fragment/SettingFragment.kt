@@ -46,14 +46,6 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
-
-        binding.card1Setting.setOnClickListener{
-            navigateToRecruitingClass()
-        }
-
-        binding.card2Setting.setOnClickListener {
-            navigateToRecruitingClass()
-        }
     }
 
     private fun init() {
@@ -78,9 +70,5 @@ class SettingFragment : Fragment() {
         Glide.with(binding.root)
             .load("${SERVER_ADDRESS}/image/${user.attachmentUrl}")
             .into(binding.ivProfileSetting)
-    }
-
-    private fun navigateToRecruitingClass() {
-        navController.navigate(R.id.action_userInfoFragment_to_recruitingClassFragment)
     }
 }

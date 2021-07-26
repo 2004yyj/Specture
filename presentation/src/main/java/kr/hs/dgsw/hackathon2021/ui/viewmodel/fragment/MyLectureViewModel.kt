@@ -7,12 +7,11 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.response.Lecture
-import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureUseCase
+import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureByUserIdUseCase
 
-class ClassViewModel(
-    private val getAllLectureUseCase: GetAllLectureUseCase
-) : ViewModel() {
-
+class MyLectureViewModel(
+    private val getAllLectureByUserIdUseCase: GetAllLectureByUserIdUseCase
+): ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     val classList = MutableLiveData(ArrayList<Lecture>())
@@ -20,8 +19,8 @@ class ClassViewModel(
     private val _isFailure = MutableLiveData<String>()
     val isFailure = _isFailure
 
-    fun getAllClass(state: Int) {
-        getAllLectureUseCase.buildUseCaseObservable(GetAllLectureUseCase.Params(state))
+    fun getAllClass(userId: String) {
+        getAllLectureByUserIdUseCase.buildUseCaseObservable(GetAllLectureByUserIdUseCase.Params(userId))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
@@ -33,10 +32,6 @@ class ClassViewModel(
             .apply {
                 compositeDisposable.add(this)
             }
-    }
-
-    fun getClass(lectureId: Int) {
-
     }
 
     override fun onCleared() {

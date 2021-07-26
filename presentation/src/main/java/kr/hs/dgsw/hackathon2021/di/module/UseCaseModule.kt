@@ -34,31 +34,37 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideGetLecture(lectureRepository: LectureRepository): GetAllClassUseCase {
-        return GetAllClassUseCase(lectureRepository)
+    fun provideGetAllLecture(lectureRepository: LectureRepository): GetAllLectureUseCase {
+        return GetAllLectureUseCase(lectureRepository)
     }
 
     @Provides
     @Singleton
-    fun provideLectureDetail(lectureRepository: LectureRepository): GetLectureDetailUseCase {
+    fun provideGetLectureDetail(lectureRepository: LectureRepository): GetLectureDetailUseCase {
         return GetLectureDetailUseCase(lectureRepository)
     }
 
     @Provides
     @Singleton
-    fun provideLectureByDate(lectureRepository: LectureRepository): GetAllLectureByDateUseCase {
+    fun provideGetAllLectureByDate(lectureRepository: LectureRepository): GetAllLectureByDateUseCase {
         return GetAllLectureByDateUseCase(lectureRepository)
     }
 
     @Provides
     @Singleton
-    fun provideLectureProposal(lectureRepository: LectureRepository): PostLectureProposalUseCase {
+    fun provideGetAllLectureByUserId(lectureRepository: LectureRepository): GetAllLectureByUserIdUseCase {
+        return GetAllLectureByUserIdUseCase(lectureRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostLectureProposal(lectureRepository: LectureRepository): PostLectureProposalUseCase {
         return PostLectureProposalUseCase(lectureRepository)
     }
 
     @Provides
     @Singleton
-    fun provideUser(userRepository: UserRepository): GetUserUseCase {
+    fun provideGetUser(userRepository: UserRepository): GetUserUseCase {
         return GetUserUseCase(userRepository)
     }
 

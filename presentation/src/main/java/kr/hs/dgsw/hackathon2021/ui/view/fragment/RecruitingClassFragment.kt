@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
+import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentRecruitingClassBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class RecruitingClassFragment : Fragment() {
 
     @Inject
-    lateinit var getAllClassUseCase: GetAllClassUseCase
+    lateinit var getAllLectureUseCase: GetAllLectureUseCase
 
     companion object {
         private const val state = 0
@@ -50,7 +50,6 @@ class RecruitingClassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
-        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
 
         adapter = LectureAdapter()
 
@@ -85,7 +84,7 @@ class RecruitingClassFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
+        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllLectureUseCase))[ClassViewModel::class.java]
 
         viewModel.getAllClass(state)
 
@@ -100,6 +99,6 @@ class RecruitingClassFragment : Fragment() {
         }
 
         binding.rvRecruitingClass.adapter = adapter
-        swipeRefreshLayout = binding.srlRecruiting
+        swipeRefreshLayout = binding.srlRecruitingClass
     }
 }

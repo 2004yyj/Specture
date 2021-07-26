@@ -6,14 +6,14 @@ import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.repository.LectureRepository
 import javax.inject.Inject
 
-class GetAllClassUseCase @Inject constructor(
+class GetAllLectureByUserIdUseCase @Inject constructor(
     private val lectureRepository: LectureRepository
-): ParamsUseCase<GetAllClassUseCase.Params, Single<List<Lecture>>>() {
+): ParamsUseCase<GetAllLectureByUserIdUseCase.Params, Single<List<Lecture>>>() {
     override fun buildUseCaseObservable(params: Params): Single<List<Lecture>> {
-        return lectureRepository.getAllLecture(params.state)
+        return lectureRepository.getAllLectureByUserId(params.userId)
     }
 
     data class Params(
-        val state: Int
+        val userId: String
     )
 }

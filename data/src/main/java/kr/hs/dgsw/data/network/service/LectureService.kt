@@ -12,13 +12,18 @@ import retrofit2.http.Query
 
 interface LectureService {
     @GET("/lecture")
-    fun getAllClass(@Query("state") state: Int): Single<retrofit2.Response<Response<List<LectureData>>>>
+    fun getAllLecture(@Query("state") state: Int): Single<retrofit2.Response<Response<List<LectureData>>>>
 
     @GET("/lecture")
-    fun getLectureByDate(
+    fun getAllLectureByDate(
         @Query("year") year: Int,
         @Query("month") month: Int,
         @Query("day") day: Int
+    ): Single<retrofit2.Response<Response<List<LectureData>>>>
+
+    @GET("/lecture")
+    fun getAllLectureByUserId(
+        @Query("userId") userId: String
     ): Single<retrofit2.Response<Response<List<LectureData>>>>
 
     @GET("/lecture/{lectureId}")

@@ -12,12 +12,16 @@ class LectureRemote @Inject constructor(
     override val service: LectureService
 ): BaseRemote<LectureService>() {
 
-    fun getAllClass(state: Int): Single<List<LectureData>> {
-        return service.getAllClass(state).map(getResponse())
+    fun getAllLecture(state: Int): Single<List<LectureData>> {
+        return service.getAllLecture(state).map(getResponse())
     }
 
-    fun getLectureByDate(year: Int, month: Int, day: Int): Single<List<LectureData>> {
-        return service.getLectureByDate(year, month, day).map(getResponse())
+    fun getAllLectureByDate(year: Int, month: Int, day: Int): Single<List<LectureData>> {
+        return service.getAllLectureByDate(year, month, day).map(getResponse())
+    }
+
+    fun getAllLectureByUserId(userId: String): Single<List<LectureData>> {
+        return service.getAllLectureByUserId(userId).map(getResponse())
     }
 
     fun getLectureDetail(lectureId: Int): Single<LectureData> {

@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kr.hs.dgsw.domain.usecase.lecture.GetAllClassUseCase
+import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentEndedClassBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class EndedClassFragment : Fragment() {
 
     @Inject
-    lateinit var getAllClassUseCase: GetAllClassUseCase
+    lateinit var getAllLectureUseCase: GetAllLectureUseCase
 
     companion object {
         private const val state = 2
@@ -50,7 +50,6 @@ class EndedClassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
-        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
 
         init()
         setVisibility()
@@ -74,16 +73,16 @@ class EndedClassFragment : Fragment() {
         if(adapter.itemCount <= 0) {
             binding.imgNoData.visibility = View.VISIBLE
             binding.tvNoData.visibility = View.VISIBLE
-            binding.rvRecruitingClass.visibility = View.GONE
+            binding.rvEndedClass.visibility = View.GONE
         } else {
             binding.imgNoData.visibility = View.GONE
             binding.tvNoData.visibility = View.GONE
-            binding.rvRecruitingClass.visibility = View.VISIBLE
+            binding.rvEndedClass.visibility = View.VISIBLE
         }
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllClassUseCase))[ClassViewModel::class.java]
+        viewModel = ViewModelProvider(this, ClassViewModelFactory(getAllLectureUseCase))[ClassViewModel::class.java]
 
         viewModel.getAllClass(state)
 
@@ -97,7 +96,7 @@ class EndedClassFragment : Fragment() {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }
 
-        binding.rvRecruitingClass.adapter = adapter
-        swipeRefreshLayout = binding.srlEnded
+        binding.rvEndedClass.adapter = adapter
+        swipeRefreshLayout = binding.srlEndedClass
     }
 }
