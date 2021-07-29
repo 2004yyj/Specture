@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -79,6 +80,16 @@ class UserInfoFragment : Fragment() {
 
         val appBarConfiguration = (requireActivity() as MainActivity).appBarConfiguration
         binding.toolbarUserInfo.setupWithNavController(navController, appBarConfiguration)
+        binding.fabSettingUserInfo.setOnClickListener {
+            navigateToSetting()
+        }
+        binding.cvSetting.setOnClickListener {
+
+        }
+    }
+
+    private fun navigateToSetting() {
+        navController.navigate(R.id.action_userInfoFragment_to_settingFragment)
     }
 
     private fun setView(user: User) {
