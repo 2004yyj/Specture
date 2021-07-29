@@ -2,39 +2,39 @@
 <resources>
     <string-array name="grade">
         <item>학년</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>1학년</item>
+        <item>2학년</item>
+        <item>3학년</item>
     </string-array>
 
     <string-array name="klass">
         <item>반</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>1반</item>
+        <item>2반</item>
+        <item>3반</item>
     </string-array>
 
     <string-array name="number">
         <item>번호</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
+        <item>1번</item>
+        <item>2번</item>
+        <item>3번</item>
+        <item>4번</item>
+        <item>5번</item>
+        <item>6번</item>
+        <item>7번</item>
+        <item>8번</item>
+        <item>9번</item>
+        <item>10번</item>
+        <item>11번</item>
+        <item>12번</item>
+        <item>13번</item>
+        <item>14번</item>
+        <item>15번</item>
+        <item>16번</item>
+        <item>17번</item>
+        <item>18번</item>
+        <item>19번</item>
+        <item>20번</item>
     </string-array>
 </resources>

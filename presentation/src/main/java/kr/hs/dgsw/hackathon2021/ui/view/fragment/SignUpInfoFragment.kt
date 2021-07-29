@@ -1,28 +1,22 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
-import com.google.android.material.chip.Chip
 import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
-import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
@@ -37,7 +31,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 
 class SignUpInfoFragment : Fragment() {
@@ -59,6 +52,7 @@ class SignUpInfoFragment : Fragment() {
     private lateinit var etIntroduce: EditText
     private lateinit var etField: EditText
     private lateinit var fbField: FlexboxLayout
+    private lateinit var ivProfile: ImageView
 
     private fun init() {
         btnSubmit = binding.btnSubmitSignUpInfo
@@ -68,15 +62,14 @@ class SignUpInfoFragment : Fragment() {
         etIntroduce = binding.etIntroduceSignUpInfo
         etField = binding.etFieldSignUpInfo
         fbField = binding.fbFieldSignUpInfo
+        ivProfile = binding.ivProfileSignUpInfo
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            if (it != null) {
-                val inputStream = requireActivity().contentResolver.openInputStream(it)
-                val image = BitmapFactory.decodeStream(inputStream)
-                with(requireActivity()) {
+            with(requireActivity()) {
+                if (it != null) {
                     multipartBody = it.asMultipart("profile", cacheDir, contentResolver)!!
+                    Glide.with(requireContext()).load(it).into(ivProfile)
                 }
-                binding.ivProfileSignUpInfo.setImageBitmap(image)
             }
         }
 

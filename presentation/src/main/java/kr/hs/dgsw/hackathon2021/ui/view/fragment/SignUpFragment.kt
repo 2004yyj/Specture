@@ -86,15 +86,15 @@ class SignUpFragment: Fragment() {
             val passwordRe = etPasswordRe.text.toString()
             val name = etName.text.toString()
 
-            val grade = spnGrade.selectedItem.toString()
-            val klass = spnKlass.selectedItem.toString()
-            val number = spnNumber.selectedItem.toString()
+            val grade = spnGrade.selectedItemPosition
+            val klass = spnKlass.selectedItemPosition
+            val number = spnNumber.selectedItemPosition
 
             val notBlankChk = userId.isNotBlank() && password.isNotBlank() && passwordRe.isNotBlank() && name.isNotBlank()
-            val spinnerChk = grade != "학년" && klass != "반" && number != "번호"
+            val spinnerChk = grade != 0 && klass != 0 && number != 0
 
             if (notBlankChk && spinnerChk) {
-                navigateSignUpToInfo(userId, password, name, grade.toInt(), klass.toInt(), number.toInt())
+                navigateSignUpToInfo(userId, password, name, grade, klass, number)
             } else {
                 Toast.makeText(context, "값이 비어 있지 않은지 확인해주세요.", Toast.LENGTH_SHORT).show()
             }
