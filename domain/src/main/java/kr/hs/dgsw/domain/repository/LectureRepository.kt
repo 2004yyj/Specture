@@ -14,7 +14,7 @@ interface LectureRepository {
 
     fun getAllLectureByUserId(userId: String): Single<List<Lecture>>
 
-    fun postLectureProposal(lectureId: Int): Single<Any?>
+    fun postLectureProposal(lectureId: Int): Single<String>
 
     fun postLecture(
         title: RequestBody,
@@ -24,5 +24,5 @@ interface LectureRepository {
         start_date: Long,
         end_date: Long,
         proposal: Long
-    ): Single<Any?>
+    ): Single<String>
 }

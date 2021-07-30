@@ -1,5 +1,6 @@
 package kr.hs.dgsw.data.repository
 
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.datasource.AuthDataSource
 import kr.hs.dgsw.domain.entity.request.LoginRequest
@@ -20,5 +21,9 @@ class AuthRepositoryImpl(
 
     override fun postAutoLogin(): Single<Token> {
         return authDataSource.postAutoLogin()
+    }
+
+    override fun postPasswordChk(password: String): Single<String> {
+        return authDataSource.postPasswordChk(password)
     }
 }

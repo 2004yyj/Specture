@@ -23,4 +23,8 @@ class AuthDataSource @Inject constructor(
     fun postAutoLogin(): Single<Token> {
         return remote.postAutoLogin().map { it.toEntity() }
     }
+
+    fun postPasswordChk(password: String): Single<String> {
+        return remote.postPasswordChk(password)
+    }
 }

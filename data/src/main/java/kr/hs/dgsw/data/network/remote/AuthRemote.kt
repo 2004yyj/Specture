@@ -1,5 +1,6 @@
 package kr.hs.dgsw.data.network.remote
 
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseRemote
 import kr.hs.dgsw.data.entity.TokenData
@@ -25,5 +26,9 @@ class AuthRemote @Inject constructor(
 
     fun postAutoLogin(): Single<TokenData> {
         return service.postAutoLogin().map(getResponse())
+    }
+
+    fun postPasswordChk(password: String): Single<String> {
+        return service.postPasswordChk(password).map(getMessage())
     }
 }

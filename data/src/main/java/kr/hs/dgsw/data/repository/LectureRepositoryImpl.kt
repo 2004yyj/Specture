@@ -26,7 +26,7 @@ class LectureRepositoryImpl(
         return lectureDataSource.getAllLectureByUserId(userId)
     }
 
-    override fun postLectureProposal(lectureId: Int): Single<Any?> {
+    override fun postLectureProposal(lectureId: Int): Single<String> {
         return lectureDataSource.postLectureProposal(lectureId)
     }
 
@@ -38,7 +38,7 @@ class LectureRepositoryImpl(
         start_date: Long,
         end_date: Long,
         proposal: Long
-    ): Single<Any?> {
+    ): Single<String> {
         return lectureDataSource.postLecture(title, content, attachment, field, start_date, end_date, proposal)
     }
 }

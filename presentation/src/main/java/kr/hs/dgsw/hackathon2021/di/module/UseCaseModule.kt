@@ -9,6 +9,7 @@ import kr.hs.dgsw.domain.usecase.lecture.*
 import kr.hs.dgsw.domain.usecase.auth.AutoLoginUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 import kr.hs.dgsw.domain.usecase.auth.LoginUseCase
+import kr.hs.dgsw.domain.usecase.auth.PasswordChkUseCase
 import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
 import javax.inject.Singleton
 
@@ -30,6 +31,12 @@ class UseCaseModule {
     @Singleton
     fun provideAutoLogin(authRepository: AuthRepository): AutoLoginUseCase {
         return AutoLoginUseCase(authRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePasswordChk(authRepository: AuthRepository): PasswordChkUseCase {
+        return PasswordChkUseCase(authRepository)
     }
 
     @Provides

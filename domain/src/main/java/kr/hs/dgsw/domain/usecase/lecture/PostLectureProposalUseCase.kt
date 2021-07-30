@@ -9,8 +9,8 @@ import javax.inject.Singleton
 
 class PostLectureProposalUseCase @Inject constructor(
     private val lectureRepository: LectureRepository
-): ParamsUseCase<Int, Single<Any?>>() {
-    override fun buildUseCaseObservable(params: Int): Single<Any?> {
+): ParamsUseCase<Int, Single<String>>() {
+    override fun buildUseCaseObservable(params: Int): Single<String> {
         return lectureRepository.postLectureProposal(params)
     }
 

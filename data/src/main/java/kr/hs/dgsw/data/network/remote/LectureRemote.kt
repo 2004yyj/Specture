@@ -28,8 +28,8 @@ class LectureRemote @Inject constructor(
         return service.getLectureDetail(lectureId).map(getResponse())
     }
 
-    fun postLectureProposal(lectureId: Int): Single<Any?> {
-        return service.postLectureProposal(lectureId).map(getResponse())
+    fun postLectureProposal(lectureId: Int): Single<String> {
+        return service.postLectureProposal(lectureId).map(getMessage())
     }
 
     fun postLecture(
@@ -40,7 +40,7 @@ class LectureRemote @Inject constructor(
         start_date: Long,
         end_date: Long,
         proposal: Long
-    ): Single<Any?> {
-        return service.postLecture(title, content, attachment, field, start_date, end_date, proposal).map(getResponse())
+    ): Single<String> {
+        return service.postLecture(title, content, attachment, field, start_date, end_date, proposal).map(getMessage())
     }
 }

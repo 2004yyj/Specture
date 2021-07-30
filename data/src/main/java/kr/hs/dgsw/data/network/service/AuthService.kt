@@ -1,5 +1,6 @@
 package kr.hs.dgsw.data.network.service
 
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.entity.TokenData
 import kr.hs.dgsw.data.entity.UserData
@@ -29,4 +30,7 @@ interface AuthService {
 
     @POST("/auth/autoLogin")
     fun postAutoLogin() : Single<retrofit2.Response<Response<TokenData>>>
+
+    @POST("/auth/chkPassword")
+    fun postPasswordChk(@Query("password") password: String): Single<retrofit2.Response<Response<Any?>>>
 }

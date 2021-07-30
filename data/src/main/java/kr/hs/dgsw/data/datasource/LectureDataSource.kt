@@ -54,7 +54,7 @@ class LectureDataSource @Inject constructor(
         return remote.getLectureDetail(lectureId).map { it.toEntity() }
     }
 
-    fun postLectureProposal(lectureId: Int): Single<Any?> {
+    fun postLectureProposal(lectureId: Int): Single<String> {
         return remote.postLectureProposal(lectureId)
     }
 
@@ -66,7 +66,7 @@ class LectureDataSource @Inject constructor(
         start_date: Long,
         end_date: Long,
         proposal: Long
-    ): Single<Any?> {
+    ): Single<String> {
         return remote.postLecture(title, content, attachment, field, start_date, end_date, proposal)
     }
 

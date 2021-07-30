@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class PostLectureUseCase @Inject constructor(
     private val lectureRepository: LectureRepository
-): ParamsUseCase<PostLectureUseCase.Params, Single<Any?>>() {
+): ParamsUseCase<PostLectureUseCase.Params, Single<String>>() {
     data class Params(
         val title: RequestBody,
         val content: RequestBody,
@@ -20,7 +20,7 @@ class PostLectureUseCase @Inject constructor(
         val proposal: Long
     )
 
-    override fun buildUseCaseObservable(params: Params): Single<Any?> {
+    override fun buildUseCaseObservable(params: Params): Single<String> {
         return lectureRepository.postLecture(
             params.title,
             params.content,
