@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.size
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,7 @@ import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
+import kr.hs.dgsw.hackathon2021.ui.view.util.clear
 import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SettingViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SettingViewModel
@@ -67,6 +69,7 @@ class SettingFragment : Fragment() {
     }
 
     private fun init() {
+        requireActivity().viewModelStore.clear()
         viewModel = ViewModelProvider(requireActivity(), SettingViewModelFactory(getUserUseCase, passwordChkUseCase))[SettingViewModel::class.java]
 
         with(viewModel) {
@@ -171,7 +174,7 @@ class SettingFragment : Fragment() {
             etIntroduceSetting.setText(user.introduce)
 
             user.field.forEach {
-                binding.fbFieldSetting.addChip(
+                fbFieldSetting.addChip(
                     resources,
                     isClickable = true,
                     isCloseIconVisible = true,

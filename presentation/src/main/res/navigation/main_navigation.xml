@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/settingFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.SettingFragment"
-        android:label="fragment_setting"
+        android:label="회원 정보 수정"
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/myLectureFragment"
