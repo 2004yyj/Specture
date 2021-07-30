@@ -1,6 +1,7 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.User
+import kr.hs.dgsw.domain.usecase.auth.PasswordChkUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSettingBinding
@@ -23,6 +25,7 @@ import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
+import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SettingViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SettingViewModel
 import okhttp3.MultipartBody
@@ -33,10 +36,13 @@ class SettingFragment : Fragment() {
     @Inject
     lateinit var getUserUseCase: GetUserUseCase
 
+    @Inject
+    lateinit var passwordChkUseCase: PasswordChkUseCase
+
     private lateinit var binding: FragmentSettingBinding
     private lateinit var viewModel: SettingViewModel
 
-    private lateinit var activityResultlauncher: ActivityResultLauncher<String>
+    private lateinit var activityResultLauncher: ActivityResultLauncher<String>
 
     private lateinit var multipartBody: MultipartBody.Part
 
@@ -61,7 +67,7 @@ class SettingFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this, SettingViewModelFactory(getUserUseCase))[SettingViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), SettingViewModelFactory(getUserUseCase, passwordChkUseCase))[SettingViewModel::class.java]
 
         with(viewModel) {
             userData.observe(viewLifecycleOwner) { user ->
@@ -70,12 +76,35 @@ class SettingFragment : Fragment() {
             isFailure.observe(viewLifecycleOwner) {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             }
+            isPasswordChkSuccess.observe(viewLifecycleOwner) {
+                // 데이터 전송 코드
+            }
         }
 
         with(binding) {
 
+            btnSubmitSetting.setOnClickListener {
+                val grade = spinnerGradeSetting.selectedItemPosition
+                val klass = spinnerClassSetting.selectedItemPosition
+                val number = spinnerNumberSetting.selectedItemPosition
+                val name = etNameSetting.text.toString()
+                val username = etUsernameSetting.text.toString()
+                val introduce = etIntroduceSetting.text.toString()
+                val field = fbFieldSetting.getAllText()
+
+                val intDataChk = grade != 0 && klass != 0 && number != 0
+                val textDataChk = name.isNotEmpty() && username.isNotEmpty() && introduce.isNotEmpty()
+
+                if (intDataChk && textDataChk) {
+                    val passwordChkFragment = PasswordChkFragment.newInstance()
+                    passwordChkFragment.show(requireActivity().supportFragmentManager, "")
+                } else {
+                    Toast.makeText(context, "빈 값이 없는지 확인해 주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
             btnImageAddSetting.setOnClickListener {
-                activityResultlauncher.launch("image/*")
+                activityResultLauncher.launch("image/*")
             }
 
             etFieldSetting.doAfterTextChanged { s ->
@@ -121,7 +150,7 @@ class SettingFragment : Fragment() {
                 spinnerNumberSetting.adapter = adapter
             }
 
-            activityResultlauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
                 with(requireActivity()) {
                     if (it != null) {
                         multipartBody = it.asMultipart("profile", cacheDir, contentResolver)!!

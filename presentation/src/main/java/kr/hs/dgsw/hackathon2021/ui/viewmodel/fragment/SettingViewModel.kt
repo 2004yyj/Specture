@@ -1,5 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,14 +8,19 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.response.User
+import kr.hs.dgsw.domain.usecase.auth.PasswordChkUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 
 class SettingViewModel(
-    private val getUserUseCase: GetUserUseCase
+    private val getUserUseCase: GetUserUseCase,
+    private val passwordChkUseCase: PasswordChkUseCase
 ): ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     val userData = MutableLiveData<User>()
+
+    private val _isPasswordChkSuccess = MutableLiveData<String>()
+    val isPasswordChkSuccess: LiveData<String> = _isPasswordChkSuccess
 
     private val _isFailure = MutableLiveData<String>()
     val isFailure: LiveData<String> = _isFailure
@@ -28,6 +34,20 @@ class SettingViewModel(
             }, {
                 _isFailure.postValue(it.message)
             }).apply {
+                compositeDisposable.add(this)
+            }
+    }
+
+    fun passwordChk(password: String) {
+        passwordChkUseCase.buildUseCaseObservable(PasswordChkUseCase.Params(password))
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                _isPasswordChkSuccess.value = password
+            } ,{
+                _isFailure.value = it.message
+            })
+            .apply {
                 compositeDisposable.add(this)
             }
     }

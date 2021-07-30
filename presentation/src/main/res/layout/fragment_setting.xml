@@ -19,7 +19,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_next_sign_up"
+            app:layout_constraintBottom_toTopOf="@+id/btn_submit_setting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_setting">
@@ -179,7 +179,7 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_next_sign_up"
+            android:id="@+id/btn_submit_setting"
             style="@style/RegularTextView_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
