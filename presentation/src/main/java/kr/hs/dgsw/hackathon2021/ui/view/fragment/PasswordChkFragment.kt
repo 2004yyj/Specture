@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import kr.hs.dgsw.domain.usecase.auth.PasswordChkUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.user.PutUserUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentPasswordChkBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SettingViewModelFactory
@@ -25,6 +26,9 @@ class PasswordChkFragment : DialogFragment() {
     lateinit var getUserUseCase: GetUserUseCase
 
     @Inject
+    lateinit var putUserUseCase: PutUserUseCase
+
+    @Inject
     lateinit var passwordChkUseCase: PasswordChkUseCase
 
     private lateinit var viewModel: SettingViewModel
@@ -33,7 +37,7 @@ class PasswordChkFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
-        viewModel = ViewModelProvider(requireActivity(), SettingViewModelFactory(getUserUseCase, passwordChkUseCase))[SettingViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), SettingViewModelFactory(getUserUseCase, putUserUseCase, passwordChkUseCase))[SettingViewModel::class.java]
         val inflater = requireActivity().layoutInflater
         binding = FragmentPasswordChkBinding.inflate(inflater)
 

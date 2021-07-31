@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Single
 import kr.hs.dgsw.data.base.BaseDataSource
 import kr.hs.dgsw.data.mapper.toEntity
 import kr.hs.dgsw.data.network.remote.UserRemote
+import kr.hs.dgsw.domain.entity.request.UpdateUserRequest
 import kr.hs.dgsw.domain.entity.response.User
 import javax.inject.Inject
 
@@ -12,5 +13,9 @@ class UserDataSource @Inject constructor(
 ): BaseDataSource<UserRemote>() {
     fun getUser(): Single<User> {
         return remote.getUser().map { it.toEntity() }
+    }
+
+    fun putUser(updateUserRequest: UpdateUserRequest): Single<String> {
+        return remote.putUser(updateUserRequest)
     }
 }

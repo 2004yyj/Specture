@@ -5,10 +5,7 @@ import kr.hs.dgsw.data.entity.LectureData
 import kr.hs.dgsw.data.util.Response
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface LectureService {
     @GET("/lecture")
@@ -29,6 +26,7 @@ interface LectureService {
     @GET("/lecture/{lectureId}")
     fun getLectureDetail(@Path("lectureId") lectureId: Int): Single<retrofit2.Response<Response<LectureData>>>
 
+    @Multipart
     @POST("/lecture/{lectureId}")
     fun postLecture(
         title: RequestBody,

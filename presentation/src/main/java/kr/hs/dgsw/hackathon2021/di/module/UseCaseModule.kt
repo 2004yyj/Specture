@@ -11,6 +11,7 @@ import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 import kr.hs.dgsw.domain.usecase.auth.LoginUseCase
 import kr.hs.dgsw.domain.usecase.auth.PasswordChkUseCase
 import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
+import kr.hs.dgsw.domain.usecase.user.PutUserUseCase
 import javax.inject.Singleton
 
 @Module
@@ -73,6 +74,12 @@ class UseCaseModule {
     @Singleton
     fun provideGetUser(userRepository: UserRepository): GetUserUseCase {
         return GetUserUseCase(userRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePutUser(userRepository: UserRepository): PutUserUseCase {
+        return PutUserUseCase(userRepository)
     }
 
     @Provides

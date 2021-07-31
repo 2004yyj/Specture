@@ -54,6 +54,8 @@ class LoginFragment : Fragment() {
         etPassword = binding.etPasswordLogin
 
         with(viewModel) {
+            chkAutoLogin.isChecked = autoLoginChk
+
             isSuccess.observe(viewLifecycleOwner, {
                 InfoHelper.token = it
                 autoLoginChk = chkAutoLogin.isChecked

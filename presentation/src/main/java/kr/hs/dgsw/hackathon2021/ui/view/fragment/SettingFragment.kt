@@ -1,5 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.size
 import androidx.core.widget.doAfterTextChanged
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,11 +21,15 @@ import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.User
 import kr.hs.dgsw.domain.usecase.auth.PasswordChkUseCase
 import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
+import kr.hs.dgsw.domain.usecase.user.PutUserUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSettingBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
+import kr.hs.dgsw.hackathon2021.ui.view.activity.IntroActivity
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.autoLoginChk
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.token
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
 import kr.hs.dgsw.hackathon2021.ui.view.util.clear
@@ -37,6 +43,9 @@ class SettingFragment : Fragment() {
 
     @Inject
     lateinit var getUserUseCase: GetUserUseCase
+
+    @Inject
+    lateinit var putUserUseCase: PutUserUseCase
 
     @Inject
     lateinit var passwordChkUseCase: PasswordChkUseCase
@@ -57,7 +66,7 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         (requireActivity().applicationContext as MyDaggerApplication).daggerMyComponent.inject(this)
-        binding = FragmentSettingBinding.inflate(inflater)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
 
         return binding.root
     }
@@ -70,7 +79,8 @@ class SettingFragment : Fragment() {
 
     private fun init() {
         requireActivity().viewModelStore.clear()
-        viewModel = ViewModelProvider(requireActivity(), SettingViewModelFactory(getUserUseCase, passwordChkUseCase))[SettingViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), SettingViewModelFactory(getUserUseCase, putUserUseCase, passwordChkUseCase))[SettingViewModel::class.java]
+        binding.vm = viewModel
 
         with(viewModel) {
             userData.observe(viewLifecycleOwner) { user ->
@@ -80,23 +90,31 @@ class SettingFragment : Fragment() {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             }
             isPasswordChkSuccess.observe(viewLifecycleOwner) {
-                // 데이터 전송 코드
+                if (this@SettingFragment::multipartBody.isInitialized) {
+                    putUser(it, multipartBody)
+                } else {
+                    putUser(it, null)
+                }
+            }
+            isUpdateUserSuccess.observe(viewLifecycleOwner) {
+                if (token != null) token = null
+
+                val intent = Intent(context, IntroActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
 
         with(binding) {
 
             btnSubmitSetting.setOnClickListener {
-                val grade = spinnerGradeSetting.selectedItemPosition
-                val klass = spinnerClassSetting.selectedItemPosition
-                val number = spinnerNumberSetting.selectedItemPosition
-                val name = etNameSetting.text.toString()
-                val username = etUsernameSetting.text.toString()
-                val introduce = etIntroduceSetting.text.toString()
-                val field = fbFieldSetting.getAllText()
 
-                val intDataChk = grade != 0 && klass != 0 && number != 0
-                val textDataChk = name.isNotEmpty() && username.isNotEmpty() && introduce.isNotEmpty()
+                val intDataChk = with(viewModel) { grade.get() != 0 && klass.get() != 0 && number.get() != 0 }
+                val textDataChk = with(viewModel) {
+                    !name.get().isNullOrEmpty() && !username.get()
+                        .isNullOrEmpty() && !introduce.get().isNullOrEmpty()
+                    field.addAll(binding.fbFieldSetting.getAllText())
+                }
 
                 if (intDataChk && textDataChk) {
                     val passwordChkFragment = PasswordChkFragment.newInstance()
@@ -166,12 +184,12 @@ class SettingFragment : Fragment() {
 
     private fun setView(user: User) {
         with(binding) {
-            spinnerGradeSetting.setSelection(user.grade)
-            spinnerClassSetting.setSelection(user.klass)
-            spinnerNumberSetting.setSelection(user.number)
-            etNameSetting.setText(user.name)
-            etUsernameSetting.setText(user.userId)
-            etIntroduceSetting.setText(user.introduce)
+            viewModel.grade.set(user.grade)
+            viewModel.klass.set(user.klass)
+            viewModel.number.set(user.number)
+            viewModel.name.set(user.name)
+            viewModel.username.set(user.userId)
+            viewModel.introduce.set(user.introduce)
 
             user.field.forEach {
                 fbFieldSetting.addChip(
