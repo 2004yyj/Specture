@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
+import kr.hs.dgsw.hackathon2021.di.util.Address
+import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -58,8 +60,8 @@ class LectureAdapter() : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
         holder.tvTitle.text = data.title
         holder.tvUser.text = data.userId
-        val fieldString = data.field?.toString()
-        val slicedString = fieldString?.slice(1 until fieldString.lastIndex)
+        val fieldString = data.field.toString()
+        val slicedString = fieldString.slice(1 until fieldString.lastIndex)
         holder.tvField.text = slicedString
         holder.tvProposal.text = "${started} ~ $ended"
 
@@ -88,7 +90,7 @@ class LectureAdapter() : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
         if (data.attachmentUrl.isNotEmpty()) {
             Glide.with(holder.img.context)
-                .load(data.attachmentUrl[0])
+                .load("${SERVER_ADDRESS}/image/${data.attachmentUrl[0]}")
                 .into(holder.img)
         }
 
