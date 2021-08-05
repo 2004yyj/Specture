@@ -42,7 +42,7 @@ class LectureDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         (requireActivity().applicationContext as MyDaggerApplication).daggerMyComponent.inject(this)
         binding = FragmentLectureDetailBinding.inflate(inflater)
 
@@ -53,8 +53,8 @@ class LectureDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
-        viewModel.getLectureDetail()
         viewModel.lectureId = arguments?.getInt("lectureId") as Int
+        viewModel.getLectureDetail()
 
         binding.btnParticipateLectureDetail.setOnClickListener {
             viewModel.postLectureProposal()

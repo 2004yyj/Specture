@@ -1,6 +1,5 @@
 package kr.hs.dgsw.hackathon2021.ui.view.interceptor
 
-import android.util.Log
 import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.token
 import okhttp3.Interceptor
 import okhttp3.Response
