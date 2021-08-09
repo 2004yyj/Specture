@@ -1,7 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.view.adapter
 
 import android.graphics.Color
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.di.util.Address
 import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,7 +57,7 @@ class LectureAdapter() : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
         val ended = output.format(data.endDate)!!
 
         holder.tvTitle.text = data.title
-        holder.tvUser.text = data.userId
+        holder.tvUser.text = data.name
         val fieldString = data.field.toString()
         val slicedString = fieldString.slice(1 until fieldString.lastIndex)
         holder.tvField.text = slicedString

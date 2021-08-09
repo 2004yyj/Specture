@@ -14,7 +14,7 @@ class PostLectureUseCase @Inject constructor(
         val title: RequestBody,
         val content: RequestBody,
         val attachment: ArrayList<MultipartBody.Part>,
-        val field: RequestBody,
+        val field: ArrayList<RequestBody>,
         val start_date: Long,
         val end_date: Long,
         val proposal: Long

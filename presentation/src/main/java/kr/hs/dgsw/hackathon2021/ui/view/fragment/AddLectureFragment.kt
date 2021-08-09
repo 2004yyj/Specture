@@ -22,6 +22,7 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.AddLectureViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.AddLectureViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
 import java.text.SimpleDateFormat
@@ -81,15 +82,15 @@ class AddLectureFragment : Fragment() {
             val end = sdf.parse(endDate.year.toString()+String.format("%02d", endDate.month)+String.format("%02d", endDate.dayOfMonth))?.time
             val field = etField.text.toString()
 
-            val fieldList = JSONArray()
-            fieldList.put(field)
+            val fieldList = ArrayList<RequestBody>()
+            fieldList.add(field.toRequestBody("text/plain".toMediaType()))
 
             if (title.isNotBlank() && content.isNotBlank() && proposal != null && start != null && end != null) {
                 viewModel.postLecture(
                     title.toRequestBody("text/plain".toMediaType()),
                     content.toRequestBody("text/plain".toMediaType()),
                     multipartBuilder.build().parts as ArrayList<MultipartBody.Part>,
-                    fieldList.toString().toRequestBody("text/plain".toMediaType()),
+                    fieldList,
                     start,
                     end,
                     proposal

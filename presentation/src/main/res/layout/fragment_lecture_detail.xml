@@ -20,9 +20,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_title_lecture_detail"
@@ -45,38 +50,25 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail"
                     tools:text="아이디" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_img_lecture_detail"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_content_lecture_detail"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_proposal_lecture_detail"
-                    tools:listitem="@layout/item_lecture_img"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_img_lecture_detail"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
 
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="horizontal"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_proposal_lecture_detail"
+                        tools:ignore="SpeakableTextPresentCheck"
+                        tools:listitem="@layout/item_lecture_img" />
 
-                <TextView
-                    android:id="@+id/tv_content_lecture_detail"
-                    style="@style/RegularTextView_black"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="TextView"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_img_lecture_detail" />
-
-                <TextView
-                    android:id="@+id/tv_field_lecture_detail"
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/fb_field_lecture_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="분야"
                     style="@style/RegularTextView_black"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_user_lecture_detail"
@@ -129,8 +121,8 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_field_lecture_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_field_lecture_detail"
+                    app:layout_constraintStart_toStartOf="@+id/fb_field_lecture_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/fb_field_lecture_detail"
                     app:layout_goneMarginTop="5dp"
                     app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
 
@@ -164,7 +156,21 @@
                     style="@style/RegularTextView_black"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_content_lecture_detail"
+                    style="@style/RegularTextView_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="top"
+                    tools:text="내용글"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_img_lecture_detail" />
+            </LinearLayout>
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -177,7 +183,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <ImageView
             android:id="@+id/imageView"

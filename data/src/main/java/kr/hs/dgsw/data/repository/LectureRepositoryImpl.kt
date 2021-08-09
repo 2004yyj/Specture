@@ -34,7 +34,7 @@ class LectureRepositoryImpl(
         title: RequestBody,
         content: RequestBody,
         attachment: ArrayList<MultipartBody.Part>,
-        field: RequestBody,
+        field: ArrayList<RequestBody>,
         start_date: Long,
         end_date: Long,
         proposal: Long

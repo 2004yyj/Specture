@@ -92,7 +92,7 @@ class LectureDetailFragment : Fragment() {
 
         binding.tvContentLectureDetail.text = data.content
         binding.tvTitleLectureDetail.text = data.title
-        binding.tvUserLectureDetail.text = data.userId  //
+        binding.tvUserLectureDetail.text = data.name
         binding.tvParticipantsLectureDetail.text = "10"
         binding.tvEndDateLectureDetail.text = ended
         binding.tvStartDateLectureDetail.text = started

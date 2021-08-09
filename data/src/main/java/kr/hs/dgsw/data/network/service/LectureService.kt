@@ -27,17 +27,17 @@ interface LectureService {
     fun getLectureDetail(@Path("lectureId") lectureId: Int): Single<retrofit2.Response<Response<LectureData>>>
 
     @Multipart
-    @POST("/lecture/{lectureId}")
+    @POST("/lecture")
     fun postLecture(
-        title: RequestBody,
-        content: RequestBody,
-        attachment: ArrayList<MultipartBody.Part>,
-        field: RequestBody,
-        start_date: Long,
-        end_date: Long,
-        proposal: Long
+        @Part("title") title: RequestBody,
+        @Part("content") content: RequestBody,
+        @Part  attachment: ArrayList<MultipartBody.Part>,
+        @Part("field") field: ArrayList<RequestBody>,
+        @Part("start_date") start_date: Long,
+        @Part("end_date") end_date: Long,
+        @Part("proposal") proposal: Long
     ): Single<retrofit2.Response<Response<Any?>>>
 
-    @POST("/lecture/proposal")
-    fun postLectureProposal(@Query("lectureId") lectureId: Int): Single<retrofit2.Response<Response<Any?>>>
+    @POST("/lecture/{lectureId}/proposal")
+    fun postLectureProposal(@Path("lectureId") lectureId: Int): Single<retrofit2.Response<Response<Any?>>>
 }
