@@ -4,6 +4,7 @@ data class Lecture(
     val lectureId: Int,
     val title: String,
     val content: String,
+    var studentList: List<Student>,
     val attachmentUrl: List<String>,
     val name: String,
     val userId: String,

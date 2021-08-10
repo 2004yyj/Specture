@@ -92,9 +92,4 @@ class HomeFragment : Fragment() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.unbind()
-    }
 }

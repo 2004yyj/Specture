@@ -1,25 +1,29 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureProposalUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureAdapter
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class LectureDetailFragment : Fragment() {
 
@@ -90,14 +94,29 @@ class LectureDetailFragment : Fragment() {
         val uploaded = output.format(data.uploadDate)!!
         val proposal = output.format(data.proposal)!!
 
+        val studentSizeSpan = SpannableStringBuilder("${data.studentList.size}명의 수강생")
+        studentSizeSpan.setSpan(
+            StyleSpan(Typeface.BOLD),
+            0,
+            data.studentList.size.toString().length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
         binding.tvContentLectureDetail.text = data.content
         binding.tvTitleLectureDetail.text = data.title
         binding.tvUserLectureDetail.text = data.name
-        binding.tvParticipantsLectureDetail.text = "10"
+        binding.tvParticipantsLectureDetail.text = studentSizeSpan
         binding.tvEndDateLectureDetail.text = ended
         binding.tvStartDateLectureDetail.text = started
         binding.tvUploadDateLectureDetail.text = uploaded
         binding.tvProposalLectureDetail.text = proposal
+        data.field.forEach {
+            binding.fbFieldLectureDetail.addChip(
+                resources,
+                isClickable = true,
+                isCloseIconVisible = false,
+                it
+            )
+        }
     }
 
 }

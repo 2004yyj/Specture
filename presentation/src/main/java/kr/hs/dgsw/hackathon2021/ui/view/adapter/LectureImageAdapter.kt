@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
+import kr.hs.dgsw.hackathon2021.di.util.Address.BASE_URL
 
 class LectureImageAdapter: RecyclerView.Adapter<LectureImageAdapter.ViewHolder>() {
 
@@ -26,7 +27,7 @@ class LectureImageAdapter: RecyclerView.Adapter<LectureImageAdapter.ViewHolder>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 //        val url = "$BASE_URL${list[position]}"
         holder.img.apply {
-            Glide.with(this.context).load(list[position]).into(this)
+            Glide.with(this.context).load("$BASE_URL/image/${list[position]}").into(this)
         }
     }
 
@@ -35,6 +36,5 @@ class LectureImageAdapter: RecyclerView.Adapter<LectureImageAdapter.ViewHolder>(
     fun setList(list: ArrayList<String>) {
         this.list.clear()
         this.list.addAll(list)
-        notifyDataSetChanged()
     }
 }

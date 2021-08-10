@@ -6,19 +6,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="40dp"
         tools:context=".ui.view.fragment.LectureDetailFragment">
 
         <ScrollView
+            android:id="@+id/scrollView3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            android:padding="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintVertical_bias="0.55">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,26 +28,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_title_lecture_detail"
-                    style="@style/BoldTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_title_lecture_detail"
+                        style="@style/BoldTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="TextView" />
 
-                <TextView
-                    android:id="@+id/tv_user_lecture_detail"
-                    style="@style/SmallTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_title_lecture_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail"
-                    tools:text="아이디" />
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_lecture_detail"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_lecture_detail">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/ic_baseline_user" />
+
+                        <TextView
+                            android:id="@+id/tv_user_lecture_detail"
+                            style="@style/SmallTextView"
+                            android:layout_marginStart="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="아이디" />
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_img_lecture_detail"
@@ -60,154 +74,196 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-
                         app:layout_constraintTop_toBottomOf="@+id/tv_proposal_lecture_detail"
                         tools:ignore="SpeakableTextPresentCheck"
                         tools:listitem="@layout/item_lecture_img" />
 
-                <com.google.android.flexbox.FlexboxLayout
-                    android:id="@+id/fb_field_lecture_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/RegularTextView_black"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_user_lecture_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_user_lecture_detail" />
+                    <LinearLayout
+                        android:id="@+id/linearLayout7"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout6"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
-                <TextView
-                    android:id="@+id/tv_start_date_lecture_detail"
-                    style="@style/SmallTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="0000.00.00"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                    app:layout_constraintStart_toEndOf="@+id/textView7"
-                    app:layout_constraintTop_toTopOf="@+id/textView7" />
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/ic_hashtag" />
 
-                <TextView
-                    android:id="@+id/tv_end_date_lecture_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="0000.00.00"
-                    style="@style/SmallTextView"
-                    app:layout_constraintStart_toEndOf="@+id/textView8"
-                    app:layout_constraintTop_toTopOf="@+id/textView8" />
+                        <com.google.android.flexbox.FlexboxLayout
+                            android:id="@+id/fb_field_lecture_detail"
+                            style="@style/RegularTextView_black"
+                            android:layout_marginStart="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/tv_upload_date_lecture_detail"
-                    style="@style/SmallTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toEndOf="@+id/tv_user_lecture_detail"
-                    app:layout_constraintTop_toTopOf="@+id/tv_user_lecture_detail"
-                    tools:text="0000.00.00" />
 
-                <TextView
-                    android:id="@+id/tv_proposal_lecture_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="0000.00.00"
-                    style="@style/SmallTextView"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+                    </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="@+id/fb_field_lecture_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/fb_field_lecture_detail"
-                    app:layout_goneMarginTop="5dp"
-                    app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+                    <TextView
+                        android:id="@+id/tv_start_date_lecture_detail"
+                        style="@style/SmallTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="0000.00.00"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                        app:layout_constraintStart_toEndOf="@+id/textView7"
+                        app:layout_constraintTop_toTopOf="@+id/textView7" />
 
-                <TextView
-                    android:id="@+id/textView7"
-                    style="@style/RegularTextView_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4"
-                    tools:text="일시" />
+                    <TextView
+                        android:id="@+id/tv_end_date_lecture_detail"
+                        style="@style/SmallTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="0000.00.00"
+                        app:layout_constraintStart_toEndOf="@+id/textView8"
+                        app:layout_constraintTop_toTopOf="@+id/textView8" />
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    tools:text="~"
-                    style="@style/SmallTextView"
-                    app:layout_constraintStart_toEndOf="@+id/tv_start_date_lecture_detail"
-                    app:layout_constraintTop_toTopOf="@+id/tv_start_date_lecture_detail" />
+                    <TextView
+                        android:id="@+id/tv_upload_date_lecture_detail"
+                        style="@style/SmallTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayout6"
+                        app:layout_constraintTop_toTopOf="@+id/linearLayout6"
+                        tools:text="0000.00.00" />
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="마감"
-                    style="@style/RegularTextView_black"
-                    app:layout_constraintStart_toStartOf="@+id/textView7"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    <TextView
+                        android:id="@+id/tv_proposal_lecture_detail"
+                        style="@style/SmallTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="0000.00.00"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                        app:layout_constraintStart_toEndOf="@+id/textView9"
+                        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout7"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
+                        app:layout_goneMarginTop="5dp"
+                        app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        style="@style/RegularTextView_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                        app:layout_constraintTop_toTopOf="@+id/imageView4"
+                        android:text="일시" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        style="@style/SmallTextView"
+                        android:layout_width="7dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/tv_start_date_lecture_detail"
+                        app:layout_constraintTop_toTopOf="@+id/tv_start_date_lecture_detail"
+                        android:text="~" />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        style="@style/RegularTextView_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="신청 마감"
+                        app:layout_constraintStart_toStartOf="@+id/textView7"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/tv_content_lecture_detail"
                     style="@style/RegularTextView_black"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:gravity="top"
-                    tools:text="내용글"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_img_lecture_detail" />
+                    app:layout_constraintTop_toBottomOf="@+id/rv_img_lecture_detail"
+                    tools:text="내용글" />
             </LinearLayout>
         </ScrollView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_participate_lecture_detail"
-            style="@style/RegularTextView_white"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_button_main"
-            android:text="@string/apply"
+            android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="TextContrastCheck" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_baseline_user"
-            app:layout_constraintBottom_toTopOf="@+id/btn_participate_lecture_detail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.47"
-            app:layout_constraintStart_toStartOf="parent" />
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_participants_lecture_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="00"
-            style="@style/RegularTextView_black"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+                <TextView
+                    android:id="@+id/tv_participants_lecture_detail"
+                    style="@style/RegularTextView_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="00명의 수강생"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0.5dp"
+                android:layout_height="30dp"
+                android:background="@color/grey"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_participate_lecture_detail"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_participate_lecture_detail"
+                style="@style/RegularTextView_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_button_main"
+                android:text="@string/apply"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

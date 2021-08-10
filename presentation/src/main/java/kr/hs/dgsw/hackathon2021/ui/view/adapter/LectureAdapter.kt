@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.hackathon2021.R
-import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
+import kr.hs.dgsw.hackathon2021.di.util.Address.BASE_URL
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -88,7 +88,7 @@ class LectureAdapter() : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
         if (data.attachmentUrl.isNotEmpty()) {
             Glide.with(holder.img.context)
-                .load("${SERVER_ADDRESS}/image/${data.attachmentUrl[0]}")
+                .load("${BASE_URL}/image/${data.attachmentUrl[0]}")
                 .into(holder.img)
         }
 

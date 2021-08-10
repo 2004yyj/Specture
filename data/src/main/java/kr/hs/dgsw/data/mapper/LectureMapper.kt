@@ -8,6 +8,9 @@ fun LectureData.toEntity(): Lecture {
         this.lectureId,
         this.title,
         this.content,
+        this.studentList.map {
+            it.toEntity()
+        },
         this.attachmentUrl,
         this.name,
         this.userId,
@@ -25,6 +28,9 @@ fun Lecture.toData(): LectureData {
         this.lectureId,
         this.title,
         this.content,
+        this.studentList.map {
+            it.toData()
+        },
         this.attachmentUrl,
         this.name,
         this.userId,
