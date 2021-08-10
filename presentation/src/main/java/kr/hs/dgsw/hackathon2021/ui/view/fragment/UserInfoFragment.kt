@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,7 +15,7 @@ import kr.hs.dgsw.domain.usecase.user.GetUserUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentUserInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
+import kr.hs.dgsw.hackathon2021.di.util.Address.BASE_URL
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.clear
@@ -109,7 +108,7 @@ class UserInfoFragment : Fragment() {
         }
 
         Glide.with(binding.root)
-            .load("${SERVER_ADDRESS}/image/${user.attachmentUrl}")
+            .load("${BASE_URL}/image/${user.attachmentUrl}")
             .into(binding.ivProfileSetting)
     }
 

@@ -2,7 +2,6 @@ package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.size
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -25,14 +23,12 @@ import kr.hs.dgsw.domain.usecase.user.PutUserUseCase
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSettingBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.di.util.Address.SERVER_ADDRESS
+import kr.hs.dgsw.hackathon2021.di.util.Address.BASE_URL
 import kr.hs.dgsw.hackathon2021.ui.view.activity.IntroActivity
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
-import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.autoLoginChk
 import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper.token
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
-import kr.hs.dgsw.hackathon2021.ui.view.util.clear
 import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SettingViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SettingViewModel
@@ -201,7 +197,7 @@ class SettingFragment : Fragment() {
             }
 
             Glide.with(root)
-                .load("${SERVER_ADDRESS}/image/${user.attachmentUrl}")
+                .load("${BASE_URL}/image/${user.attachmentUrl}")
                 .into(ivProfileSetting)
         }
     }
