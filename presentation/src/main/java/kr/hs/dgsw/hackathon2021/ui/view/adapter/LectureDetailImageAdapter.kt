@@ -9,16 +9,16 @@ import com.bumptech.glide.Glide
 import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.di.util.Address.BASE_URL
 
-class LectureImageAdapter: RecyclerView.Adapter<LectureImageAdapter.ViewHolder>() {
+class LectureDetailImageAdapter: RecyclerView.Adapter<LectureDetailImageAdapter.ViewHolder>() {
 
     private val list: ArrayList<String> = ArrayList()
 
     class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
-        val img: ImageView = v.findViewById(R.id.iv_lecture)
+        val img: ImageView = v.findViewById(R.id.iv_lecture_detail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.item_lecture_img, parent, false)
+        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.item_lecture_detail_img, parent, false)
         return ViewHolder(inflater)
     }
 

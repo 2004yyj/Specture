@@ -1,6 +1,5 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
-import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -17,7 +16,7 @@ import kr.hs.dgsw.domain.usecase.lecture.GetLectureDetailUseCase
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureProposalUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureDetailImageAdapter
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
@@ -41,7 +40,7 @@ class LectureDetailFragment : Fragment() {
 
     private lateinit var viewModel: LectureDetailViewModel
 
-    private val adapter = LectureImageAdapter()
+    private val adapter = LectureDetailImageAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
