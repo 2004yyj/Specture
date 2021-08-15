@@ -257,6 +257,7 @@
                 style="@style/RegularTextView_white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:background="@drawable/round_button_main"
                 android:text="@string/apply"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -100,6 +100,20 @@ class LectureDetailFragment : Fragment() {
             data.studentList.size.toString().length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+        with(binding.btnParticipateLectureDetail) {
+            isEnabled =
+                when (data.state) {
+                    0 -> {
+                        text = "수강신청"
+                        true
+                    }
+                    else -> {
+                        text = "종료 된 강의"
+                        false
+                    }
+                }
+        }
+
         binding.tvContentLectureDetail.text = data.content
         binding.tvTitleLectureDetail.text = data.title
         binding.tvUserLectureDetail.text = data.name
