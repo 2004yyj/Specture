@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.response.Lecture
 import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureByDateUseCase
@@ -11,6 +12,8 @@ import kr.hs.dgsw.domain.usecase.lecture.GetAllLectureByDateUseCase
 class CalendarViewModel(
     private val getAllLectureByDateUseCase: GetAllLectureByDateUseCase
 ): ViewModel() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     private val _isSuccess = MutableLiveData<List<Lecture>>()
     val isSuccess : LiveData<List<Lecture>> = _isSuccess
@@ -26,7 +29,14 @@ class CalendarViewModel(
                 _isSuccess.postValue(it)
             } ,{
                 _isFailure.postValue(it.message)
-            })
+            }).apply {
+                compositeDisposable.add(this)
+            }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 
 }
