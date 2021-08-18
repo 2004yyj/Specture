@@ -32,6 +32,10 @@ class LectureRemote @Inject constructor(
         return service.postLectureProposal(lectureId).map(getMessage())
     }
 
+    fun getAllLectureProposalByUserId(userId: String): Single<List<LectureData>> {
+        return service.getAllLectureProposalByUserId(userId).map(getResponse())
+    }
+
     fun postLecture(
         title: RequestBody,
         content: RequestBody,

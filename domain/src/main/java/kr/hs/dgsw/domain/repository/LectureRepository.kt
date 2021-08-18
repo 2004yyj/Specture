@@ -16,6 +16,8 @@ interface LectureRepository {
 
     fun postLectureProposal(lectureId: Int): Single<String>
 
+    fun getAllLectureProposalByUserId(userId: String): Single<List<Lecture>>
+
     fun postLecture(
         title: RequestBody,
         content: RequestBody,

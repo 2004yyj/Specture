@@ -99,7 +99,7 @@ class LectureAdapter() : RecyclerView.Adapter<LectureAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
-    fun setList(list: ArrayList<Lecture>) {
+    fun setList(list: List<Lecture>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

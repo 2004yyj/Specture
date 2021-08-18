@@ -40,4 +40,7 @@ interface LectureService {
 
     @POST("/lecture/{lectureId}/proposal")
     fun postLectureProposal(@Path("lectureId") lectureId: Int): Single<retrofit2.Response<Response<Any?>>>
+
+    @GET("/lecture/proposal")
+    fun getAllLectureProposalByUserId(@Query("userId") userId: String): Single<retrofit2.Response<Response<List<LectureData>>>>
 }

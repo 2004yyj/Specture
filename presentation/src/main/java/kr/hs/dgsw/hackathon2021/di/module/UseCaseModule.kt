@@ -87,4 +87,10 @@ class UseCaseModule {
     fun providePostLecture(lectureRepository: LectureRepository): PostLectureUseCase {
         return PostLectureUseCase(lectureRepository)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetAllLectureProposalByUserId(lectureRepository: LectureRepository): GetAllLectureProposalByUserIdUseCase {
+        return GetAllLectureProposalByUserIdUseCase(lectureRepository)
+    }
 }

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_userInfoFragment_to_myLectureFragment"
             app:destination="@id/myLectureFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_proposedLectureFragment"
+            app:destination="@id/proposedLectureFragment" />
     </fragment>
     <fragment
         android:id="@+id/calenderFragment"
@@ -56,5 +59,11 @@
     <fragment
         android:id="@+id/myLectureFragment"
         android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.MyLectureFragment"
-        android:label="나의 강의" />
+        android:label="나의 강의"
+        tools:layout="@layout/fragment_my_lecture"/>
+    <fragment
+        android:id="@+id/proposedLectureFragment"
+        android:name="kr.hs.dgsw.hackathon2021.ui.view.fragment.ProposedLectureFragment"
+        android:label="신청 중인 강좌"
+        tools:layout="@layout/fragment_proposed_lecture"/>
 </navigation>

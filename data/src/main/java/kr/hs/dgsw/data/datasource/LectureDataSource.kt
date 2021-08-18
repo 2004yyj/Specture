@@ -58,6 +58,16 @@ class LectureDataSource @Inject constructor(
         return remote.postLectureProposal(lectureId)
     }
 
+    fun getAllLectureProposalByUserId(userId: String): Single<List<Lecture>> {
+        return remote.getAllLectureProposalByUserId(userId).map { lectureDataList ->
+            val lectureList = ArrayList<Lecture>()
+            lectureDataList.forEach {
+                lectureList.add(it.toEntity())
+            }
+            lectureList
+        }
+    }
+
     fun postLecture(
         title: RequestBody,
         content: RequestBody,

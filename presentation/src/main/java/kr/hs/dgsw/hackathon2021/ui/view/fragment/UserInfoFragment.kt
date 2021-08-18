@@ -60,9 +60,11 @@ class UserInfoFragment : Fragment() {
         }
 
         binding.card2Setting.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("userId", userId)
-            navigateToMyLecture(bundle)
+            if (this::userId.isInitialized) {
+                val bundle = Bundle()
+                bundle.putString("userId", userId)
+                navigateToProposedLecture(bundle)
+            }
         }
     }
 
@@ -81,9 +83,6 @@ class UserInfoFragment : Fragment() {
         binding.toolbarUserInfo.setupWithNavController(navController, appBarConfiguration)
         binding.fabSettingUserInfo.setOnClickListener {
             navigateToSetting()
-        }
-        binding.cvSetting.setOnClickListener {
-
         }
     }
 
@@ -115,4 +114,9 @@ class UserInfoFragment : Fragment() {
     private fun navigateToMyLecture(bundle: Bundle) {
         navController.navigate(R.id.action_userInfoFragment_to_myLectureFragment, bundle)
     }
+
+    private fun navigateToProposedLecture(bundle: Bundle) {
+        navController.navigate(R.id.action_userInfoFragment_to_proposedLectureFragment, bundle)
+    }
+
 }

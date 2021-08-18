@@ -30,6 +30,10 @@ class LectureRepositoryImpl(
         return lectureDataSource.postLectureProposal(lectureId)
     }
 
+    override fun getAllLectureProposalByUserId(userId: String): Single<List<Lecture>> {
+        return lectureDataSource.getAllLectureProposalByUserId(userId)
+    }
+
     override fun postLecture(
         title: RequestBody,
         content: RequestBody,

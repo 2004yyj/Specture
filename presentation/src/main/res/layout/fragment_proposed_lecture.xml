@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.view.fragment.RecruitingClassFragment">
+    tools:context=".ui.view.fragment.ProposedLectureFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,12 +10,12 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_my_lecture"
+            android:id="@+id/toolbar_proposed_lecture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srl_my_lecture"
+            android:id="@+id/srl_proposed_lecture"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -24,7 +24,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_my_lecture"
+                    android:id="@+id/rv_proposed_lecture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
