@@ -18,6 +18,7 @@ import kr.hs.dgsw.hackathon2021.databinding.FragmentLectureDetailBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureDetailImageAdapter
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
+import kr.hs.dgsw.hackathon2021.ui.view.util.clear
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.LectureDetailViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LectureDetailViewModel
 import java.text.SimpleDateFormat
@@ -82,6 +83,7 @@ class LectureDetailFragment : Fragment() {
 
         viewModel.singleLiveData.observe(viewLifecycleOwner, {
             Toast.makeText(context, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            viewModel.getLectureDetail()
         })
     }
 
@@ -100,6 +102,25 @@ class LectureDetailFragment : Fragment() {
             data.studentList.size.toString().length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+        binding.tvContentLectureDetail.text = data.content
+        binding.tvTitleLectureDetail.text = data.title
+        binding.tvUserLectureDetail.text = data.name
+        binding.tvParticipantsLectureDetail.text = studentSizeSpan
+        binding.tvEndDateLectureDetail.text = ended
+        binding.tvStartDateLectureDetail.text = started
+        binding.tvUploadDateLectureDetail.text = uploaded
+        binding.tvProposalLectureDetail.text = proposal
+
+        binding.fbFieldLectureDetail.clear()
+        data.field.forEach {
+            binding.fbFieldLectureDetail.addChip(
+                resources,
+                isClickable = true,
+                isCloseIconVisible = false,
+                it
+            )
+        }
+
         with(binding.btnParticipateLectureDetail) {
             isEnabled =
                 when (data.state) {
@@ -112,23 +133,6 @@ class LectureDetailFragment : Fragment() {
                         false
                     }
                 }
-        }
-
-        binding.tvContentLectureDetail.text = data.content
-        binding.tvTitleLectureDetail.text = data.title
-        binding.tvUserLectureDetail.text = data.name
-        binding.tvParticipantsLectureDetail.text = studentSizeSpan
-        binding.tvEndDateLectureDetail.text = ended
-        binding.tvStartDateLectureDetail.text = started
-        binding.tvUploadDateLectureDetail.text = uploaded
-        binding.tvProposalLectureDetail.text = proposal
-        data.field.forEach {
-            binding.fbFieldLectureDetail.addChip(
-                resources,
-                isClickable = true,
-                isCloseIconVisible = false,
-                it
-            )
         }
     }
 
