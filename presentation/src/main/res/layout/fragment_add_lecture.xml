@@ -9,9 +9,10 @@
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_submit_add_lecture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,29 +24,6 @@
                 android:orientation="vertical"
                 android:padding="30dp"
                 tools:context=".ui.view.fragment.AddLectureFragment">
-
-                <EditText
-                    android:id="@+id/et_title_add_lecture"
-                    style="@style/RegularTextView_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_title_add_lecture" />
-
-                <EditText
-                    android:id="@+id/et_field_add_lecture"
-                    style="@style/RegularTextView_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="주제"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_title_add_lecture" />
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -73,91 +51,162 @@
                         app:layout_constraintBottom_toBottomOf="@+id/rv_image_add_lecture"
                         app:layout_constraintEnd_toEndOf="@+id/rv_image_add_lecture" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView_asdf"
-                    style="@style/BoldTextView"
-                    android:layout_width="wrap_content"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="신청 종료일"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_image_add_lecture" />
+                    android:gravity="center">
 
-                <DatePicker
-                    android:id="@+id/proposal_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="10dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_title" />
 
+                    <EditText
+                        android:id="@+id/et_title_add_lecture"
+                        style="@style/RegularTextView_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/title"
+                        android:maxLines="1"
+                        android:paddingStart="10dp"
+                        tools:ignore="RtlSymmetry" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    style="@style/BoldTextView"
-                    android:layout_width="wrap_content"
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/start_date"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_image_add_lecture" />
+                    android:gravity="center_vertical">
 
-                <DatePicker
-                    android:id="@+id/start_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="10dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_field" />
 
-                <TextView
-                    android:id="@+id/textView_end"
-                    style="@style/BoldTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="강의 종료일"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_image_add_lecture" />
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:id="@+id/fb_field_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:alignContent="space_around"
+                        app:alignItems="stretch"
+                        app:flexWrap="wrap"
+                        app:showDivider="beginning|middle|end">
 
-                <DatePicker
-                    android:id="@+id/end_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="10dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                        <EditText
+                            android:id="@+id/et_field_add_lecture"
+                            style="@style/RegularTextView_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/field"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            app:layout_flexGrow="1"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                    </com.google.android.flexbox.FlexboxLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_baseline_calendar_today_24" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="신청 종료일" />
+
+                            <Button
+                                android:id="@+id/btn_proposal_date_add_lecture"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="7dp"
+                                android:background="?selectableItemBackground"
+                                android:letterSpacing="0"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                tools:text="2021년 8월 19일" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="강의 기간" />
+
+                            <Button
+                                android:id="@+id/btn_start_to_end_date_add_lecture"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="20dp"
+                                android:background="?selectableItemBackground"
+                                android:letterSpacing="0"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                tools:text="2021년 8월 19일 - 2021년 8월 26일" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey" />
+
 
                 <EditText
                     android:id="@+id/et_content_add_lecture"
                     style="@style/RegularTextView_black"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="top"
                     android:hint="@string/content"
@@ -172,15 +221,14 @@
             android:id="@+id/btn_submit_add_lecture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginHorizontal="30dp"
             android:background="@drawable/round_button_main"
             android:text="@string/check"
-            android:layout_margin="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.95" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,6 +1,5 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
-import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.util.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
+import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentAddLectureBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
@@ -24,7 +26,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -44,12 +45,14 @@ class AddLectureFragment : Fragment() {
     private lateinit var lectureImageAdapter: LectureImageAdapter
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var etTitle: EditText
-    private lateinit var proposalDate: DatePicker
-    private lateinit var startDate: DatePicker
-    private lateinit var endDate: DatePicker
+    private lateinit var btnProposalDate: Button
+    private lateinit var btnStartToEndDate: Button
     private lateinit var etContent: EditText
     private lateinit var etField: EditText
     private lateinit var btnSubmit: Button
+
+    private lateinit var materialDateRangePicker: MaterialDatePicker<Pair<Long, Long>>
+
 
     private lateinit var imageList: ArrayList<String>
 
@@ -72,14 +75,18 @@ class AddLectureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
 
+        btnProposalDate.setOnClickListener {
+            materialDateRangePicker.show(requireActivity().supportFragmentManager, "")
+        }
+
         btnSubmit.setOnClickListener {
-            val sdf = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
+            val sdf = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
 
             val title = etTitle.text.toString()
             val content = etContent.text.toString()
-            val proposal = sdf.parse(proposalDate.year.toString()+String.format("%02d", proposalDate.month)+String.format("%02d", proposalDate.dayOfMonth))?.time
-            val start = sdf.parse(startDate.year.toString()+String.format("%02d", startDate.month)+String.format("%02d", startDate.dayOfMonth))?.time
-            val end = sdf.parse(endDate.year.toString()+String.format("%02d", endDate.month)+String.format("%02d", endDate.dayOfMonth))?.time
+            val proposal = sdf.parse("2021년 8월 30일")?.time
+            val start = sdf.parse("2021년 9월 1일")?.time
+            val end = sdf.parse("2021년 10월 1일")?.time
             val field = etField.text.toString()
 
             val fieldList = ArrayList<RequestBody>()
@@ -113,15 +120,19 @@ class AddLectureFragment : Fragment() {
 
         fabAdd = binding.fabAddImage
         etTitle = binding.etTitleAddLecture
-        proposalDate = binding.proposalDate
-        startDate = binding.startDate
-        endDate = binding.endDate
+        btnProposalDate = binding.btnProposalDateAddLecture
+        btnStartToEndDate = binding.btnStartToEndDateAddLecture
         etContent = binding.etContentAddLecture
         btnSubmit = binding.btnSubmitAddLecture
         etField = binding.etFieldAddLecture
         rvImageList = binding.rvImageAddLecture
         rvImageList.adapter = lectureImageAdapter
         rvImageList.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+
+        materialDateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText("날짜를 설정해 주세요.")
+            .setSelection(Pair(MaterialDatePicker.todayInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
+            .build()
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
