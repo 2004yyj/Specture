@@ -97,7 +97,7 @@
                         android:src="@drawable/ic_field" />
 
                     <com.google.android.flexbox.FlexboxLayout
-                        android:id="@+id/fb_field_setting"
+                        android:id="@+id/fb_field_add_lecture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -150,19 +150,20 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="신청 종료일" />
+                                android:text="@string/proposal_end_date" />
 
                             <Button
                                 android:id="@+id/btn_proposal_date_add_lecture"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
-                                android:layout_marginStart="7dp"
+                                android:layout_marginStart="5dp"
                                 android:background="?selectableItemBackground"
                                 android:letterSpacing="0"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:padding="10dp"
                                 android:textColor="@color/black"
+                                android:text="@string/please_set_proposal_end_date"
                                 tools:text="2021년 8월 19일" />
 
                         </LinearLayout>
@@ -175,20 +176,21 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="강의 기간" />
+                                android:text="@string/start_to_end_date" />
 
                             <Button
                                 android:id="@+id/btn_start_to_end_date_add_lecture"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
-                                android:layout_marginStart="20dp"
+                                android:layout_marginStart="5dp"
                                 android:background="?selectableItemBackground"
                                 android:letterSpacing="0"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:padding="10dp"
                                 android:textColor="@color/black"
-                                tools:text="2021년 8월 19일 - 2021년 8월 26일" />
+                                android:text="@string/please_set_start_to_end_date"
+                                tools:text="2021년 8월 25일 - 2021년 8월 30일"/>
 
                         </LinearLayout>
 

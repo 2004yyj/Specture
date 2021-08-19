@@ -31,7 +31,7 @@ interface LectureService {
     fun postLecture(
         @Part("title") title: RequestBody,
         @Part("content") content: RequestBody,
-        @Part  attachment: ArrayList<MultipartBody.Part>,
+        @Part  attachment: List<MultipartBody.Part>?,
         @Part("field") field: ArrayList<RequestBody>,
         @Part("start_date") start_date: Long,
         @Part("end_date") end_date: Long,

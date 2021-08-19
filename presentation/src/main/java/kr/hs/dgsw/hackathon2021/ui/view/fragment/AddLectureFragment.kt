@@ -2,6 +2,7 @@ package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,19 @@ import android.widget.*
 import androidx.core.util.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
-import kr.hs.dgsw.hackathon2021.R
 import kr.hs.dgsw.hackathon2021.databinding.FragmentAddLectureBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
+import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.AddLectureViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.AddLectureViewModel
 import okhttp3.MediaType.Companion.toMediaType
@@ -49,10 +53,11 @@ class AddLectureFragment : Fragment() {
     private lateinit var btnStartToEndDate: Button
     private lateinit var etContent: EditText
     private lateinit var etField: EditText
+    private lateinit var fbField: FlexboxLayout
     private lateinit var btnSubmit: Button
 
-    private lateinit var materialDateRangePicker: MaterialDatePicker<Pair<Long, Long>>
-
+    private lateinit var materialStartToEndDatePicker: MaterialDatePicker<Pair<Long, Long>>
+    private lateinit var materialProposalDatePicker: MaterialDatePicker<Long>
 
     private lateinit var imageList: ArrayList<String>
 
@@ -76,7 +81,23 @@ class AddLectureFragment : Fragment() {
         init()
 
         btnProposalDate.setOnClickListener {
-            materialDateRangePicker.show(requireActivity().supportFragmentManager, "")
+            materialProposalDatePicker.show(requireActivity().supportFragmentManager, "")
+        }
+
+        btnStartToEndDate.setOnClickListener {
+            materialStartToEndDatePicker.show(requireActivity().supportFragmentManager, "")
+        }
+
+        materialProposalDatePicker.addOnPositiveButtonClickListener {
+            val sdf = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+            btnProposalDate.text = sdf.format(Date(it))
+            viewModel.proposalDate = sdf.format(Date(it))
+        }
+
+        materialStartToEndDatePicker.addOnPositiveButtonClickListener {
+            val sdf = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+            btnStartToEndDate.text = "${sdf.format(Date(it.first))} - ${sdf.format(Date(it.second))}"
+            viewModel.startToEndDates = it
         }
 
         btnSubmit.setOnClickListener {
@@ -84,26 +105,38 @@ class AddLectureFragment : Fragment() {
 
             val title = etTitle.text.toString()
             val content = etContent.text.toString()
-            val proposal = sdf.parse("2021년 8월 30일")?.time
-            val start = sdf.parse("2021년 9월 1일")?.time
-            val end = sdf.parse("2021년 10월 1일")?.time
-            val field = etField.text.toString()
+            val fieldTextList = fbField.getAllText()
 
-            val fieldList = ArrayList<RequestBody>()
-            fieldList.add(field.toRequestBody("text/plain".toMediaType()))
+            val fieldBodyList = ArrayList<RequestBody>()
+            fieldTextList.forEach {
+                fieldBodyList.add(it.toRequestBody("text/plain".toMediaType()))
+            }
 
-            if (title.isNotBlank() && content.isNotBlank() && proposal != null && start != null && end != null) {
-                viewModel.postLecture(
-                    title.toRequestBody("text/plain".toMediaType()),
-                    content.toRequestBody("text/plain".toMediaType()),
-                    multipartBuilder.build().parts as ArrayList<MultipartBody.Part>,
-                    fieldList,
-                    start,
-                    end,
-                    proposal
-                )
-            } else {
-                Toast.makeText(context, "빈 칸이 없는지 확인해 주세요.", Toast.LENGTH_SHORT).show()
+            with(viewModel) {
+                if (title.isNotBlank() && content.isNotBlank() &&
+                    viewModel.proposalDate.isNotEmpty() && fieldBodyList.isNotEmpty() &&
+                    viewModel.startToEndDates.first != 0L && viewModel.startToEndDates.second != 0L) {
+
+                    val proposal = sdf.parse(proposalDate)!!.time
+                    val start = viewModel.startToEndDates.first
+                    val end = viewModel.startToEndDates.second
+
+                    viewModel.postLecture(
+                        title.toRequestBody("text/plain".toMediaType()),
+                        content.toRequestBody("text/plain".toMediaType()),
+                        if (::multipartBuilder.isInitialized) {
+                            multipartBuilder.build().parts
+                        } else {
+                            null
+                        },
+                        fieldBodyList,
+                        start,
+                        end,
+                        proposal
+                    )
+                } else {
+                    Toast.makeText(context, "빈 칸이 없는지 확인해 주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -125,13 +158,19 @@ class AddLectureFragment : Fragment() {
         etContent = binding.etContentAddLecture
         btnSubmit = binding.btnSubmitAddLecture
         etField = binding.etFieldAddLecture
+        fbField = binding.fbFieldAddLecture
         rvImageList = binding.rvImageAddLecture
         rvImageList.adapter = lectureImageAdapter
         rvImageList.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
-        materialDateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
-            .setTitleText("날짜를 설정해 주세요.")
+        materialStartToEndDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText("강의 시작일과 종료일을 입력해 주세요.")
             .setSelection(Pair(MaterialDatePicker.todayInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
+            .build()
+
+        materialProposalDatePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("강의 신청 종료일을 입력해 주세요.")
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
             .build()
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
@@ -142,6 +181,19 @@ class AddLectureFragment : Fragment() {
                     multipartBuilder.addPart(it.asMultipart("profile", cacheDir, contentResolver)!!)
                 }
                 lectureImageAdapter.setList(imageList)
+            }
+        }
+
+        etField.doAfterTextChanged { s ->
+            val trimmed = s.toString().trim { it <= ' ' }
+            if (trimmed.length > 1 && trimmed.endsWith(",")) {
+                fbField.addChip(
+                    resources,
+                    isClickable = true,
+                    isCloseIconVisible = true,
+                    trimmed.substring(0, trimmed.length - 1)
+                )
+                s?.clear()
             }
         }
     }

@@ -8,7 +8,7 @@ import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.AddLectureViewModel
 class AddLectureViewModelFactory(private val postLectureUseCase: PostLectureUseCase) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(AddLectureViewModel::class.java)) {
-            AddLectureViewModel(postLectureUseCase) as T
+            AddLectureViewModel(postLectureUseCase,) as T
         } else {
             throw IllegalArgumentException()
         }

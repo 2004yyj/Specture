@@ -37,7 +37,7 @@ class LectureRepositoryImpl(
     override fun postLecture(
         title: RequestBody,
         content: RequestBody,
-        attachment: ArrayList<MultipartBody.Part>,
+        attachment: List<MultipartBody.Part>?,
         field: ArrayList<RequestBody>,
         start_date: Long,
         end_date: Long,

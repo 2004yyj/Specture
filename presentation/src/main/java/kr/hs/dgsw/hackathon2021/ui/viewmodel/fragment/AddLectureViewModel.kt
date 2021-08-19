@@ -1,5 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment
 
+import androidx.core.util.Pair
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,10 +11,14 @@ import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
 import kr.hs.dgsw.hackathon2021.ui.view.util.SingleLiveEvent
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import kotlin.properties.Delegates
 
 class AddLectureViewModel(
     private val postLectureUseCase: PostLectureUseCase
 ) : ViewModel() {
+
+    var proposalDate: String = ""
+    var startToEndDates: Pair<Long, Long> = Pair(0L, 0L)
 
     private val compositeDisposable = CompositeDisposable()
     val isSuccess = SingleLiveEvent<Any?>()
@@ -23,7 +28,7 @@ class AddLectureViewModel(
     fun postLecture(
         title: RequestBody,
         content: RequestBody,
-        attachment: ArrayList<MultipartBody.Part>,
+        attachment: List<MultipartBody.Part>?,
         field: ArrayList<RequestBody>,
         start_date: Long,
         end_date: Long,
