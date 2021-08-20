@@ -33,8 +33,8 @@ interface LectureService {
         @Part("content") content: RequestBody,
         @Part  attachment: List<MultipartBody.Part>?,
         @Part("field") field: ArrayList<RequestBody>,
-        @Part("start_date") start_date: Long,
-        @Part("end_date") end_date: Long,
+        @Part("startDate") startDate: Long,
+        @Part("endDate") endDate: Long,
         @Part("proposal") proposal: Long
     ): Single<retrofit2.Response<Response<Any?>>>
 

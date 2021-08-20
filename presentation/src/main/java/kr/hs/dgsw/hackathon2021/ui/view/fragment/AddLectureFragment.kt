@@ -12,6 +12,7 @@ import androidx.core.util.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayout
@@ -42,6 +43,10 @@ class AddLectureFragment : Fragment() {
 
     @Inject
     lateinit var postLectureUseCase: PostLectureUseCase
+
+    private val navController by lazy {
+        findNavController()
+    }
 
     private lateinit var viewModel: AddLectureViewModel
     private lateinit var binding: FragmentAddLectureBinding
@@ -79,6 +84,7 @@ class AddLectureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        observe()
 
         btnProposalDate.setOnClickListener {
             materialProposalDatePicker.show(requireActivity().supportFragmentManager, "")
@@ -121,6 +127,10 @@ class AddLectureFragment : Fragment() {
                     val start = viewModel.startToEndDates.first
                     val end = viewModel.startToEndDates.second
 
+                    Log.d("AddLectureFragment", "onViewCreated: ${sdf.parse(proposalDate)!!.time}")
+                    Log.d("AddLectureFragment", "onViewCreated: ${viewModel.startToEndDates.first}")
+                    Log.d("AddLectureFragment", "onViewCreated: ${viewModel.startToEndDates.second}")
+
                     viewModel.postLecture(
                         title.toRequestBody("text/plain".toMediaType()),
                         content.toRequestBody("text/plain".toMediaType()),
@@ -144,6 +154,15 @@ class AddLectureFragment : Fragment() {
             activityResultLauncher.launch("image/*")
         }
 
+    }
+
+    private fun observe() {
+        viewModel.isSuccess.observe(viewLifecycleOwner) {
+            navController.navigateUp()
+        }
+        viewModel.isFailure.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun init() {

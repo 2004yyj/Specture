@@ -73,11 +73,11 @@ class LectureDataSource @Inject constructor(
         content: RequestBody,
         attachment: List<MultipartBody.Part>?,
         field: ArrayList<RequestBody>,
-        start_date: Long,
-        end_date: Long,
+        startDate: Long,
+        endDate: Long,
         proposal: Long
     ): Single<String> {
-        return remote.postLecture(title, content, attachment, field, start_date, end_date, proposal)
-    }
+        return remote.postLecture(title, content, attachment, field, startDate, endDate, proposal)
+     }
 
 }

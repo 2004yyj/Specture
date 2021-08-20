@@ -11,7 +11,6 @@ import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
 import kr.hs.dgsw.hackathon2021.ui.view.util.SingleLiveEvent
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import kotlin.properties.Delegates
 
 class AddLectureViewModel(
     private val postLectureUseCase: PostLectureUseCase
@@ -30,12 +29,12 @@ class AddLectureViewModel(
         content: RequestBody,
         attachment: List<MultipartBody.Part>?,
         field: ArrayList<RequestBody>,
-        start_date: Long,
-        end_date: Long,
+        startDate: Long,
+        endDate: Long,
         proposal: Long
     ) {
         postLectureUseCase.buildUseCaseObservable(PostLectureUseCase.Params(
-            title, content, attachment, field, start_date, end_date, proposal
+            title, content, attachment, field, startDate, endDate, proposal
         )).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
