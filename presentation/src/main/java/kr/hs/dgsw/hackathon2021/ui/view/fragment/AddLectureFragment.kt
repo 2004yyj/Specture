@@ -1,5 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -13,15 +14,14 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.dgsw.domain.usecase.lecture.PostLectureUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentAddLectureBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
-import kr.hs.dgsw.hackathon2021.ui.view.adapter.LectureImageAdapter
+import kr.hs.dgsw.hackathon2021.ui.view.adapter.AddLectureImageAdapter
 import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
 import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
 import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
@@ -51,7 +51,7 @@ class AddLectureFragment : Fragment() {
     private lateinit var viewModel: AddLectureViewModel
     private lateinit var binding: FragmentAddLectureBinding
 
-    private lateinit var lectureImageAdapter: LectureImageAdapter
+    private lateinit var addLectureImageAdapter: AddLectureImageAdapter
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var etTitle: EditText
     private lateinit var btnProposalDate: Button
@@ -64,11 +64,11 @@ class AddLectureFragment : Fragment() {
     private lateinit var materialStartToEndDatePicker: MaterialDatePicker<Pair<Long, Long>>
     private lateinit var materialProposalDatePicker: MaterialDatePicker<Long>
 
-    private lateinit var imageList: ArrayList<String>
+    private val imageList = ArrayList<Uri>()
 
     private lateinit var rvImageList: RecyclerView
 
-    private lateinit var multipartBuilder: MultipartBody.Builder
+    private val multipartBuilder = MultipartBody.Builder()
 
     private lateinit var activityResultLauncher: ActivityResultLauncher<String>
 
@@ -134,11 +134,7 @@ class AddLectureFragment : Fragment() {
                     viewModel.postLecture(
                         title.toRequestBody("text/plain".toMediaType()),
                         content.toRequestBody("text/plain".toMediaType()),
-                        if (::multipartBuilder.isInitialized) {
-                            multipartBuilder.build().parts
-                        } else {
-                            null
-                        },
+                        multipartBuilder.build().parts,
                         fieldBodyList,
                         start,
                         end,
@@ -168,7 +164,8 @@ class AddLectureFragment : Fragment() {
     private fun init() {
         viewModel = ViewModelProvider(this, AddLectureViewModelFactory(postLectureUseCase))[AddLectureViewModel::class.java]
 
-        lectureImageAdapter = LectureImageAdapter()
+
+        addLectureImageAdapter = AddLectureImageAdapter()
 
         fabAdd = binding.fabAddImage
         etTitle = binding.etTitleAddLecture
@@ -178,8 +175,12 @@ class AddLectureFragment : Fragment() {
         btnSubmit = binding.btnSubmitAddLecture
         etField = binding.etFieldAddLecture
         fbField = binding.fbFieldAddLecture
+
         rvImageList = binding.rvImageAddLecture
-        rvImageList.adapter = lectureImageAdapter
+        val pagerSnapHelper = PagerSnapHelper()
+        pagerSnapHelper.attachToRecyclerView(rvImageList)
+
+        rvImageList.adapter = addLectureImageAdapter
         rvImageList.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
         materialStartToEndDatePicker = MaterialDatePicker.Builder.dateRangePicker()
@@ -194,12 +195,12 @@ class AddLectureFragment : Fragment() {
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
-                imageList.add(it.toString())
+                imageList.add(it)
+                addLectureImageAdapter.setList(imageList)
 
                 with(requireActivity()) {
-                    multipartBuilder.addPart(it.asMultipart("profile", cacheDir, contentResolver)!!)
+                    multipartBuilder.addPart(it.asMultipart("attachmentUrl", cacheDir, contentResolver)!!)
                 }
-                lectureImageAdapter.setList(imageList)
             }
         }
 
