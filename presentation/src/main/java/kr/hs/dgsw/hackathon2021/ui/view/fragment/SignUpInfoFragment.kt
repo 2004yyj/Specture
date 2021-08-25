@@ -1,7 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.view.fragment
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,10 +19,7 @@ import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
 import kr.hs.dgsw.hackathon2021.databinding.FragmentSignUpInfoBinding
 import kr.hs.dgsw.hackathon2021.di.application.MyDaggerApplication
 import kr.hs.dgsw.hackathon2021.ui.view.activity.MainActivity
-import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
-import kr.hs.dgsw.hackathon2021.ui.view.util.addChip
-import kr.hs.dgsw.hackathon2021.ui.view.util.asMultipart
-import kr.hs.dgsw.hackathon2021.ui.view.util.getAllText
+import kr.hs.dgsw.hackathon2021.ui.view.util.*
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.factory.SignUpViewModelFactory
 import kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel
 import okhttp3.MediaType.Companion.toMediaType
@@ -74,7 +70,7 @@ class SignUpInfoFragment : Fragment() {
         }
 
         with(viewModel) {
-            isSuccess.observe(viewLifecycleOwner, {
+            isSuccess.observe(viewLifecycleOwner, EventObserver {
                 InfoHelper.token = it
 
                 val intent = Intent(requireActivity(), MainActivity::class.java)
@@ -82,7 +78,7 @@ class SignUpInfoFragment : Fragment() {
                 requireActivity().finish()
             })
 
-            isFailure.observe(viewLifecycleOwner, {
+            isFailure.observe(viewLifecycleOwner, EventObserver {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             })
 
@@ -98,7 +94,7 @@ class SignUpInfoFragment : Fragment() {
     ): View {
         binding = FragmentSignUpInfoBinding.inflate(inflater)
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
-        viewModel = ViewModelProvider(this, SignUpViewModelFactory(signUpUseCase))[SignUpViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), SignUpViewModelFactory(signUpUseCase))[SignUpViewModel::class.java]
         binding.vm = viewModel
         return binding.root
     }
@@ -108,14 +104,12 @@ class SignUpInfoFragment : Fragment() {
 
         init()
 
-        val arguments = requireArguments()
-
-        val userId = arguments.getString("userId")!!
-        val password = arguments.getString("password")!!
-        val name = arguments.getString("name")!!
-        val grade = arguments.getInt("grade")
-        val klass = arguments.getInt("klass")
-        val number = arguments.getInt("number")
+        val userId = viewModel.userId.get()!!
+        val password = viewModel.password.get()!!
+        val name = viewModel.name.get()!!
+        val grade = viewModel.grade.get()
+        val klass = viewModel.klass.get()
+        val number = viewModel.number.get()
 
         tvName.text = name
         tvSchool.text = "${grade}학년 ${klass}반 ${number}번"

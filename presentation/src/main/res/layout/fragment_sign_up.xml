@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="kr.hs.dgsw.hackathon2021.ui.view.fragment.SignUpFragment">
 
+    <data>
+        <import type="kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel"/>
+        <variable
+            name="vm"
+            type="SignUpViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,18 +64,24 @@
                     android:id="@+id/spinner_grade_sign_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:entries="@array/grade"
+                    android:selectedItemPosition="@={vm.grade}"
                     android:layout_weight="1" />
 
                 <Spinner
                     android:id="@+id/spinner_class_sign_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:entries="@array/klass"
+                    android:selectedItemPosition="@={vm.klass}"
                     android:layout_weight="1" />
 
                 <Spinner
                     android:id="@+id/spinner_number_sign_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:entries="@array/number"
+                    android:selectedItemPosition="@={vm.number}"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -83,6 +96,7 @@
                     style="@style/RegularTextView_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={vm.name}"
                     android:drawableStart="@drawable/ic_baseline_user"
                     android:drawablePadding="10dp"
                     android:paddingBottom="15dp"
@@ -101,6 +115,7 @@
                     style="@style/RegularTextView_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={vm.userId}"
                     android:drawableStart="@drawable/ic_id_card"
                     android:drawablePadding="10dp"
                     android:paddingBottom="15dp"
@@ -118,6 +133,7 @@
                     style="@style/RegularTextView_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={vm.password}"
                     android:drawableStart="@drawable/ic_padlock"
                     android:drawablePadding="10dp"
                     android:paddingBottom="15dp"
@@ -136,6 +152,7 @@
                     style="@style/RegularTextView_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={vm.passwordRe}"
                     android:drawableStart="@drawable/ic_padlock"
                     android:drawablePadding="10dp"
                     android:paddingBottom="15dp"
@@ -153,7 +170,7 @@
             style="@style/RegularTextView_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity=""
+            android:onClick="@{() -> vm.navigateSignUpToSignUpInfo()}"
             android:background="@drawable/round_button_main"
             android:text="@string/check"
             app:layout_constraintTop_toBottomOf="@id/linearLayout1"
