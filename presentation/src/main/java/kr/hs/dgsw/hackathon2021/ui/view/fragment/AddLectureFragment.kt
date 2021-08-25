@@ -127,10 +127,6 @@ class AddLectureFragment : Fragment() {
                     val start = viewModel.startToEndDates.first
                     val end = viewModel.startToEndDates.second
 
-                    Log.d("AddLectureFragment", "onViewCreated: ${sdf.parse(proposalDate)!!.time}")
-                    Log.d("AddLectureFragment", "onViewCreated: ${viewModel.startToEndDates.first}")
-                    Log.d("AddLectureFragment", "onViewCreated: ${viewModel.startToEndDates.second}")
-
                     viewModel.postLecture(
                         title.toRequestBody("text/plain".toMediaType()),
                         content.toRequestBody("text/plain".toMediaType()),
