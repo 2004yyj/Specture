@@ -1,137 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingHorizontal="40dp"
-    android:paddingVertical="80dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="kr.hs.dgsw.hackathon2021.ui.view.fragment.LoginFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_logo_login"
-        android:layout_width="0dp"
-        android:layout_height="130dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_login_login"
-        android:src="@drawable/ic_white_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.LoginViewModel"/>
+        <variable
+            name="vm"
+            type="LoginViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/tv_login_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/login"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo_login" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="kr.hs.dgsw.hackathon2021.ui.view.fragment.LoginFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_login">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo_login"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_login_login"
+            android:src="@drawable/ic_white_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Design.TextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/et_username_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/RegularTextView_black"
-                android:paddingBottom="15dp"
-                android:drawableStart="@drawable/ic_id_card"
-                android:drawablePadding="10dp"
-                android:hint="@string/id" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Design.TextInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/et_password_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/RegularTextView_black"
-                android:paddingBottom="15dp"
-                android:drawableStart="@drawable/ic_padlock"
-                android:drawablePadding="10dp"
-                android:hint="@string/password"
-                android:inputType="textPassword"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <CheckBox
-            android:id="@+id/chk_auto_login"
+        <TextView
+            android:id="@+id/tv_login_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/main"
-            android:text="@string/auto_login" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+            android:layout_marginBottom="10dp"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo_login" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/linearLayout1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_login">
 
-            <TextView
-                android:text="계정이 없으신가요?"
-                android:layout_marginEnd="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Design.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/btn_signUp_login"
+                <EditText
+                    android:id="@+id/et_username_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/RegularTextView_black"
+                    android:text="@={vm.username}"
+                    android:paddingBottom="15dp"
+                    android:drawableStart="@drawable/ic_id_card"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/id" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Design.TextInputLayout"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_password_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/RegularTextView_black"
+                    android:text="@={vm.password}"
+                    android:paddingBottom="15dp"
+                    android:drawableStart="@drawable/ic_padlock"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/chk_auto_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_up"
-                android:textColor="@color/main_bold"
-                android:background="?selectableItemBackground"
-                style="@style/RegularTextView_black"/>
+                android:layout_gravity="start"
+                android:checked="@={vm.autoLoginCheck}"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/main"
+                android:text="@string/auto_login" />
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit_login"
-            style="@style/RegularTextView_white"
-            android:layout_marginTop="5dp"
+        <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_button_main"
-            android:text="@string/login" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout1">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp">
 
-    </LinearLayout>
+                <TextView
+                    android:text="@string/dont_you_have_an_account"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/btn_signUp_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> vm.navigateLoginToSignUp()}"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/main_bold"
+                    android:background="?selectableItemBackground"
+                    style="@style/RegularTextView_black" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit_login"
+                style="@style/RegularTextView_white"
+                android:layout_marginTop="5dp"
+                android:onClick="@{() -> vm.login()}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_button_main"
+                android:text="@string/login" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
