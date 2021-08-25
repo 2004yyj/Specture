@@ -28,26 +28,26 @@ class SplashActivity : AppCompatActivity() {
     private fun init() {
         viewModel = ViewModelProvider(this, SplashViewModelFactory(autoLoginUseCase))[SplashViewModel::class.java]
 
-        if (InfoHelper.autoLoginChk) {
-            viewModel.autoLogin()
-        } else {
+        if (!InfoHelper.autoLoginChk) {
             val intent = Intent(this@SplashActivity, IntroActivity::class.java)
             startActivity(intent)
             finish()
-        }
+        } else {
+            viewModel.autoLogin()
 
-        with(viewModel) {
-            isSuccess.observe(this@SplashActivity) {
-                val intent = Intent(this@SplashActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            with(viewModel) {
+                isSuccess.observe(this@SplashActivity) {
+                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
 
-            isFailure.observe(this@SplashActivity) {
-                Toast.makeText(this@SplashActivity, it, Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@SplashActivity, IntroActivity::class.java)
-                startActivity(intent)
-                finish()
+                isFailure.observe(this@SplashActivity) {
+                    Toast.makeText(this@SplashActivity, it, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@SplashActivity, IntroActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
     }
