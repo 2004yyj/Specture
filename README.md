@@ -1,5 +1,5 @@
 # <img width="35px" alt="로고 이미지" src="https://user-images.githubusercontent.com/18213322/126336655-09a88a84-c374-4ba8-ac9e-5f37a8e67a08.png"> Specture
-2021-07-15 ~
+2021-07-15 ~ 2021-08-28
 
 듣고 싶은 선배의, 하고 싶은 나만의 오프라인 특강을 신청하고 공지받을 수 있는 게시판
 
