@@ -26,4 +26,5 @@
     <string name="please_set_start_to_end_date">강의 기간을 선택해 주세요.</string>
     <string name="please_set_proposal_end_date">신청 종료일자를 선택해 주세요.</string>
     <string name="dont_you_have_an_account">계정이 없으신가요?</string>
+    <string name="school_grade_class_number">%d학년 %d반 %d번</string>
 </resources>

@@ -1,5 +1,6 @@
 package kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment
 
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
@@ -12,16 +13,24 @@ import kr.hs.dgsw.domain.entity.request.SignUpRequest
 import kr.hs.dgsw.domain.usecase.auth.SignUpUseCase
 import kr.hs.dgsw.hackathon2021.ui.view.util.Event
 import kr.hs.dgsw.hackathon2021.ui.view.util.SingleLiveEvent
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : ViewModel() {
 
-    val userId = ObservableField<String>()
-    val password = ObservableField<String>()
-    val passwordRe = ObservableField<String>()
-    val name = ObservableField<String>()
-    val grade = ObservableInt()
-    val klass = ObservableInt()
-    val number = ObservableInt()
+    val userId = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+    val passwordRe = MutableLiveData<String>()
+    val name = MutableLiveData<String>()
+    val grade = MutableLiveData(0)
+    val klass = MutableLiveData(0)
+    val number = MutableLiveData(0)
+
+    val introduce = MutableLiveData<String>()
+    val field = MutableLiveData<String>()
+    val fieldList = ArrayList<String>()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -38,17 +47,17 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : ViewModel() {
     val isLoading: LiveData<Event<Boolean>> = _isLoading
 
     fun navigateSignUpToSignUpInfo() {
-        val getUserId = userId.get()
-        val getPassword = password.get()
-        val getPasswordRe = passwordRe.get()
-        val getName = name.get()
-        val getGrade = grade.get()
-        val getKlass = klass.get()
-        val getNumber = number.get()
+        val getUserId = userId.value
+        val getPassword = password.value
+        val getPasswordRe = passwordRe.value
+        val getName = name.value
+        val getGrade = grade.value
+        val getKlass = klass.value
+        val getNumber = number.value
 
         if (!(getUserId.isNullOrEmpty() && getPassword.isNullOrEmpty() &&
                     getPasswordRe.isNullOrEmpty() && getName.isNullOrEmpty() &&
-                    getGrade != 0 && getKlass != 0 && getNumber != 0)
+                    getGrade == 0 && getKlass == 0 && getNumber == 0)
         ) {
             _navigateSignUpToSignUpInfo.call()
         } else {
@@ -56,21 +65,51 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : ViewModel() {
         }
     }
 
-    fun signUp(signUpRequest: SignUpRequest) {
+    fun signUp(multipartBody: MultipartBody.Part?) {
         _isLoading.value = Event(true)
 
-        signUpUseCase.buildUseCaseObservable(SignUpUseCase.Params(signUpRequest))
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                _isSuccess.value = Event(it.token)
-                _isLoading.value = Event(false)
-            }, {
-                _isFailure.value = Event(it.message?:"")
-                _isLoading.value = Event(false)
-            }).apply {
-                compositeDisposable.add(this)
+        if (introduce.value != null) {
+            val mediaType = "text/plain".toMediaType()
+            val userIdBody = userId.value!!.toRequestBody(mediaType)
+            val passwordBody = password.value!!.toRequestBody(mediaType)
+            val nameBody = name.value!!.toRequestBody(mediaType)
+            val introduceBody = introduce.value!!.toRequestBody(mediaType)
+            val fieldListBody = ArrayList<RequestBody>().apply {
+                addAll(
+                    fieldList.map {
+                        it.toRequestBody(mediaType)
+                    }
+                )
             }
+
+            val signUpRequest =
+                    SignUpRequest(
+                        userIdBody,
+                        passwordBody,
+                        multipartBody,
+                        nameBody,
+                        grade.value!!,
+                        klass.value!!,
+                        number.value!!,
+                        fieldListBody,
+                        introduceBody
+                    )
+
+            signUpUseCase.buildUseCaseObservable(SignUpUseCase.Params(signUpRequest))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    _isSuccess.value = Event(it.token)
+                    _isLoading.value = Event(false)
+                }, {
+                    _isFailure.value = Event(it.message?:"")
+                    _isLoading.value = Event(false)
+                }).apply {
+                    compositeDisposable.add(this)
+                }
+        } else {
+            _isFailure.value = Event("빈 값이 없는지 확인해 주세요.")
+        }
     }
 
     override fun onCleared() {

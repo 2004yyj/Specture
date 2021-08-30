@@ -38,6 +38,7 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, LoginViewModelFactory(loginUseCase))[LoginViewModel::class.java]
         binding.vm = viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -45,11 +46,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewModel) {
-            autoLoginCheck.set(autoLoginChk)
-
             isSuccess.observe(viewLifecycleOwner, EventObserver {
                 InfoHelper.token = it
-                autoLoginChk = (autoLoginCheck.get() == true)
+                autoLoginChk = (autoLoginCheck.value == true)
 
                 val intent = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(intent)
