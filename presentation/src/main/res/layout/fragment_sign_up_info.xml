@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="kr.hs.dgsw.hackathon2021.ui.view.fragment.SignUpInfoFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <import type="kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment.SignUpViewModel"/>
@@ -16,7 +15,8 @@
         android:layout_height="match_parent"
         android:paddingVertical="40dp"
         android:gravity="bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context="kr.hs.dgsw.hackathon2021.ui.view.fragment.SignUpInfoFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logo_login"
@@ -77,7 +77,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="asdfasdf"
+                    android:text="@{vm.name}"
+                    tools:text="이름"
                     android:textSize="25sp"/>
 
                 <TextView
@@ -85,7 +86,8 @@
                     style="@style/RegularTextView_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="0학년 0반 0번"/>
+                    tools:text="0학년 0반 0번"
+                    android:text="@{@string/school_grade_class_number(vm.grade, vm.klass, vm.number)}"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.Design.TextInputLayout"
@@ -101,6 +103,7 @@
                         android:drawableStart="@drawable/ic_introduce"
                         android:drawablePadding="10dp"
                         android:hint="@string/introduce"
+                        android:text="@={vm.introduce}"
                         app:layout_constraintBottom_toTopOf="@+id/btn_next_sign_up" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -135,6 +138,7 @@
                             android:layout_marginStart="5dp"
                             app:layout_flexGrow="1"
                             android:hint="@string/field"
+                            android:text="@={vm.field}"
                             android:background="@android:color/transparent"
                             android:imeOptions="actionDone"
                             android:inputType="text"/>

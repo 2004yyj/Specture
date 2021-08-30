@@ -1,6 +1,5 @@
 package kr.hs.dgsw.hackathon2021.ui.viewmodel.fragment
 
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,14 +10,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kr.hs.dgsw.domain.entity.request.LoginRequest
 import kr.hs.dgsw.domain.usecase.auth.LoginUseCase
 import kr.hs.dgsw.hackathon2021.ui.view.util.Event
+import kr.hs.dgsw.hackathon2021.ui.view.util.InfoHelper
 import kr.hs.dgsw.hackathon2021.ui.view.util.SingleLiveEvent
 
 class LoginViewModel(
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
-    val username = ObservableField<String>()
-    val password = ObservableField<String>()
-    val autoLoginCheck = ObservableField<Boolean>()
+    val username = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+    val autoLoginCheck = MutableLiveData(InfoHelper.autoLoginChk)
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -35,8 +35,8 @@ class LoginViewModel(
     val navigateLoginToSignUp: LiveData<Unit> = _navigateLoginToSignUp
 
     fun login() {
-        if(!username.get().isNullOrEmpty() && !password.get().isNullOrEmpty()) {
-            val loginRequest = LoginRequest(username.get()!!, password.get()!!)
+        if(!(username.value.isNullOrEmpty() && password.value.isNullOrEmpty())) {
+            val loginRequest = LoginRequest(username.value!!, password.value!!)
 
             _isLoading.value = Event(true)
 

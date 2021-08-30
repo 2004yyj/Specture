@@ -35,6 +35,7 @@ class SignUpFragment: Fragment() {
         (requireActivity().application as MyDaggerApplication).daggerMyComponent.inject(this)
         binding = FragmentSignUpBinding.inflate(inflater)
         viewModel = ViewModelProvider(requireActivity(), SignUpViewModelFactory(signUpUseCase))[SignUpViewModel::class.java]
+        binding.vm = viewModel
         return binding.root
     }
 
